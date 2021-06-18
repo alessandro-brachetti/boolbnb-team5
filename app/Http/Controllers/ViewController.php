@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Apartment;
+use App\View;
 use Illuminate\Http\Request;
 
-class ApartmentController extends Controller
+class ViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
-        return view('welcome', compact('apartments'));
+        //
     }
 
     /**
@@ -25,7 +24,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('partials.apartments.create');
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Apartment  $apartment
+     * @param  \App\View  $view
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(View $view)
     {
         //
     }
@@ -53,10 +52,10 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Apartment  $apartment
+     * @param  \App\View  $view
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit(View $view)
     {
         //
     }
@@ -65,10 +64,10 @@ class ApartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Apartment  $apartment
+     * @param  \App\View  $view
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, View $view)
     {
         //
     }
@@ -76,10 +75,10 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Apartment  $apartment
+     * @param  \App\View  $view
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apartment $apartment)
+    public function destroy(View $view)
     {
         //
     }

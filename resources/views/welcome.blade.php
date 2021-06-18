@@ -96,5 +96,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="bla">
+          @foreach($apartments as $apartment)
+          <img src="{{$apartment->img}}" alt="">
+          @endforeach
+        </div>
     </body>
 </html>

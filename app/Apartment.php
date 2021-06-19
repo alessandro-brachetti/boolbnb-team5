@@ -19,4 +19,9 @@ class Apartment extends Model
     'visible',
     'user_id'
   ];
+
+  public function services()
+  {
+    return $this->belongsToMany(Service::class);
+  }
 }

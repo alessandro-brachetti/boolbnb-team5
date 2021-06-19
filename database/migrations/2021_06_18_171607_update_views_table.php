@@ -27,7 +27,7 @@ class UpdateViewsTable extends Migration
     public function down()
     {
         Schema::table('views', function (Blueprint $table) {
-            $table->dropForeign('apartments_apartment_id_foreign');
+            $table->dropForeign('views_apartment_id_foreign');
             $table->dropColumn('apartment_id');
         });
     }

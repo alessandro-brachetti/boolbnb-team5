@@ -19,13 +19,15 @@ class CreateApartmentServiceTable extends Migration
 
             $table->foreign('apartment_id')
                 ->references('id')
-                ->on('apartments');
+                ->on('apartments')
+                ->onDelete('set null');
   
             $table->unsignedBigInteger('service_id')->nullable();
   
             $table->foreign('service_id')
                 ->references('id')
-                ->on('services');
+                ->on('services')
+                ->onDelete('set null');
         });
     }
 

@@ -25,7 +25,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('partials.apartments.create');
+        return view('admin.apartments.create');
     }
 
     /**

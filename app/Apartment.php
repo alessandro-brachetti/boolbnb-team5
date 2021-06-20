@@ -17,7 +17,7 @@ class Apartment extends Model
     'longitude',
     'img',
     'visible',
-    'user_id'
+    'user_id',
   ];
 
 

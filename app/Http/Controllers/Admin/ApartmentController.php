@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Storage;
 class ApartmentController extends Controller
 {
     /**
@@ -37,7 +37,34 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'exists:users,id',
+            'title' => 'required| unique:apartments| max:255',
+            'n_rooms' => 'required|numeric',
+            'n_beds' => 'required|numeric',
+            'n_bathrooms' => 'required|numeric',
+            'mq' => 'required|numeric',
+            'address' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'img' => 'required|max:2000',
+            'visible' => 'required|boolean'
+
+        ]);
+        $data = $request->all();
+
+        $image = NULL;
+        if(array_key_exists('img', $data)){
+            $image = Storage::put('uploads', $data['img']);
+        }
+
+        $apartment = new Apartment();
+        $apartment->fill($data);
+        $apartment->img = 'storage/'. $image;
+        $apartment->save();
+
+        return redirect()->route('admin.apartments.index');
+
     }
 
     /**
@@ -48,7 +75,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -59,7 +86,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -71,7 +98,30 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        //
+        $request->validate([
+            'user_id' => 'exists:users,id',
+            'title' => 'required|max:255',
+            'n_rooms' => 'required|numeric',
+            'n_beds' => 'required|numeric',
+            'n_bathrooms' => 'required|numeric',
+            'mq' => 'required|numeric',
+            'address' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'img' => 'required|max:2000',
+            'visible' => 'required|boolean'
+
+        ]);
+
+        $data = $request->all();
+
+        $image = NULL;
+        if(array_key_exists('img', $data)){
+            $image = Storage::put('uploads', $data['img']);
+            $data['img'] = 'storage/'. $image;
+        }
+        $apartment->update($data);
+        return redirect()->route('admin.apartments.show', $apartment);
     }
 
     /**

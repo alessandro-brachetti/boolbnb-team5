@@ -11,7 +11,7 @@
             <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
               @csrf
               @method('POST')
-  
+              <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
               <div class="form-group">
                 <label for="title">Title</label>
                 <input class="form-control @error('title') is-invalid @enderror" id="title" type="text" name="title" value="{{ old('title') }}">

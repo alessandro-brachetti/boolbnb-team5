@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <div class="bla">
-          @foreach($apartments as $apartment)
-            <img src="{{$apartment->img}}" alt="{{$apartment->title}}">
-          @endforeach
+@extends('layouts.app')
+@section('content')
+<div class="container-fluid">
+    <div class="row">
+        <div class="apartments d-flex flex-wrap">
+            @foreach($apartments as $apartment)
+                <div class="col-sm">
+                    <a href="{{route('admin.apartments.show', ['apartment'=> $apartment->id])}}" class="card-link">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-img-top" style="background: url({{asset($apartment->img)}}); height: 14rem; background-size: cover;"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{$apartment->title}}</h5>
+                                <p class="card-text">Indirizzo: {{$apartment->address}}</p>
+                            </div>
+                            
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
-    </body>
-</html>
+    </div>
+</div>
+  
+@endsection

@@ -19,7 +19,7 @@
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
-  
+
               <div class="form-group">
                 <label for="n_rooms">Numero Stanze</label>
                 <input class="form-control @error('n_rooms') is-invalid @enderror" id="n_rooms" type="number" name="n_rooms" value="{{ old('n_rooms') }}">
@@ -75,7 +75,7 @@
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
-  
+
               <div class="form-group">
                 <label for="img">Immagine</label>
                 <input class="form-control-file @error('img') is-invalid @enderror" id="img" type="file" name="img" value="{{old('img')}}">
@@ -83,14 +83,22 @@
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
-  
+
               <div class="form-group">
                 <label for="visible">Visibile</label>
-                <select class="form-control @error('visible') is-invalid @enderror" id="visible" name="visible">               
+                <select class="form-control @error('visible') is-invalid @enderror" id="visible" name="visible">
                     <option value="1">SI</option>
                     <option value="0">NO</option>
                 </select>
                 @error('visibile')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+
+              <div class="form-group">
+                <label for="longitude">Longitudine</label>
+                <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="checkbox" name="service_name" value="{{ old('longitude') }}">
+                @error('longitudine')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>

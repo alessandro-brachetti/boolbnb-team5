@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'ApartmentController@index'); 
+Route::get('/', 'ApartmentController@index');
 Route::get('/guests/{apartment}', 'ApartmentController@show')->name('guests.show');
 
 Route::post('/messages', 'MessageController@store')->name('messages.store');
@@ -29,5 +29,5 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
   ->group(function () {
     Route::resource('/apartments', 'ApartmentController');
-    Route::resource('/message', 'MessageController'); 
+    Route::get('/message/{apartment}', 'MessageController@index')->name('message.index');
   });

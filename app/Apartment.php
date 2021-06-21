@@ -25,7 +25,7 @@ class Apartment extends Model
   {
     return $this->belongsTo(User::class);
   }
-  
+
   public function services()
   {
     return $this->belongsToMany(Service::class);
@@ -33,7 +33,7 @@ class Apartment extends Model
 
   public function messages()
   {
-    return $this->hasMany(Message::class);
+    return $this->hasMany(Message::class)->orderBy('id', 'desc');
   }
 
   public function views()

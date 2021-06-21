@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Message;
+use App\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
@@ -14,87 +16,15 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
-        $messages = Message::all();
-        return view('admin.messages.index', compact('messages'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index($apartment)
     {
+        $hostapartment = Apartment::where('id', '=', $apartment)->first();
+        $messages = Message::where('apartment_id', '=', $apartment)->get();
 
+        if (Auth::user()->id == $hostapartment->user_id){
+            return view('admin.messages.index', compact('messages'));
+        }
+      return redirect()->route('guests.show', compact('apartment'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'string|nullable|max:25',
-            'lastname' => 'string|nullable|max:25', 
-            'email' => 'required|email',
-            'message' => 'required|string|max:255'
-        ]);
-
-        $data = $request->all();
-
-        $message = new Message();
-        $message->create($data);
-
-        return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Message $message)
-    {
-        //
-    }
 }

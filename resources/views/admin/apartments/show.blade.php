@@ -6,7 +6,7 @@
         <img class="card-img-top" src="{{asset($apartment->img)}}" alt="{{$apartment->title}}">
         <div class="card-body">
             <h5 class="card-title">{{$apartment->title}}</h5>
-            <p class="card-text">Indirizzo: {{$apartment->address}}</p>         
+            <p class="card-text">Indirizzo: {{$apartment->address}}</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">N. Rooms: {{$apartment->n_rooms}}</li>
@@ -16,8 +16,9 @@
         </ul>
         <div class="card-body">
             <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Edit</a>
+            <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messages</a>
         </div>
       </div>
 </div>
-    
+
 @endsection

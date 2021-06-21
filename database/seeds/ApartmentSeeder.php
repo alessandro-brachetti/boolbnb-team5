@@ -26,12 +26,6 @@ class ApartmentSeeder extends Seeder
         $apartment->img = $faker->imageUrl(360, 360, 'animals', true);
         $apartment->visible = $faker->boolean();
         $apartment->save();
-
-
-
-
-
-
       }
     }
 }

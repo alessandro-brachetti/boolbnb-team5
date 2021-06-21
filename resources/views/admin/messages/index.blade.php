@@ -1,15 +1,19 @@
 @extends('layouts.app')
 @section('content')
-    <div>
-        @foreach (Auth::user()->apartments as $apartment)
-            @foreach ($apartment->messages as $message)
-                <div>
-                    <p>{{$message->name}}</p>
-                    <p>{{$message->lastname}}</p>
-                    <p>{{$message->email}}</p>
-                    <p>{{$message->message}}</p>
+    <div class="container">
+      <div class="row">
+
+            @foreach ($messages as $message)
+                <div class="col-md-3">
+                  <div>
+                      <p>Nome: {{$message->name}}</p>
+                      <p>Cognome: {{$message->lastname}}</p>
+                      <p>Indirizzo e-mail: {{$message->email}}</p>
+                      <p>Messaggio: {{$message->message}}</p>
+                  </div>
                 </div>
-            @endforeach 
-        @endforeach
+            @endforeach
+
+      </div>
     </div>
 @endsection

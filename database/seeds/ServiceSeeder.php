@@ -10,12 +10,27 @@ class ServiceSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i=0; $i < 10; $i++) { 
-            $service = new Service();
-            $service->service_name = $faker->word();
-            $service->save();
-        }
+      $services=
+      [
+        'WIFI',
+        'Posto macchina',
+        'Aria condizionata',
+        'Riscaldamento',
+        'TV',
+        'Bagno privato',
+        'Piscina',
+        'Portineria',
+        'Sauna',
+        'Vista mare'
+      ];
+
+      foreach ($services as $service) {
+        $service_obj = new Service();
+        $service_obj->service_name = $service;
+        $service_obj->save();
+      };
+
     }
 }

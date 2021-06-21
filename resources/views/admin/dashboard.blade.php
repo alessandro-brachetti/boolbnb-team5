@@ -5,8 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-2">
             <a href="{{route('admin.apartments.index')}}">I tuoi appartamenti</a>
-            <a href="{{route('admin.apartments.create')}}">Aggiungi appartamento</a>
-            <a href="{{route('admin.message.index')}}">Messaggi</a>
+            <a href="{{route('admin.apartments.create')}}">Aggiungi appartamento</a>          
         </div>
         <div class="col-md-8">
             <div class="card">
@@ -24,6 +23,5 @@
             </div>
         </div>
     </div>
-    
 </div>
 @endsection

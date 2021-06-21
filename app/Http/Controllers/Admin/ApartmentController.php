@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Apartment;
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -77,9 +79,9 @@ class ApartmentController extends Controller
     {
         if (Auth::user()->id == $apartment->user_id) {
             return view('admin.apartments.show', compact('apartment'));
-        } 
+        }
 
-        return redirect()->route('guests.show', compact('apartment')); 
+        return redirect()->route('guests.show', compact('apartment'));
     }
 
     /**

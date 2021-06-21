@@ -18,5 +18,16 @@ class ApartmentController extends Controller
         return view('welcome', compact('apartments'));
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Apartment  $apartment
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Apartment $apartment)
+    {
+        return view('guests.show', compact('apartment'));
+    }
 
 }

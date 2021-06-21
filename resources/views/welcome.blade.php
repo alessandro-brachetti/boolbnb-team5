@@ -5,7 +5,7 @@
         <div class="apartments d-flex flex-wrap">
             @foreach($apartments as $apartment)
                 <div class="col-sm">
-                    <a href="{{route('admin.apartments.show', ['apartment'=> $apartment->id])}}" class="card-link">
+                    <a href="{{route('guests.show', ['apartment'=> $apartment->id])}}" class="card-link">
                         <div class="card" style="width: 18rem;">
                             <div class="card-img-top" style="background: url({{asset($apartment->img)}}); height: 14rem; background-size: cover;"></div>
                             <div class="card-body">

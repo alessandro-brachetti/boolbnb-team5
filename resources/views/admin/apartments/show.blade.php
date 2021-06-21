@@ -6,8 +6,7 @@
         <img class="card-img-top" src="{{asset($apartment->img)}}" alt="{{$apartment->title}}">
         <div class="card-body">
             <h5 class="card-title">{{$apartment->title}}</h5>
-            <p class="card-text">Indirizzo: {{$apartment->address}}</p>
-            
+            <p class="card-text">Indirizzo: {{$apartment->address}}</p>         
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">N. Rooms: {{$apartment->n_rooms}}</li>

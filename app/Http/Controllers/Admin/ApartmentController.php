@@ -6,6 +6,7 @@ use App\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 class ApartmentController extends Controller
 {
     /**
@@ -49,7 +50,6 @@ class ApartmentController extends Controller
             'longitude' => 'required|numeric',
             'img' => 'required|max:2000',
             'visible' => 'required|boolean'
-
         ]);
         $data = $request->all();
 
@@ -75,7 +75,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        if (Auth::user()->id == $apartment->user_id) {
+            return view('admin.apartments.show', compact('apartment'));
+        } 
+
+        return redirect()->route('guests.show', compact('apartment')); 
     }
 
     /**

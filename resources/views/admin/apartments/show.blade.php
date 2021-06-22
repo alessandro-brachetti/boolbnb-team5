@@ -15,8 +15,19 @@
             <li class="list-group-item">MQ: {{$apartment->mq}}</li>
         </ul>
         <div class="card-body">
-            <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Edit</a>
-            <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messages</a>
+            Servizi:
+            @foreach($apartment->services as $service)
+                @if ($loop->last)
+                    <span>{{$service->service_name}}</span>
+                @else 
+                    <span>{{$service->service_name}},</span>
+                @endif
+            @endforeach
+        </div>
+        <div class="card-body">
+            <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Modifica</a>
+            <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messaggi</a>
+            <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Sponsor</a>
         </div>
       </div>
 </div>

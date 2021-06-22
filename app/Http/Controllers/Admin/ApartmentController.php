@@ -51,7 +51,8 @@ class ApartmentController extends Controller
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'img' => 'required|max:2000',
-            'visible' => 'required|boolean'
+            'visible' => 'required|boolean',
+            'service_ids.*' => 'exists:services,id'
         ]);
         $data = $request->all();
 
@@ -64,6 +65,10 @@ class ApartmentController extends Controller
         $apartment->fill($data);
         $apartment->img = 'storage/'. $image;
         $apartment->save();
+
+        if(array_key_exists('service_ids', $data)){
+            $apartment->services()->attach($data['service_ids']);
+        }
 
         return redirect()->route('admin.apartments.index');
 
@@ -92,7 +97,14 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('admin.apartments.edit', compact('apartment'));
+
+        $services = Service::all();
+
+        if (Auth::user()->id == $apartment->user_id) {
+            return view('admin.apartments.edit', compact('apartment', 'services'));
+        }
+
+        return redirect()->route('guests.show', compact('apartment'));
     }
 
     /**
@@ -114,9 +126,9 @@ class ApartmentController extends Controller
             'address' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'img' => 'required|max:2000',
-            'visible' => 'required|boolean'
-
+            'img' => 'required|image|mimes:jpeg,jpg,png,gif,svg,bmp|max:2000',
+            'visible' => 'required|boolean',
+            'service_ids.*' => 'exists:services,id'
         ]);
 
         $data = $request->all();
@@ -127,6 +139,13 @@ class ApartmentController extends Controller
             $data['img'] = 'storage/'. $image;
         }
         $apartment->update($data);
+
+        if(array_key_exists('service_ids', $data)){
+            $apartment->services()->sync($data['service_ids']);
+        } else {
+            $apartment->services()->detach();
+        }
+
         return redirect()->route('admin.apartments.show', $apartment);
     }
 

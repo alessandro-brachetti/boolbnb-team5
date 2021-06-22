@@ -14,7 +14,19 @@
             <li class="list-group-item">N. Bathrooms: {{$apartment->n_bathrooms}}</li>
             <li class="list-group-item">MQ: {{$apartment->mq}}</li>
         </ul>
-        @if (!Auth::user() || Auth::user()->id != $apartment->user_id)
+        <div class="card-body">
+          Servizi:
+          @foreach($apartment->services as $service)
+              @if ($loop->last)
+                  <span>{{$service->service_name}}</span>
+              @else 
+                  <span>{{$service->service_name}},</span>
+              @endif
+          @endforeach
+      </div>
+    </div>
+    <div class="card-body">
+      @if (!Auth::user() || Auth::user()->id != $apartment->user_id)
             <form action="{{ route('messages.store') }}" method="post">
                 @csrf
                 @method('POST')
@@ -52,9 +64,9 @@
                 </div>
     
                 <button class="btn btn-primary" type="submit" name="button">Invia</button>
-            </form> 
-        @endif
-    </div>
+            </form>       
+          @endif
+    </div>   
 </div>
     
 @endsection

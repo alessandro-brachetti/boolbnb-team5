@@ -26,7 +26,7 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment)
-    {
+    {   
         return view('guests.show', compact('apartment'));
     }
 

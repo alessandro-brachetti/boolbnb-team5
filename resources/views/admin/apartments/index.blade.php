@@ -17,7 +17,7 @@
         <div class="card-body">
           <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Modifica</a>
           <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messaggi</a>
-          <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Sponsor</a>
+          <a href="{{route('admin.sponsor.index', ['apartment'=>$apartment->id])}}" class="card-link">Sponsor</a>
         </div>
         @endforeach
       </div>

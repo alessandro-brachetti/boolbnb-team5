@@ -29,9 +29,9 @@ class CreateApartmentSponsorTable extends Migration
                 ->on('sponsors')
                 ->onDelete('set null');
 
-            $table->boolean('active')->default(0);
+            // $table->boolean('active')->default(0);
+            $table->timestamp('expiration_date');
             $table->timestamps();
-            $table->date('expiration_date');
         });
     }
 

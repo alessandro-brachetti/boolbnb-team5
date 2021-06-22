@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Sponsor;
+use App\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 
 
 class SponsorController extends Controller
@@ -14,9 +16,12 @@ class SponsorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($apartment)
     {
-        //
+        $apartments = Apartment::where('id','=', $apartment)->first();
+        $sponsors = Sponsor::all();
+
+        return view('admin.sponsors.index', compact('sponsors','apartments'));
     }
 
     /**
@@ -35,9 +40,17 @@ class SponsorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $apartment)
     {
-        //
+        // $data = $request->all(); 
+        $sponsor = Sponsor::where('id','=', $request->sponsor_type)->first();
+
+        $now = Carbon::now();
+        $expirate_date = Carbon::now()->addHours($sponsor->duration);
+
+        $sponsor->apartments()->attach($request['apartment_id'],['expiration_date'=> $expirate_date]);
+
+        // return DA RICORDARE!!!!!
     }
 
     /**

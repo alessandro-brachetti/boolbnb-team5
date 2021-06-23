@@ -13,7 +13,8 @@ class ApartmentSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-      for ($i=0; $i < 10; $i++) {
+
+      for ($i=1; $i <= 5; $i++) {
         $apartment = new Apartment();
         $apartment->title = $faker->word();
         $apartment->n_rooms = $faker->randomDigit();
@@ -25,6 +26,7 @@ class ApartmentSeeder extends Seeder
         $apartment->longitude = $faker->randomDigit();
         $apartment->img = $faker->imageUrl(360, 360, 'animals', true);
         $apartment->visible = $faker->boolean();
+        $apartment->user_id = $faker->numberBetween(1,2);
         $apartment->save();
       }
     }

@@ -126,7 +126,7 @@ class ApartmentController extends Controller
             'address' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'img' => 'required|image|mimes:jpeg,jpg,png,gif,svg,bmp|max:2000',
+            'img' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg,bmp|max:2000',
             'visible' => 'required|boolean',
             'service_ids.*' => 'exists:services,id'
         ]);

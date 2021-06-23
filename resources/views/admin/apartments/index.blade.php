@@ -11,14 +11,14 @@
             <div class="card-body">
               <h5 class="card-title">{{$apartment->title}}</h5>
               <p class="card-text">Indirizzo: {{$apartment->address}}</p>
+              <div class="card-text">
+                <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Modifica</a>
+                <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messaggi</a>
+                <a href="{{route('admin.sponsor.index', ['apartment'=>$apartment->id])}}" class="card-link">Sponsor</a>
+              </div>
             </div>   
           </div>
-        </a>
-        <div class="card-body">
-          <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Modifica</a>
-          <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messaggi</a>
-          <a href="{{route('admin.sponsor.index', ['apartment'=>$apartment->id])}}" class="card-link">Sponsor</a>
-        </div>
+        </a>    
         @endforeach
       </div>
     </div>

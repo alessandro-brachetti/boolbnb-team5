@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Sponsor;
 use App\Apartment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Carbon;
@@ -42,15 +43,32 @@ class SponsorController extends Controller
      */
     public function store(Request $request, $apartment)
     {
-        // $data = $request->all(); 
         $sponsor = Sponsor::where('id','=', $request->sponsor_type)->first();
 
         $now = Carbon::now();
         $expirate_date = Carbon::now()->addHours($sponsor->duration);
 
-        $sponsor->apartments()->attach($request['apartment_id'],['expiration_date'=> $expirate_date]);
+        // TENTATIVO NON RIUSCITO, DA CORREGGERE!!!!
 
-        // return DA RICORDARE!!!!!
+        // $results = DB::table('apartment_sponsor')->get();
+        // ->where('apartment_id','=', $apartment)
+        // $array =(array)$results;
+
+        // // if ($results)  {
+        //     // dd(!empty($results == true));
+        //     foreach ($results as $result) {
+        //         if ($result->expiration_date > $now && $result->apartment_id == $apartment) {
+        //         // dd($now);
+
+        //             // dd(Carbon::parse($result->expiration_date)->addHours($sponsor->duration));
+        //             $sponsor->apartments()->attach($request['apartment_id'],['expiration_date'=> Carbon::parse($result->expiration_date)->addHours($sponsor->duration)]);
+        //         } 
+        //     }
+
+        
+        $sponsor->apartments()->attach($request['apartment_id'],['expiration_date'=> $expirate_date]);
+    
+        return redirect()->back();
     }
 
     /**

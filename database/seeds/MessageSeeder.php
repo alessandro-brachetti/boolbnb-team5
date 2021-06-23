@@ -18,6 +18,7 @@ class MessageSeeder extends Seeder
             $message->lastname = $faker->lastName();
             $message->email = $faker->email();
             $message->message = $faker->paragraph();
+            $message->apartment_id = $faker->numberBetween(1,5);
             $message->save();
         }
     }

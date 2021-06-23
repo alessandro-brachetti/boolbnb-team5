@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\View;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 
 class ViewController extends Controller
@@ -35,9 +34,17 @@ class ViewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $apartment)
     {
-        //
+        $data = $request->all();
+        $view = new View();
+        
+        $view->fill($data);
+        $view->ip_address = $_SERVER['REMOTE_ADDR'];
+        $view->save();
+        
+        return redirect()->route('guests.show', ['apartment'=> $apartment]);
+        
     }
 
     /**

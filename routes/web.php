@@ -20,6 +20,8 @@ Route::get('/guests/{apartment}', 'ApartmentController@show')->name('guests.show
 
 Route::post('/messages', 'MessageController@store')->name('messages.store');
 
+Route::post('/views/{apartment}', 'ViewController@store')->name('views.store');
+
 
 
 Auth::routes();

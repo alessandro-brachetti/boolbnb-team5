@@ -11,8 +11,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{$apartment->title}}</h5>
                                 <p class="card-text">Indirizzo: {{$apartment->address}}</p>
-                            </div>
-                            
+                            </div>                       
                         </div>
                     </a>
                 </div>

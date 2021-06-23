@@ -21,6 +21,7 @@ Route::get('/guests/{apartment}', 'ApartmentController@show')->name('guests.show
 Route::post('/messages', 'MessageController@store')->name('messages.store');
 
 
+
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
@@ -32,4 +33,6 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
     Route::get('/message/{apartment}', 'MessageController@index')->name('message.index');
     Route::get('/sponsor/{apartment}', 'SponsorController@index')->name('sponsor.index');
     Route::post('/sponsor/{apartment}', 'SponsorController@store')->name('sponsor.store');
+    Route::get('/payment/make', 'PaymentController@index')->name('payment.index');
+    Route::post('/payment/make', 'PaymentController@make')->name('payment.make');
   });

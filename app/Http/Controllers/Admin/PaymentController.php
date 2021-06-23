@@ -29,6 +29,8 @@ class PaymentController extends Controller
         ]);
 
     return response()->json(['response'=> $result, 'success' => true]);
+    // $response= response()->json(['response'=> $result, 'success' => true]);
+    // return redirect()->back();
 }
 
 }

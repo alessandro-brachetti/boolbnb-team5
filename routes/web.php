@@ -29,7 +29,7 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 
-Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
+Route::middleware(['auth'])->namespace('Admin')->prefix('admin')->name('admin.')
   ->group(function () {
     Route::resource('/apartments', 'ApartmentController');
     Route::get('/message/{apartment}', 'MessageController@index')->name('message.index');

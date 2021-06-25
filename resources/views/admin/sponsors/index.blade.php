@@ -8,7 +8,7 @@
           <div class="col-md-12">             
               <div class="col-12 d-flex flex-column align-items-center">
                   <h2>TIPI DI SPONSOR</h2>
-                  <form id="sponsor-form" class="d-flex" action="{{ route('admin.sponsor.store', ['apartment'=>$apartments->id]) }}" method="post" enctype="multipart/form-data">
+                  <form id="form2" class="d-flex" action="{{ route('admin.sponsor.store', ['apartment'=>$apartments->id]) }}" method="post" enctype="multipart/form-data">
                       @csrf
                       @method('POST')
                       <input type="hidden" name="apartment_id" value="{{$apartments->id}}">
@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-12 d-flex flex-column align-items-center">
           <div id="dropin-container"></div>
-         <form name="form" action="{{route('admin.payment.make')}}"  method="post">
+         <form name="form" id="form1" action="{{route('admin.payment.make')}}"  method="post">
            @csrf
            @method('POST')
            <div class="form-group">
@@ -37,23 +37,28 @@
                <input type="hidden"  class="form-control" name="sponsor" id="sponsor" value="">
  
            </div>
-           <button type="button" class="btn btn-success" id="submit-button"> Conferma e attiva la promo </button>
+            <button type="submit" class="btn btn-success" id="submit-button"> Conferma e attiva la promo </button>
            </form>
+
+           
         </div>
       </div>
     </div> 
   <script>
       
-    var button = document.querySelector('#submit-button');
+    var form = document.querySelector('#form1');
  
     braintree.dropin.create({
       authorization: "sandbox_38thk8rh_2y94pm5jx53r545r",
       container: '#dropin-container'
     }, function (createErr, instance) {
-      button.addEventListener('click', function () {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
-          document.querySelector('#sponsor-form').submit();
+
+          form.submit();
+          
         });
       });
     });

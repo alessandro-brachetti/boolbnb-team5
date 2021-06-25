@@ -6,7 +6,7 @@
         <h2>Crea Appartamento</h2>
       </div>
     </div>
-      <div class="row justify-content-center">
+      <div  class="row justify-content-center">
           <div class="col-md-8">
             <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
               @csrf
@@ -54,7 +54,9 @@
 
               <div class="form-group">
                 <label for="address">Indirizzo</label>
-                <input class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address') }}">
+                <div id="root">
+                  <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address') }}" @keyup.down="responseApi">
+                </div>
                 @error('address')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror

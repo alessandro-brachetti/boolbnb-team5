@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -51,32 +52,36 @@
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
-
+            <div id="root">
               <div class="form-group">
                 <label for="address">Indirizzo</label>
-                <div id="root">
-                  <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address') }}" @keyup.down="responseApi">
-                </div>
+                
+                  <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address') }}" @input="responseApi">
+                  <ul class="results">
+                    <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">@{{result.address.freeformAddress}}</li>
+                  </ul>
+                
                 @error('address')
                   <small class="text-danger"> {{ $message }}</small>
-                @enderror
+                @enderror          
               </div>
 
               <div class="form-group">
-                <label for="latitude">Latitudine</label>
-                <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" value="{{ old('latitude') }}">
+                {{-- <label for="latitude">Latitudine</label> --}}
+                <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                 @error('latitude')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="longitude">Longitudine</label>
-                <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" name="longitude" value="{{ old('longitude') }}">
+                {{-- <label for="longitude">Longitudine</label> --}}
+                <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
                 @error('longitude')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
+            </div>
 
               <div class="form-group">
                 <label for="img">Immagine</label>

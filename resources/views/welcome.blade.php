@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/maps/maps.css'>
-<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/maps/maps-web.min.js"></script>
-<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/services/services-web.min.js"></script>
+
 
 <style>
 
@@ -45,20 +43,44 @@
 </div>
 
 <script>
-    const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
-    const APPLICATION_NAME = 'My Application';
-    const APPLICATION_VERSION = '1.0';
- 
-    tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
+const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
+const APPLICATION_NAME = 'My Application';
+const APPLICATION_VERSION = '1.0';
+const GOLDEN_GATE_BRIDGE = {lng: 38.12451, lat: 13.33526};
+tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
 
-    const GOLDEN_GATE_BRIDGE = {lng: -122.47483, lat: 37.80776};
- 
-    var map = tt.map({
-    key: API_KEY,
-    container: 'map-div',
-    center: GOLDEN_GATE_BRIDGE,
-    zoom: 12
-    });
+
+var map = tt.map({
+key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+container: 'map-div',
+center: GOLDEN_GATE_BRIDGE,
+zoom: 13,
+    
+});
+
+// map.addControl(new tt.NavigationControl());
+// var geolocateControl = new tt.GeolocateControl({
+//     positionOptions: {
+//         enableHighAccuracy: false
+//     }
+// });
+
+tt.services.fuzzySearch({
+  key: API_KEY,
+  query: 'via domenico lancia di brolo 167'
+})
+.go()
+.then(function(response) {
+  map = tt.map({
+	key: API_KEY,
+	container: 'map-div',
+	center: response.results[0].position,
+	zoom: 12
+
+    
+  });
+
+});
     
 </script>
 @endsection

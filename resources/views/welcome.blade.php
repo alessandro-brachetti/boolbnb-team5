@@ -4,7 +4,7 @@
 
 <style>
 
-    #map-div { width: 100%; height: 50vh; }
+    #map { width: 100%; height: 50vh; }
   </style>
 <div class="container-fluid">
     <div class="row">
@@ -35,7 +35,7 @@
     
     <div class="row">
         <div class="col-8">
-            <div id="map-div"></div>
+            <div id="map"></div>
         </div>
         
     </div>
@@ -44,43 +44,42 @@
 
 <script>
 const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
-const APPLICATION_NAME = 'My Application';
-const APPLICATION_VERSION = '1.0';
-const GOLDEN_GATE_BRIDGE = {lng: 38.12451, lat: 13.33526};
-tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
+// const APPLICATION_NAME = 'My Application';
+// const APPLICATION_VERSION = '1.0';
 
+// tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
+
+// const GOLDEN_GATE_BRIDGE = {lng: -122.47483, lat: 37.80776};
 
 var map = tt.map({
-key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-container: 'map-div',
-center: GOLDEN_GATE_BRIDGE,
-zoom: 13,
-    
+key: API_KEY,
+container: 'map',
+center: [13.33374, 38.12759],
+zoom: 12, 
 });
 
-// map.addControl(new tt.NavigationControl());
-// var geolocateControl = new tt.GeolocateControl({
-//     positionOptions: {
-//         enableHighAccuracy: false
-//     }
-// });
+   
+    // tt.setProductInfo('My Application', '1.0');
+    //   var map = tt.map({
+    //       key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+    //       container: 'map',
+    //       center: GOLDEN_GATE_BRIDGE,
+    //       zoom: 12, 
+    //   });
 
-tt.services.fuzzySearch({
-  key: API_KEY,
-  query: 'via domenico lancia di brolo 167'
-})
-.go()
-.then(function(response) {
-  map = tt.map({
-	key: API_KEY,
-	container: 'map-div',
-	center: response.results[0].position,
-	zoom: 12
 
-    
-  });
+    search();
 
-});
-    
+      function search(){
+          map = tt.map({
+          key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+          container: 'map',
+          center: [12.0809380292276, 42.744388161339],
+          zoom: 12, 
+      })
+    };
+
+    var marker = new tt.Marker().setLngLat([12.0809380292276, 42.744388161339]).addTo(map);
+
 </script>
 @endsection

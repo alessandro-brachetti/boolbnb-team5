@@ -5,6 +5,11 @@
 <style>
 
     #map { width: 100%; height: 50vh; }
+
+    #marker::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\e065";
+    font-size: 2em;
+}
   </style>
 <div class="container-fluid">
     <div class="row">
@@ -44,12 +49,6 @@
 
 <script>
 const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
-// const APPLICATION_NAME = 'My Application';
-// const APPLICATION_VERSION = '1.0';
-
-// tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
-
-// const GOLDEN_GATE_BRIDGE = {lng: -122.47483, lat: 37.80776};
 
 var map = tt.map({
 key: API_KEY,
@@ -58,28 +57,23 @@ center: [13.33374, 38.12759],
 zoom: 12, 
 });
 
-   
-    // tt.setProductInfo('My Application', '1.0');
-    //   var map = tt.map({
-    //       key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-    //       container: 'map',
-    //       center: GOLDEN_GATE_BRIDGE,
-    //       zoom: 12, 
-    //   });
-
 
     search();
 
-      function search(){
-          map = tt.map({
-          key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-          container: 'map',
-          center: [12.0809380292276, 42.744388161339],
-          zoom: 12, 
-      })
-    };
+function search(){
+    map = tt.map({
+    key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+    container: 'map',
+    center: [12.0809380292276, 42.744388161339],
+    zoom: 12, 
+})
+};
 
-    var marker = new tt.Marker().setLngLat([12.0809380292276, 42.744388161339]).addTo(map);
+    var element = document.createElement('div');
+    element.id = 'marker';
+    var marker = new tt.Marker({element: element}).setLngLat([12.0809380292276, 42.744388161339]).addTo(map);
+
+    
 
 </script>
 @endsection

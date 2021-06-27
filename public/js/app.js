@@ -37398,6 +37398,7 @@ Vue.config.devtools = true;
 var payment = new Vue({
   el: '#payment',
   data: {
+    clicked: false,
     selected: '',
     form: {
       payment_Method_Nonce: '',
@@ -37405,28 +37406,37 @@ var payment = new Vue({
     }
   },
   mounted: function mounted() {
-    var form = document.querySelector('#form1');
     braintree.dropin.create({
       authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
       container: '#dropin-container'
     }, function (createErr, instance) {
       document.querySelector('#submit-button').addEventListener('click', function (e) {
+        console.log(this.clicked);
         e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
-          console.log(payload.nonce); // form.submit();
         });
       });
     });
   },
   methods: {
-    postResult: function postResult() {
+    postResult: function postResult(apartment_id) {
+      var _this3 = this;
+
       this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
       this.form.sponsor = this.selected;
       axios.post('/admin/payment/make', this.form).then(function (response) {
         if (response.data.response.success = true) {
-          document.querySelector('#form2').submit();
-        }
+          axios.post('/admin/sponsor/', {
+            sponsor_type: _this3.selected,
+            apartment_id: apartment_id
+          }).then(function (response) {
+            console.log(response);
+          });
+        } // if(response.data.response.success = true){
+        //   document.querySelector('#form2').submit()
+        // }
+
       });
     },
     value: function value(id) {

@@ -41,14 +41,19 @@ class SponsorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $apartment)
+    public function store(Request $request)
     {
+        
         $sponsor = Sponsor::where('id','=', $request->sponsor_type)->first();
 
         $now = Carbon::now();
         $expirate_date = Carbon::now()->addHours($sponsor->duration);        
         $sponsor->apartments()->attach($request['apartment_id'],['expiration_date'=> $expirate_date]);
-    
+        dd($sponsor);
+        return response()->json([
+            'response'=> $sponsor,
+            'success'=> true
+        ]);
     }
 
     /**

@@ -51,6 +51,7 @@ Vue.config.devtools = true;
 let payment = new Vue({
   el: '#payment',
   data:{
+    clicked: false,
     selected: '',
     form: {
       payment_Method_Nonce: '',
@@ -59,18 +60,15 @@ let payment = new Vue({
   },
 
   mounted(){
-    var form = document.querySelector('#form1');
- 
     braintree.dropin.create({
       authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
       container: '#dropin-container'
     }, function (createErr, instance) {
       document.querySelector('#submit-button').addEventListener('click', function (e) {
+        console.log(this.clicked)
         e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
-          console.log(payload.nonce)
-          // form.submit();
           
         });
       });
@@ -78,14 +76,23 @@ let payment = new Vue({
   },
 
   methods:{
-    postResult() {
+    postResult(apartment_id) {
       this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
       this.form.sponsor = this.selected;
       axios.post('/admin/payment/make', this.form).then((response) => {
 
         if(response.data.response.success = true){
-          document.querySelector('#form2').submit()
+          axios.post('/admin/sponsor/', {
+            sponsor_type: this.selected,
+            apartment_id: apartment_id
+          }).then((response)=>{
+            console.log(response)
+          })
         }
+
+        // if(response.data.response.success = true){
+        //   document.querySelector('#form2').submit()
+        // }
       })
     },
 

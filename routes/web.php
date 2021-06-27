@@ -34,7 +34,7 @@ Route::middleware(['auth'])->namespace('Admin')->prefix('admin')->name('admin.')
     Route::resource('/apartments', 'ApartmentController');
     Route::get('/message/{apartment}', 'MessageController@index')->name('message.index');
     Route::get('/sponsor/{apartment}', 'SponsorController@index')->name('sponsor.index');
-    Route::post('/sponsor/{apartment}', 'SponsorController@store')->name('sponsor.store');
+    Route::post('/sponsor/', 'SponsorController@store')->name('sponsor.store');
     Route::post('/payment/make', 'PaymentController@make')->name('payment.make');
     Route::get('/payment/make', 'PaymentController@make')->name('payment.make');
   });

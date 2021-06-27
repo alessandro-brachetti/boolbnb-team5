@@ -41,9 +41,8 @@ class SponsorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $apartment)
     {
-        dd($request);
         $sponsor = Sponsor::where('id','=', $request->sponsor_type)->first();
 
         $now = Carbon::now();

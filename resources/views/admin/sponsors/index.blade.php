@@ -8,13 +8,13 @@
           <div class="col-md-12">             
               <div class="col-12 d-flex flex-column align-items-center">
                   <h2>TIPI DI SPONSOR</h2>
-                  {{-- <form id="form2" class="d-flex" action="{{ route('admin.sponsor.store', ['apartment'=>$apartments->id]) }}" method="post" enctype="multipart/form-data">
+                  <form id="form2" class="d-flex" action="{{ route('admin.sponsor.store', ['apartment'=>$apartments->id]) }}" method="post" enctype="multipart/form-data">
                       @csrf
                       @method('POST')
-                      <input type="hidden" name="apartment_id" value="{{$apartments->id}}"> --}}
+                      <input type="hidden" name="apartment_id" value="{{$apartments->id}}">
                       @foreach ($sponsors as $sponsor)
                       <div class="form-check form-check-group">
-                        <input name="sponsor_type" type="radio" id="sponsor_type" aria-labelledby="sponsor_type-help" @click="value({{$sponsor->id}})" >
+                        <input name="sponsor_type" type="radio" id="sponsor_type" value="{{$sponsor->id}}" aria-labelledby="sponsor_type-help" @click="value({{$sponsor->id}})" >
                         <label for="sponsor_type">{{$sponsor->name}}</label>
                         <small id="sponsor_type-help" class="form-text">
                             <p>Prezzo: {{$sponsor->price}} euro</p>
@@ -22,7 +22,7 @@
                         </small>
                       </div>
                   @endforeach                   
-                  {{-- </form> --}}
+                  </form>
               </div>          
           </div>
       </div>
@@ -41,14 +41,15 @@
             <button type="submit" class="btn btn-success" id="submit-button"> Conferma e attiva lo sponsor </button>
            </form> --}}
 
-           <form name="form" id="form1" @submit.prevent="postResult({{$apartments->id}})">
+           <form name="form" id="form1" @submit.prevent="postResult">
             <div class="form-group">
                 <input type="hidden" class="form-control" id="nonce" v-model="form.payment_Method_Nonce">
                 
             </div>
-             <button class="btn btn-success" id="submit-button"> Conferma e attiva lo sponsor </button>
+             
+            <button class="btn btn-success" > Sponsorizza </button>
             </form>
-
+            <button class="btn btn-success" id="submit-button"> Conferma </button>
            
         </div>
       </div>

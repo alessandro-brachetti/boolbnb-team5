@@ -55,7 +55,6 @@ let payment = new Vue({
     form: {
       payment_Method_Nonce: '',
       sponsor: '',
-      apartment_id: ''
     }
   },
 
@@ -66,12 +65,11 @@ let payment = new Vue({
       authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
       container: '#dropin-container'
     }, function (createErr, instance) {
-      form.addEventListener('submit', function (e) {
+      document.querySelector('#submit-button').addEventListener('click', function (e) {
         e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
-          this.form.payment_Method_Nonce = payload.name;
-
+          console.log(payload.nonce)
           // form.submit();
           
         });
@@ -80,12 +78,14 @@ let payment = new Vue({
   },
 
   methods:{
-    postResult(apartment_id) {
+    postResult() {
+      this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
       this.form.sponsor = this.selected;
-      this.form.apartment_id = apartment_id;
       axios.post('/admin/payment/make', this.form).then((response) => {
-        // console.log(this.form);
-        console.log(response);
+
+        if(response.data.response.success = true){
+          document.querySelector('#form2').submit()
+        }
       })
     },
 

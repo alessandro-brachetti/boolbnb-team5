@@ -9,10 +9,6 @@ let app = new Vue({
         lat:'',
         lon:''
     },
-    created(){
-        
-        
-    },
 
     computed: {
         filteredList() {
@@ -47,3 +43,37 @@ let app = new Vue({
 });
 
 // https://api.tomtom.com/search/2/geocode/via domenico lancia di brolo 167.json?key=DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL
+
+let payment = new Vue({
+  el: '#payment',
+  data:{
+    selected: ''
+  },
+
+  mounted(){
+    var form = document.querySelector('#form1');
+ 
+    braintree.dropin.create({
+      authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
+      container: '#dropin-container'
+    }, function (createErr, instance) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        instance.requestPaymentMethod(function (err, payload) {
+          document.querySelector('#nonce').value = payload.nonce;
+
+          form.submit();
+          
+        });
+      });
+    });
+  },
+
+  methods:{
+    value(id){
+      this.selected= id;
+      console.log(this.selected)
+    }
+  }
+
+});

@@ -3,18 +3,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
-    <div class="container">
+    <div class="container" id="payment">
       <div class="row">
           <div class="col-md-12">             
               <div class="col-12 d-flex flex-column align-items-center">
                   <h2>TIPI DI SPONSOR</h2>
-                  <form id="form2" class="d-flex" action="{{ route('admin.sponsor.store', ['apartment'=>$apartments->id]) }}" method="post" enctype="multipart/form-data">
+                  {{-- <form id="form2" class="d-flex" action="{{ route('admin.sponsor.store', ['apartment'=>$apartments->id]) }}" method="post" enctype="multipart/form-data">
                       @csrf
                       @method('POST')
-                      <input type="hidden" name="apartment_id" value="{{$apartments->id}}">
+                      <input type="hidden" name="apartment_id" value="{{$apartments->id}}"> --}}
                       @foreach ($sponsors as $sponsor)
                       <div class="form-check form-check-group">
-                        <input name="sponsor_type" type="radio" id="sponsor_type" value="{{$sponsor->id}}" aria-labelledby="sponsor_type-help">
+                        <input name="sponsor_type" type="radio" id="sponsor_type" aria-labelledby="sponsor_type-help" @click="value({{$sponsor->id}})" >
                         <label for="sponsor_type">{{$sponsor->name}}</label>
                         <small id="sponsor_type-help" class="form-text">
                             <p>Prezzo: {{$sponsor->price}} euro</p>
@@ -22,7 +22,7 @@
                         </small>
                       </div>
                   @endforeach                   
-                  </form>
+                  {{-- </form> --}}
               </div>          
           </div>
       </div>
@@ -34,7 +34,8 @@
            @method('POST')
            <div class="form-group">
                <input type="hidden"  class="form-control" name="payment_Method_Nonce" id="nonce" placeholder="">
-               <input type="hidden"  class="form-control" name="sponsor" id="sponsor" value="">
+               <input type="hidden"  class="form-control" name="sponsor" id="sponsor" :value="selected">
+               <input type="hidden"  class="form-control" name="apartment_id" id="apartment_id" value="{{$apartments->id}}">
  
            </div>
             <button type="submit" class="btn btn-success" id="submit-button"> Conferma e attiva la promo </button>
@@ -44,23 +45,4 @@
         </div>
       </div>
     </div> 
-  <script>
-      
-    var form = document.querySelector('#form1');
- 
-    braintree.dropin.create({
-      authorization: "sandbox_38thk8rh_2y94pm5jx53r545r",
-      container: '#dropin-container'
-    }, function (createErr, instance) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        instance.requestPaymentMethod(function (err, payload) {
-          document.querySelector('#nonce').value = payload.nonce;
-
-          form.submit();
-          
-        });
-      });
-    });
-  </script>
 @endsection

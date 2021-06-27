@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-12 d-flex flex-column align-items-center">
           <div id="dropin-container"></div>
-         <form name="form" id="form1" action="{{route('admin.payment.make')}}"  method="post">
+         {{-- <form name="form" id="form1" action="{{route('admin.payment.make')}}"  method="post">
            @csrf
            @method('POST')
            <div class="form-group">
@@ -38,8 +38,16 @@
                <input type="hidden"  class="form-control" name="apartment_id" id="apartment_id" value="{{$apartments->id}}">
  
            </div>
-            <button type="submit" class="btn btn-success" id="submit-button"> Conferma e attiva la promo </button>
-           </form>
+            <button type="submit" class="btn btn-success" id="submit-button"> Conferma e attiva lo sponsor </button>
+           </form> --}}
+
+           <form name="form" id="form1" @submit.prevent="postResult({{$apartments->id}})">
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="nonce" v-model="form.payment_Method_Nonce">
+                
+            </div>
+             <button class="btn btn-success" id="submit-button"> Conferma e attiva lo sponsor </button>
+            </form>
 
            
         </div>

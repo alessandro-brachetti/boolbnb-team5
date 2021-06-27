@@ -8,6 +8,7 @@ use Braintree\Gateway;
 use App\Http\Controllers\Controller;
 use App\Sponsor;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 class PaymentController extends Controller
 {
     public function make(Request $request)
@@ -32,28 +33,5 @@ class PaymentController extends Controller
             ]
     ]);
 
-    // return response()->json(['response'=> $result, 'success' => true]);
-    // $response= response()->json(['response'=> $result, 'success' => true]);
-    // 
-    
-    // $response = Http::post('http://127.0.0.1:8000/admin/sponsor', [
-    //     'sponsor_id' => $data['sponsor'],
-    //     'apartment_id' => $data['apartment_id'],
-    // ]);
-
-    $response = 
-    Http::post('http://127.0.0.1:8000/admin/sponsor', [
-            'name' => 'Miller Juma',
-            'role' => 'Laravel Contributor',
-    ]);
-    return $response;
-
-    // $client = new Client;
-
-    // $request = $client->post('http://127.0.0.1:8000/admin/sponsor', [
-    //        'sponsor_id' => $data['sponsor'],
-    //        'apartment_id' => $data['apartment_id']
-    // ]);
-    
 }
 }

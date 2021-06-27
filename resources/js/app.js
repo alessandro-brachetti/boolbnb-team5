@@ -1,6 +1,10 @@
+Vue.config.devtools = true;
+Vue.config.debug = true;
+
+
 require('./bootstrap');
 const { default: axios } = require('axios');
-
+Vue.config.devtools = true;
 let app = new Vue({
     el: '#root',
     data:{
@@ -43,11 +47,16 @@ let app = new Vue({
 });
 
 // https://api.tomtom.com/search/2/geocode/via domenico lancia di brolo 167.json?key=DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL
-
+Vue.config.devtools = true;
 let payment = new Vue({
   el: '#payment',
   data:{
-    selected: ''
+    selected: '',
+    form: {
+      payment_Method_Nonce: '',
+      sponsor: '',
+      apartment_id: ''
+    }
   },
 
   mounted(){
@@ -61,8 +70,9 @@ let payment = new Vue({
         e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
+          this.form.payment_Method_Nonce = payload.name;
 
-          form.submit();
+          // form.submit();
           
         });
       });
@@ -70,6 +80,15 @@ let payment = new Vue({
   },
 
   methods:{
+    postResult(apartment_id) {
+      this.form.sponsor = this.selected;
+      this.form.apartment_id = apartment_id;
+      axios.post('/admin/payment/make', this.form).then((response) => {
+        // console.log(this.form);
+        console.log(response);
+      })
+    },
+
     value(id){
       this.selected= id;
       console.log(this.selected)

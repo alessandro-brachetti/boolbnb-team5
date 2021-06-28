@@ -65,10 +65,10 @@
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror          
               </div>
-
+              
               <div class="form-group">
                 {{-- <label for="latitude">Latitudine</label> --}}
-                <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
+                <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" :value="lat">
                 @error('latitude')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
@@ -76,7 +76,7 @@
 
               <div class="form-group">
                 {{-- <label for="longitude">Longitudine</label> --}}
-                <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
+                <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" name="longitude" :value="lon">
                 @error('longitude')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror

@@ -21,6 +21,7 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

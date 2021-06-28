@@ -28,16 +28,16 @@ let app = new Vue({
               axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
                 params:{
                     key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-                }, 
+                },
             }).then((response) =>{
                 this.results = response.data.results;
                 console.log(this.results);
-            }); 
+            });
             } else {
               this.results = [];
-            }              
+            }
           }, 1000),
-          
+
           getCords(lat,lon) {
             this.lat = lat;
             this.lon = lon;
@@ -69,7 +69,7 @@ let payment = new Vue({
         e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
-          
+
         });
       });
     });

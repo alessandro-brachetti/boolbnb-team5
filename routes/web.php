@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ApartmentController@index');
 Route::get('/guests/{apartment}', 'ApartmentController@show')->name('guests.show');
-// Route::get('/guests/{searchInput}', 'SearchController@index')->name('guests.search');
 
+Route::get('/search/{query}', function(){
+  return view('guests.search');
+})->name('guests.search');
 
 Route::post('/messages', 'MessageController@store')->name('messages.store');
 

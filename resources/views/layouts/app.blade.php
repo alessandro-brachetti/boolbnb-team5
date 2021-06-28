@@ -40,11 +40,10 @@
                     <ul class="navbar-nav mr-auto">
                         
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                      </form>
-
+                    <div class="form-inline my-2 my-lg-0" id="welcome">
+                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search" v-model="search">
+                        <a class="btn btn-outline-success my-2 my-sm-0" :href="`/search/${search}`">Search</a>
+                    </div>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -87,5 +86,12 @@
             @yield('content')
         </main>
     </div>
+    {{-- <script>
+        function searchInput() {
+        let val = document.getElementById('searchInput').value;
+        console.log(val);
+        return val; 
+        }
+    </script> --}}
 </body>
 </html>

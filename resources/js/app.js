@@ -1,10 +1,11 @@
 Vue.config.devtools = true;
 Vue.config.debug = true;
 
-
 require('./bootstrap');
 const { default: axios } = require('axios');
+
 Vue.config.devtools = true;
+
 let app = new Vue({
     el: '#root',
     data:{
@@ -102,4 +103,47 @@ let payment = new Vue({
     }
   }
 
+});
+
+let welcome = new Vue({
+  el: '#welcome',
+  data:{
+    search: '',
+  },
+});
+
+
+let search = new Vue({
+  el: '#search',
+  data:{
+    city: null,
+  },
+  created() {
+    
+    let path = window.location.pathname;
+    this.city = path.split('/search/')[1];
+
+    axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
+        params:{
+            key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+        }, 
+    }).then((response) =>{
+      let lon = response.data.results[0].position.lon;
+      let lat = response.data.results[0].position.lat;
+    
+      const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
+    
+      var map = tt.map({
+      key: API_KEY,
+      container: 'map',
+      center: [lon, lat],
+      zoom: 12, 
+      });
+
+      var element = document.createElement('div');
+      element.id = 'marker';
+      var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
+    });
+        
+  },
 });

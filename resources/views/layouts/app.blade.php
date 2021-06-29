@@ -38,11 +38,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        
+
                     </ul>
                     <div class="form-inline my-2 my-lg-0" id="welcome">
-                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search" v-model="search">
+                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search" v-model="search" @input="responseApi">
                         <a class="btn btn-outline-success my-2 my-sm-0" :href="`/search/${search}`">Search</a>
+                        <div class="">
+                          <ul>
+                            <li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li>
+                          </ul>
+                        </div>
                     </div>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -90,7 +95,7 @@
         function searchInput() {
         let val = document.getElementById('searchInput').value;
         console.log(val);
-        return val; 
+        return val;
         }
     </script> --}}
 </body>

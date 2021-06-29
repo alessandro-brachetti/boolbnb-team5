@@ -29,16 +29,16 @@ let app = new Vue({
               axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
                 params:{
                     key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-                }, 
+                },
             }).then((response) =>{
                 this.results = response.data.results;
                 console.log(this.results);
-            }); 
+            });
             } else {
               this.results = [];
-            }              
+            }
           }, 1000),
-          
+
           getCords(lat,lon) {
             this.lat = lat;
             this.lon = lon;
@@ -70,7 +70,7 @@ let payment = new Vue({
         e.preventDefault();
         instance.requestPaymentMethod(function (err, payload) {
           document.querySelector('#nonce').value = payload.nonce;
-          
+
         });
       });
     });
@@ -99,7 +99,6 @@ let payment = new Vue({
 
     value(id){
       this.selected= id;
-      console.log(this.selected)
     }
   }
 
@@ -109,7 +108,29 @@ let welcome = new Vue({
   el: '#welcome',
   data:{
     search: '',
+    results: [],
   },
+  methods:{
+    responseApi:_.debounce(function() {
+      if (this.search != '') {
+        axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+          params:{
+              key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+          },
+      }).then((response) =>{
+          this.results = response.data.results;
+      });
+      } else {
+        this.results = [];
+      }
+    }, 1000),
+
+    getCords(lat,lon) {
+      this.lat = lat;
+      this.lon = lon;
+      this.results = [];
+    },
+  }
 });
 
 
@@ -117,33 +138,51 @@ let search = new Vue({
   el: '#search',
   data:{
     city: null,
+    results: [],
   },
   created() {
-    
+
     let path = window.location.pathname;
     this.city = path.split('/search/')[1];
 
     axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
         params:{
             key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-        }, 
+        },
     }).then((response) =>{
       let lon = response.data.results[0].position.lon;
       let lat = response.data.results[0].position.lat;
-    
+
       const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
-    
+
       var map = tt.map({
       key: API_KEY,
       container: 'map',
       center: [lon, lat],
-      zoom: 12, 
+      zoom: 12,
       });
 
       var element = document.createElement('div');
       element.id = 'marker';
       var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
     });
-        
+
+    axios.get('/api/search?address='+this.city).then((response)=>{
+      this.results = response.data.data;
+      console.log(this.results);
+
+    });
+
+    var element = document.createElement('div');
+    element.id = 'marker';
+
+    for (var i = 0; i < this.results.length; i++) {
+      var i = new tt.Marker({element: element}).setLngLat([this.results[i].longitude, this.results[i].latitude]).addTo(map);
+    }
+
+
+
+
+
   },
 });

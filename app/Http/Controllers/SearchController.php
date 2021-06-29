@@ -14,10 +14,16 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        $apartments = Apartment::where('address', 'LIKE', "%".$request->address."%")->get();
+        $words = explode(" ", $request->address);
 
+        $apartments = Apartment::with('services')->where('address', 'LIKE', '%'.$words[0].'%');
+        for ($i=1; $i < count($words); $i++) {
+          $apartments->orWhere('address', 'LIKE', '%'.$words[$i].'%');
+        };
+        $results = $apartments->get();
+        
         return response()->json([
-            'data' => $apartments,
+            'data' => $results,
             'success' => true,
         ]);
     }

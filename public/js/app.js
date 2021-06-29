@@ -37488,22 +37488,47 @@ var payment = new Vue({
     },
     value: function value(id) {
       this.selected = id;
-      console.log(this.selected);
     }
   }
 });
 var welcome = new Vue({
   el: '#welcome',
   data: {
-    search: ''
+    search: '',
+    results: []
+  },
+  methods: {
+    responseApi: _.debounce(function () {
+      var _this4 = this;
+
+      if (this.search != '') {
+        axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+          params: {
+            key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+          }
+        }).then(function (response) {
+          _this4.results = response.data.results;
+        });
+      } else {
+        this.results = [];
+      }
+    }, 1000),
+    getCords: function getCords(lat, lon) {
+      this.lat = lat;
+      this.lon = lon;
+      this.results = [];
+    }
   }
 });
 var search = new Vue({
   el: '#search',
   data: {
-    city: null
+    city: null,
+    results: []
   },
   created: function created() {
+    var _this5 = this;
+
     var path = window.location.pathname;
     this.city = path.split('/search/')[1];
     axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
@@ -37526,6 +37551,18 @@ var search = new Vue({
         element: element
       }).setLngLat([lon, lat]).addTo(map);
     });
+    axios.get('/api/search?address=' + this.city).then(function (response) {
+      _this5.results = response.data.data;
+      console.log(_this5.results);
+    });
+    var element = document.createElement('div');
+    element.id = 'marker';
+
+    for (var i = 0; i < this.results.length; i++) {
+      var i = new tt.Marker({
+        element: element
+      }).setLngLat([this.results[i].longitude, this.results[i].latitude]).addTo(map);
+    }
   }
 });
 
@@ -37594,8 +37631,8 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alessandro\Desktop\Esercizi\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alessandro\Desktop\Esercizi\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\giudi\Desktop\BOOLEAN\ESERCIZI\ESERCIZI-SVOLGIMENTO\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\giudi\Desktop\BOOLEAN\ESERCIZI\ESERCIZI-SVOLGIMENTO\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

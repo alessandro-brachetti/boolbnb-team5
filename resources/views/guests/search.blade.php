@@ -4,11 +4,13 @@
 <div class="container" id="search">
     <div class="row">
         <div class="col-6">
-            <p>HELLO WORLD</p>
+            <ul>
+              <li v-for="result in results">@{{result.title}}</li>
+            </ul>
         </div>
         <div class="col-6">
             <div id="map"></div>
-        </div>    
+        </div>
     </div>
 </div>
 

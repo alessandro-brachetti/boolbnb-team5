@@ -146,6 +146,13 @@ let search = new Vue({
     results: [],
     lon: '',
     lat: '',
+    range:15,
+    // companyAssets: [
+    //   { lat: 52.373627, lng: 4.902642 },
+    //   { lat: 52.3659, lng: 4.927198 },
+    //   { lat: 52.347878, lng: 4.893488 },
+    //   { lat: 52.349447, lng: 4.858433 }
+    // ]
   },
   created() {
 
@@ -168,12 +175,27 @@ let search = new Vue({
       key: API_KEY,
       container: 'map',
       center: [lon, lat],
-      zoom: 12,
+      zoom: 6,
       });
 
-      var element = document.createElement('div');
-      element.id = 'marker';
-      var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
+      console.log(this.results);
+      for (let i = 0; i < this.results.length; i++) {
+        console.log(this.results);
+        var long = this.results[i].longitude
+        var lati = this.results[i].latitude
+        console.log(lon, lat)
+        var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
+        
+      }
+
+      // var element2 = document.createElement('div');
+      // element2.class = 'marker2';
+      // new tt.Marker({element: element2}).setLngLat([lon, lat]).addTo(map);
+      
+
+      // var element = document.createElement('div');
+      // element.id = 'marker';
+      // var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
     });
 
     axios.get('/api/search').then((response)=>{
@@ -182,24 +204,62 @@ let search = new Vue({
         let lat1 = response.data.data[i].latitude;
         let lon1 = response.data.data[i].longitude;
 
-        var range=20;
+        var range = this.range;
 
         let y = lat1 - this.lat;
         let x = lon1 - this.lon;
         let distancekm = Math.sqrt(x*x+y*y)*100;
 
         if (distancekm <= range) {
-          this.results.push(response.data.data[i]);
+          this.results.push(response.data.data[i]); 
         }
       }
-      console.log(this.results);
     });
 
-    // var element = document.createElement('div');
-    // element.id = 'marker';
+
+
+//     this.companyAssets.forEach(function (child) {
+//       new tt.Marker({element: element2}).setLngLat(child).addTo(map);
+// });
     //
-    // for (var i = 0; i < this.results.length; i++) {
-    //   var i = new tt.Marker({element: element}).setLngLat([this.results[i].longitude, this.results[i].latitude]).addTo(map);
-    // }
+    
+    
+
   },
+
+  methods:{
+    onRangeChange: _.debounce(function() {
+      axios.get('/api/search').then((response)=>{
+
+        for (var i = 0; i < response.data.data.length; i++) {
+          let lat1 = response.data.data[i].latitude;
+          let lon1 = response.data.data[i].longitude;
+          
+          var range = this.range;
+          let y = lat1 - this.lat;
+          let x = lon1 - this.lon;
+          let distancekm = Math.sqrt(x*x+y*y)*100;
+          // console.log(distancekm)
+          var temp = response.data.data[i].id
+          if (distancekm <= range ) {
+            if(this.results.some(result => result.id === temp)){
+              console.log("Object found inside the array.", distancekm <= range);
+            } else{
+              this.results.push(response.data.data[i]);
+            }
+          
+          }else{
+            let index = this.results.indexOf(this.results.find(result => result.id === temp))
+
+            if (index != -1 && distancekm > range && this.results.some(result => result.id === temp ) ) {
+              console.log(distancekm, range, distancekm > range)
+              this.results.splice(index, 1);
+            }
+
+            
+          }
+        }
+      });
+    }, 1000)
+  }
 });

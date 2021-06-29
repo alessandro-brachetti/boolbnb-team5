@@ -12,7 +12,7 @@ let app = new Vue({
         search: '',
         results: [],
         lat:'',
-        lon:''
+        lon:'',
     },
 
     computed: {
@@ -44,7 +44,12 @@ let app = new Vue({
             this.lon = lon;
             this.results = [];
           },
+          
+          getAddress(address){
+            this.search=address;
+          }
       }
+
 });
 
 // https://api.tomtom.com/search/2/geocode/via domenico lancia di brolo 167.json?key=DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL
@@ -139,6 +144,8 @@ let search = new Vue({
   data:{
     city: null,
     results: [],
+    lon: '',
+    lat: '',
   },
   created() {
 
@@ -152,6 +159,8 @@ let search = new Vue({
     }).then((response) =>{
       let lon = response.data.results[0].position.lon;
       let lat = response.data.results[0].position.lat;
+      this.lon = lon;
+      this.lat = lat;
 
       const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
 
@@ -167,22 +176,30 @@ let search = new Vue({
       var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
     });
 
-    axios.get('/api/search?address='+this.city).then((response)=>{
-      this.results = response.data.data;
-      console.log(this.results);
+    axios.get('/api/search').then((response)=>{
 
+      for (var i = 0; i < response.data.data.length; i++) {
+        let lat1 = response.data.data[i].latitude;
+        let lon1 = response.data.data[i].longitude;
+
+        var range=20;
+
+        let y = lat1 - this.lat;
+        let x = lon1 - this.lon;
+        let distancekm = Math.sqrt(x*x+y*y)*100;
+
+        if (distancekm <= range) {
+          this.results.push(response.data.data[i]);
+        }
+      }
+      console.log(this.results);
     });
 
-    var element = document.createElement('div');
-    element.id = 'marker';
-
-    for (var i = 0; i < this.results.length; i++) {
-      var i = new tt.Marker({element: element}).setLngLat([this.results[i].longitude, this.results[i].latitude]).addTo(map);
-    }
-
-
-
-
-
+    // var element = document.createElement('div');
+    // element.id = 'marker';
+    //
+    // for (var i = 0; i < this.results.length; i++) {
+    //   var i = new tt.Marker({element: element}).setLngLat([this.results[i].longitude, this.results[i].latitude]).addTo(map);
+    // }
   },
 });

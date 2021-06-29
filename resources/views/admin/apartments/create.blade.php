@@ -15,7 +15,7 @@
               <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
               <div class="form-group">
                 <label for="title">Titolo</label>
-                <input class="form-control @error('title') is-invalid @enderror" id="titolo" type="text" name="title" value="{{ old('title') }}">           
+                <input class="form-control @error('title') is-invalid @enderror" id="titolo" type="text" name="title" value="{{ old('title') }}">
                 @error('title')
                   <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -55,17 +55,17 @@
             <div id="root">
               <div class="form-group">
                 <label for="address">Indirizzo</label>
-                
-                  <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address') }}" @input="responseApi">
+
+                  <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
                   <ul class="results">
                     <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">@{{result.address.freeformAddress}}</li>
                   </ul>
-                
+
                 @error('address')
                   <small class="text-danger"> {{ $message }}</small>
-                @enderror          
+                @enderror
               </div>
-              
+
               <div class="form-group">
                 {{-- <label for="latitude">Latitudine</label> --}}
                 <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" :value="lat">
@@ -96,7 +96,7 @@
                 @foreach ($services as $service)
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" @error('services') is-invalid @enderror" id="services" type="checkbox" name="service_ids[]" value="{{$service->id}}">
-                <label class="form-check-label" for="services">{{$service->service_name}}</label>      
+                <label class="form-check-label" for="services">{{$service->service_name}}</label>
                 </div>
                 @endforeach
                 @error('services')

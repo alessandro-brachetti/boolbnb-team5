@@ -18,7 +18,7 @@
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
               </div>
-  
+
               <div class="form-group">
                 <label for="n_rooms">Numero Stanze</label>
                 <input class="form-control @error('n_rooms') is-invalid @enderror" id="n_rooms" type="number" name="n_rooms" value="{{ old('n_rooms', $apartment->n_rooms) }}">
@@ -51,7 +51,37 @@
                 @enderror
               </div>
 
-              <div class="form-group">
+              <div id="root">
+                <p @click="getAddress('{{$apartment->address}}')">Clicca qui per prendere il vecchio indirizzo</p>
+                <div class="form-group">
+                  <label for="address">Indirizzo</label>
+
+                    <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
+                    <ul class="results">
+                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">@{{result.address.freeformAddress}}</li>
+                    </ul>
+
+                  @error('address')
+                    <small class="text-danger"> {{ $message }}</small>
+                  @enderror
+                </div>
+
+                <div class="form-group">
+                  <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" :value="lat">
+                  @error('latitude')
+                    <small class="text-danger"> {{ $message }}</small>
+                  @enderror
+                </div>
+
+                <div class="form-group">
+                  <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" name="longitude" :value="lon">
+                  @error('longitude')
+                    <small class="text-danger"> {{ $message }}</small>
+                  @enderror
+                </div>
+              </div>
+
+              <!-- <div class="form-group">
                 <label for="address">Indirizzo</label>
                 <input class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address', $apartment->address) }}">
                 @error('address')
@@ -73,10 +103,10 @@
                 @error('longitude')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
-              </div>
+              </div> -->
               <img src="{{asset($apartment->img)}}" class="img-fluid img-thumbnail" alt="{{$apartment->title}}">
               <div class="form-group">
-                <label for="img">Immagine</label>            
+                <label for="img">Immagine</label>
                 <input class="form-control-file @error('img') is-invalid @enderror" id="img" type="file" name="img" value="{{old('img')}}">
                 @error('img')
                   <small class="text-danger"> {{ $message }}</small>
@@ -88,7 +118,7 @@
                 @foreach ($services as $service)
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" @error('services') is-invalid @enderror" id="services" type="checkbox" name="service_ids[]" value=" {{$service->id}}" {{ $apartment->services->contains($service) ?  'checked' : '' }}>
-                <label class="form-check-label" for="services">{{$service->service_name}}</label>      
+                <label class="form-check-label" for="services">{{$service->service_name}}</label>
                 </div>
                 @endforeach
                 @error('services')
@@ -98,7 +128,7 @@
 
               <div class="form-group">
                 <label for="visible">Visibile</label>
-                <select class="form-control @error('visible') is-invalid @enderror" id="visible" name="visible">               
+                <select class="form-control @error('visible') is-invalid @enderror" id="visible" name="visible">
                     <option value="1">SI</option>
                     <option value="0">NO</option>
                 </select>

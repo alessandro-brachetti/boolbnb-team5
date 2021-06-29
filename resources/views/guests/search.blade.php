@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-6">
             <ul>
-              <li v-for="result in results">@{{result.title}}</li>
+              <li v-for="result in results"><a :href="`/guests/${result.id}`">@{{result.title}}</a></li>
             </ul>
         </div>
         <div class="col-6">

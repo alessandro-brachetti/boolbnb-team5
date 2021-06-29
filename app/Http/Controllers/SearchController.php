@@ -12,16 +12,17 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $words = explode(" ", $request->address);
+        // $words = explode(" ", $request->address);
 
-        $apartments = Apartment::with('services')->where('address', 'LIKE', '%'.$words[0].'%');
-        for ($i=1; $i < count($words); $i++) {
-          $apartments->orWhere('address', 'LIKE', '%'.$words[$i].'%');
-        };
+        $apartments = Apartment::with('services');
+        // ->where('address', 'LIKE', '%'.$words[0].'%');
+        // for ($i=1; $i < count($words); $i++) {
+        //   $apartments->orWhere('address', 'LIKE', '%'.$words[$i].'%');
+        // };
         $results = $apartments->get();
-        
+
         return response()->json([
             'data' => $results,
             'success' => true,

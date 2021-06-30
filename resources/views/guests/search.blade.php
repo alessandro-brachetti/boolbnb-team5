@@ -32,7 +32,7 @@
                 {{-- <div v-for="result in results" v-if="result.n_rooms >= filter.rooms && result.n_beds >= filter.beds">
                     <a :href="`/guests/${result.id}`">@{{result.title}}</a>   
                 </div> --}}
-                <div v-for="apartment in filteredServices">
+                <div v-for="apartment in filteredServices" v-if="apartment.n_rooms >= filter.rooms && apartment.n_beds >= filter.beds">
                     <p>FIltrati:@{{apartment.title}}</p>
                 </div>
             </div>

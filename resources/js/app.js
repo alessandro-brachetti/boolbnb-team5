@@ -44,7 +44,7 @@ let app = new Vue({
             this.lon = lon;
             this.results = [];
           },
-          
+
           getAddress(address){
             this.search=address;
           }
@@ -74,7 +74,7 @@ let payment = new Vue({
             e.preventDefault();
             instance.requestPaymentMethod(function (err, payload) {
               document.querySelector('#nonce').value = payload.nonce;
-    
+
             });
           });
         });
@@ -163,7 +163,7 @@ let search = new Vue({
         let lat = response.data.results[0].position.lat;
         this.lon = lon;
         this.lat = lat;
-  
+
       const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
 
       var map = tt.map({
@@ -180,13 +180,13 @@ let search = new Vue({
         var lati = this.results[i].latitude
         console.log(lon, lat)
         var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
-        
+
       }
       // MARKERS PER MAPPA
       // var element2 = document.createElement('div');
       // element2.class = 'marker2';
       // new tt.Marker({element: element2}).setLngLat([lon, lat]).addTo(map);
-      
+
 
       // var element = document.createElement('div');
       // element.id = 'marker';
@@ -205,31 +205,51 @@ let search = new Vue({
         let x = lon1 - this.lon;
         let distancekm = Math.sqrt(x*x+y*y)*100;
 
-        if (distancekm <= range) { 
-          this.results.push(response.data.data[i]); 
+        if (distancekm <= range) {
+          this.results.push(response.data.data[i]);
         }
       }
     });
-    }  
+    }
   },
   computed: {
       filteredServices() {
-        if (!this.checkedItems.length) {
+        if (this.checkedItems.length == 0) {
           return this.results;
+        }else{
+          var results = []
+        
+          this.results.forEach(element => {
+            element.services.filter(item => {
+              // console.log('item',item)
+              // console.log('include ', this.checkedItems.includes(item.service_name))
+              if(this.checkedItems.includes(item.service_name) == true){
+                // console.log('da pushare se non esiste', results.indexOf(element) == -1)
+                if(results.indexOf(element) == -1){
+                  results.push(element)
+                }
+               
+              }
+            });
+          });
+          return results
         }
-        return this.results.filter(result => this.checkedItems.includes(result.services));
+        
+
+        
+        
       }
   },
   methods:{
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function() {
       axios.get('/api/search').then((response)=>{
-        console.log(this.checkedItems);
+
 
         for (var i = 0; i < response.data.data.length; i++) {
           let lat1 = response.data.data[i].latitude;
           let lon1 = response.data.data[i].longitude;
-          
+
           var range = this.range;
           let y = lat1 - this.lat;
           let x = lon1 - this.lon;
@@ -242,13 +262,13 @@ let search = new Vue({
             } else{
               this.results.push(response.data.data[i]);
             }
-          
+
           }else{
             let index = this.results.indexOf(this.results.find(result => result.id === temp))
 
             if (index != -1 && distancekm > range && this.results.some(result => result.id === temp ) ) {
               this.results.splice(index, 1);
-            }        
+            }
           }
         }
       });

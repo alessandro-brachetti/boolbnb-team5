@@ -52,7 +52,6 @@ let app = new Vue({
 
 });
 
-// https://api.tomtom.com/search/2/geocode/via domenico lancia di brolo 167.json?key=DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL
 Vue.config.devtools = true;
 let payment = new Vue({
   el: '#payment',
@@ -64,24 +63,22 @@ let payment = new Vue({
       sponsor: '',
     }
   },
-
-  mounted(){
-    braintree.dropin.create({
-      authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
-      container: '#dropin-container'
-    }, function (createErr, instance) {
-      document.querySelector('#submit-button').addEventListener('click', function (e) {
-        console.log(this.clicked)
-        e.preventDefault();
-        instance.requestPaymentMethod(function (err, payload) {
-          document.querySelector('#nonce').value = payload.nonce;
-
-        });
-      });
-    });
-  },
-
   methods:{
+    startPayment() {
+        braintree.dropin.create({
+          authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
+          container: '#dropin-container'
+        }, function (createErr, instance) {
+          document.querySelector('#submit-button').addEventListener('click', function (e) {
+            console.log(this.clicked)
+            e.preventDefault();
+            instance.requestPaymentMethod(function (err, payload) {
+              document.querySelector('#nonce').value = payload.nonce;
+    
+            });
+          });
+        });
+    },
     postResult(apartment_id) {
       this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
       this.form.sponsor = this.selected;
@@ -95,10 +92,6 @@ let payment = new Vue({
             console.log(response)
           })
         }
-
-        // if(response.data.response.success = true){
-        //   document.querySelector('#form2').submit()
-        // }
       })
     },
 
@@ -146,29 +139,30 @@ let search = new Vue({
     results: [],
     lon: '',
     lat: '',
-    range:15,
-    // companyAssets: [
-    //   { lat: 52.373627, lng: 4.902642 },
-    //   { lat: 52.3659, lng: 4.927198 },
-    //   { lat: 52.347878, lng: 4.893488 },
-    //   { lat: 52.349447, lng: 4.858433 }
-    // ]
+    range: 20,
+    filter: {
+      rooms: 1,
+      beds: 1
+    },
+    filteredResults: [],
   },
   created() {
 
     let path = window.location.pathname;
     this.city = path.split('/search/')[1];
 
-    axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
+    if (this.city != null) {
+      axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
         params:{
             key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
         },
     }).then((response) =>{
-      let lon = response.data.results[0].position.lon;
-      let lat = response.data.results[0].position.lat;
-      this.lon = lon;
-      this.lat = lat;
-
+        console.log(response);
+        let lon = response.data.results[0].position.lon;
+        let lat = response.data.results[0].position.lat;
+        this.lon = lon;
+        this.lat = lat;
+  
       const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
 
       var map = tt.map({
@@ -187,7 +181,7 @@ let search = new Vue({
         var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
         
       }
-
+      // MARKERS PER MAPPA
       // var element2 = document.createElement('div');
       // element2.class = 'marker2';
       // new tt.Marker({element: element2}).setLngLat([lon, lat]).addTo(map);
@@ -215,19 +209,11 @@ let search = new Vue({
         }
       }
     });
-
-
-
-//     this.companyAssets.forEach(function (child) {
-//       new tt.Marker({element: element2}).setLngLat(child).addTo(map);
-// });
-    //
-    
-    
-
+    }  
   },
 
   methods:{
+    // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function() {
       axios.get('/api/search').then((response)=>{
 
@@ -254,12 +240,10 @@ let search = new Vue({
             if (index != -1 && distancekm > range && this.results.some(result => result.id === temp ) ) {
               console.log(distancekm, range, distancekm > range)
               this.results.splice(index, 1);
-            }
-
-            
+            }        
           }
         }
       });
-    }, 1000)
+    }, 1000),
   }
 });

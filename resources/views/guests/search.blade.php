@@ -4,16 +4,31 @@
 <div class="container" id="search">
     <div class="row">
         <div class="col-6">
+            <div>
+                <label for="points">Numero minimo stanze:</label>
+                <input type="number" id="points" name="points" min="1" max="20" v-model="filter.rooms">
+            </div>
+            
+            <div>
+                <label for="points">Numero minimo posti letto:</label>
+                <input type="number" id="points" name="points" min="1" max="20" v-model="filter.beds">
+            </div>
+            
+
+            <div>
+                <span>@{{range}} Km</span>
+                <input type="range" v-model='range' name="" id="" min="20" max="100" @input="onRangeChange">
+                <span>100 Km</span>
+            </div>
+            
             <ul>
-              <li v-for="result in results"><a :href="`/guests/${result.id}`">@{{result.title}}</a></li>
+                <li  v-for="result in results" v-if="result.n_rooms >= filter.rooms && result.n_beds >= filter.beds"><a :href="`/guests/${result.id}`">@{{result.title}}</a>
+                </li>
             </ul>
         </div>
         <div class="col-6">
             <div id="map"></div>
-        </div>
-        <span>@{{range}}</span>
-        <input type="range" v-model='range' name="" id="" min="15" max="100" @input="onRangeChange">
-        <span>100</span>
+        </div>       
     </div>
 </div>
 

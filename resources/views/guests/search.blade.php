@@ -13,7 +13,14 @@
                 <label for="points">Numero minimo posti letto:</label>
                 <input type="number" id="points" name="points" min="1" max="20" v-model="filter.beds">
             </div>
-            
+
+            <div class="form-group">
+                <p>Filtra per Servizi:</p>
+                <div class="form-check form-check-inline" v-for="service in services">  
+                  <input class="form-check-input" id="services" type="checkbox" v-model="checkedItems" :value="service">
+                  <label> @{{service}} </label>
+                </div>      
+            </div>
 
             <div>
                 <span>@{{range}} Km</span>
@@ -21,10 +28,14 @@
                 <span>100 Km</span>
             </div>
             
-            <ul>
-                <li  v-for="result in results" v-if="result.n_rooms >= filter.rooms && result.n_beds >= filter.beds"><a :href="`/guests/${result.id}`">@{{result.title}}</a>
-                </li>
-            </ul>
+            <div>               
+                {{-- <div v-for="result in results" v-if="result.n_rooms >= filter.rooms && result.n_beds >= filter.beds">
+                    <a :href="`/guests/${result.id}`">@{{result.title}}</a>   
+                </div> --}}
+                <div v-for="apartment in filteredServices">
+                    <p>FIltrati:@{{apartment.title}}</p>
+                </div>
+            </div>
         </div>
         <div class="col-6">
             <div id="map"></div>

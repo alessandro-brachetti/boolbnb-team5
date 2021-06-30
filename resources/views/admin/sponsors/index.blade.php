@@ -30,10 +30,28 @@
                 
             </div>
              
-            <button v-if="clicked == true" class="btn btn-success" > Sponsorizza </button>
+            <button v-if="clicked == true" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Sponsorizza </button>
             </form>
             <button v-if="clicked == false" class="btn btn-success" id="submit-button" @click="clicked = true"> Conferma </button>
-           
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Congratulazioni!</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Hai sponsorizzato il tuo appartamento con successo!
+                    </div>
+                    <div class="modal-footer">
+                      <a href="/dashboard" class="btn btn-secondary">Ok</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
       </div>
     </div> 

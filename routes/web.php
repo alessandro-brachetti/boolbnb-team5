@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Service;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +19,8 @@ Route::get('/', 'ApartmentController@index');
 Route::get('/guests/{apartment}', 'ApartmentController@show')->name('guests.show');
 
 Route::get('/search/{query}', function(){
-  return view('guests.search');
+  $services = Service::all();
+  return view('guests.search', compact('services'));
 })->name('guests.search');
 
 Route::post('/messages', 'MessageController@store')->name('messages.store');

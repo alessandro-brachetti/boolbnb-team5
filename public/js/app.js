@@ -37531,7 +37531,8 @@ var search = new Vue({
       rooms: 1,
       beds: 1
     },
-    filteredResults: []
+    services: ['WIFI', 'Posto macchina', 'Aria condizionata', 'Riscaldamento', 'TV', 'Bagno privato', 'Piscina', 'Portineria', 'Sauna', 'Vista mare'],
+    checkedItems: []
   },
   created: function created() {
     var _this5 = this;
@@ -37555,7 +37556,7 @@ var search = new Vue({
           key: API_KEY,
           container: 'map',
           center: [lon, lat],
-          zoom: 6
+          zoom: 10
         });
         console.log(_this5.results);
 
@@ -37573,7 +37574,8 @@ var search = new Vue({
         // element.id = 'marker';
         // var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
 
-      });
+      }); // API TO GET APARTMENTS
+
       axios.get('/api/search').then(function (response) {
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
@@ -37590,41 +37592,54 @@ var search = new Vue({
       });
     }
   },
+  computed: {
+    filteredServices: function filteredServices() {
+      var _this6 = this;
+
+      if (!this.checkedItems.length) {
+        return this.results;
+      }
+
+      return this.results.filter(function (result) {
+        return _this6.checkedItems.includes(result.services);
+      });
+    }
+  },
   methods: {
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('/api/search').then(function (response) {
+        console.log(_this7.checkedItems);
+
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
-          var range = _this6.range;
-          var y = lat1 - _this6.lat;
-          var x = lon1 - _this6.lon;
+          var range = _this7.range;
+          var y = lat1 - _this7.lat;
+          var x = lon1 - _this7.lon;
           var distancekm = Math.sqrt(x * x + y * y) * 100; // console.log(distancekm)
 
           var temp = response.data.data[i].id;
 
           if (distancekm <= range) {
-            if (_this6.results.some(function (result) {
+            if (_this7.results.some(function (result) {
               return result.id === temp;
             })) {
               console.log("Object found inside the array.", distancekm <= range);
             } else {
-              _this6.results.push(response.data.data[i]);
+              _this7.results.push(response.data.data[i]);
             }
           } else {
-            var index = _this6.results.indexOf(_this6.results.find(function (result) {
+            var index = _this7.results.indexOf(_this7.results.find(function (result) {
               return result.id === temp;
             }));
 
-            if (index != -1 && distancekm > range && _this6.results.some(function (result) {
+            if (index != -1 && distancekm > range && _this7.results.some(function (result) {
               return result.id === temp;
             })) {
-              console.log(distancekm, range, distancekm > range);
-
-              _this6.results.splice(index, 1);
+              _this7.results.splice(index, 1);
             }
           }
         }

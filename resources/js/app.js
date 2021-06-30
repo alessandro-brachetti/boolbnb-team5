@@ -142,9 +142,10 @@ let search = new Vue({
     range: 20,
     filter: {
       rooms: 1,
-      beds: 1
+      beds: 1,
     },
-    filteredResults: [],
+    services: ['WIFI', 'Posto macchina', 'Aria condizionata', 'Riscaldamento', 'TV', 'Bagno privato', 'Piscina','Portineria','Sauna','Vista mare'],
+    checkedItems: [],
   },
   created() {
 
@@ -169,7 +170,7 @@ let search = new Vue({
       key: API_KEY,
       container: 'map',
       center: [lon, lat],
-      zoom: 6,
+      zoom: 10,
       });
 
       console.log(this.results);
@@ -191,7 +192,7 @@ let search = new Vue({
       // element.id = 'marker';
       // var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
     });
-
+    // API TO GET APARTMENTS
     axios.get('/api/search').then((response)=>{
 
       for (var i = 0; i < response.data.data.length; i++) {
@@ -204,18 +205,26 @@ let search = new Vue({
         let x = lon1 - this.lon;
         let distancekm = Math.sqrt(x*x+y*y)*100;
 
-        if (distancekm <= range) {
+        if (distancekm <= range) { 
           this.results.push(response.data.data[i]); 
         }
       }
     });
     }  
   },
-
+  computed: {
+      filteredServices() {
+        if (!this.checkedItems.length) {
+          return this.results;
+        }
+        return this.results.filter(result => this.checkedItems.includes(result.services));
+      }
+  },
   methods:{
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function() {
       axios.get('/api/search').then((response)=>{
+        console.log(this.checkedItems);
 
         for (var i = 0; i < response.data.data.length; i++) {
           let lat1 = response.data.data[i].latitude;
@@ -238,7 +247,6 @@ let search = new Vue({
             let index = this.results.indexOf(this.results.find(result => result.id === temp))
 
             if (index != -1 && distancekm > range && this.results.some(result => result.id === temp ) ) {
-              console.log(distancekm, range, distancekm > range)
               this.results.splice(index, 1);
             }        
           }

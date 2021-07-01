@@ -218,26 +218,24 @@ let search = new Vue({
           return this.results;
         }else{
           var results = []
-        
+
           this.results.forEach(element => {
             element.services.filter(item => {
               // console.log('item',item)
               // console.log('include ', this.checkedItems.includes(item.service_name))
+
               if(this.checkedItems.includes(item.service_name) == true){
+                console.log('prima cond');
                 // console.log('da pushare se non esiste', results.indexOf(element) == -1)
                 if(results.indexOf(element) == -1){
                   results.push(element)
+                  console.log('seconda cond');
                 }
-               
               }
             });
           });
           return results
         }
-        
-
-        
-        
       }
   },
   methods:{

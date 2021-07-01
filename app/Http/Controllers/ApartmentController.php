@@ -14,7 +14,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::whereHas('sponsors')->where('visible','=', 1)->get();
         return view('welcome', compact('apartments'));
     }
 
@@ -27,7 +27,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {   
-        return view('guests.show', compact('apartment'));
+        if($apartment->visible == 1) {
+            return view('guests.show', compact('apartment'));
+        } else {
+            return abort(404);
+        }
     }
 
 }

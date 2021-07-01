@@ -37557,23 +37557,21 @@ var search = new Vue({
           container: 'map',
           center: [lon, lat],
           zoom: 10
-        });
-        console.log(_this5.results);
-
-        for (var i = 0; i < _this5.results.length; i++) {
-          console.log(_this5.results);
-          var _long = _this5.results[i].longitude;
-          var lati = _this5.results[i].latitude;
-          console.log(lon, lat);
-          var marker = new tt.Marker().setLngLat([_long, lati]).addTo(map);
-        } // MARKERS PER MAPPA
+        }); // console.log(this.results);
+        // for (let i = 0; i < this.results.length; i++) {
+        //   console.log(this.results);
+        //   var long = this.results[i].longitude
+        //   var lati = this.results[i].latitude
+        //   console.log(lon, lat)
+        //   var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
+        // }
+        // MARKERS PER MAPPA
         // var element2 = document.createElement('div');
         // element2.class = 'marker2';
         // new tt.Marker({element: element2}).setLngLat([lon, lat]).addTo(map);
         // var element = document.createElement('div');
         // element.id = 'marker';
         // var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
-
       }); // API TO GET APARTMENTS
 
       axios.get('/api/search').then(function (response) {
@@ -37590,67 +37588,68 @@ var search = new Vue({
           }
         }
       });
+      var prova = ['WIFI', 'Posto macchina'];
     }
   },
   computed: {
     filteredServices: function filteredServices() {
-      var _this6 = this;
-
       if (this.checkedItems.length == 0) {
         return this.results;
       } else {
-        var results = [];
-        this.results.forEach(function (element) {
-          element.services.filter(function (item) {
-            // console.log('item',item)
-            // console.log('include ', this.checkedItems.includes(item.service_name))
-            if (_this6.checkedItems.includes(item.service_name) == true) {
-              console.log('prima cond'); // console.log('da pushare se non esiste', results.indexOf(element) == -1)
-
-              if (results.indexOf(element) == -1) {
-                results.push(element);
-                console.log('seconda cond');
-              }
-            }
-          });
-        });
-        return results;
+        axios.get('/api/search/filter?service=' + this.checkedItems).then(function (response) {
+          console.log('FILTRO', response);
+        }); // var results = []
+        // this.results.forEach(element => {
+        //   element.services.filter(item => {
+        //     // console.log('item',item)
+        //     // console.log('include ', this.checkedItems.includes(item.service_name))
+        //     if(this.checkedItems.includes(item.service_name) == true){
+        //       console.log('prima cond');
+        //       // console.log('da pushare se non esiste', results.indexOf(element) == -1)
+        //       if(results.indexOf(element) == -1){
+        //         results.push(element)
+        //         console.log('seconda cond');
+        //       }
+        //     }
+        //   });
+        // });
+        // return results
       }
     }
   },
   methods: {
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
-      var _this7 = this;
+      var _this6 = this;
 
       axios.get('/api/search').then(function (response) {
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
-          var range = _this7.range;
-          var y = lat1 - _this7.lat;
-          var x = lon1 - _this7.lon;
+          var range = _this6.range;
+          var y = lat1 - _this6.lat;
+          var x = lon1 - _this6.lon;
           var distancekm = Math.sqrt(x * x + y * y) * 100; // console.log(distancekm)
 
           var temp = response.data.data[i].id;
 
           if (distancekm <= range) {
-            if (_this7.results.some(function (result) {
+            if (_this6.results.some(function (result) {
               return result.id === temp;
             })) {
               console.log("Object found inside the array.", distancekm <= range);
             } else {
-              _this7.results.push(response.data.data[i]);
+              _this6.results.push(response.data.data[i]);
             }
           } else {
-            var index = _this7.results.indexOf(_this7.results.find(function (result) {
+            var index = _this6.results.indexOf(_this6.results.find(function (result) {
               return result.id === temp;
             }));
 
-            if (index != -1 && distancekm > range && _this7.results.some(function (result) {
+            if (index != -1 && distancekm > range && _this6.results.some(function (result) {
               return result.id === temp;
             })) {
-              _this7.results.splice(index, 1);
+              _this6.results.splice(index, 1);
             }
           }
         }

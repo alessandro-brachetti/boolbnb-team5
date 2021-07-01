@@ -16,7 +16,8 @@ use App\Service;
 
 
 Route::get('/', 'ApartmentController@index');
-Route::get('/guests/{apartment}', 'ApartmentController@show')->name('guests.show');
+Route::get('/apartment/{apartment}', 'ApartmentController@show')->name('guests.show');
+
 
 Route::get('/search/{query}', function(){
   $services = Service::all();

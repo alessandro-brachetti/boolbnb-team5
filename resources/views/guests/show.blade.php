@@ -6,7 +6,9 @@
         <img class="card-img-top" src="{{asset($apartment->img)}}" alt="{{$apartment->title}}">
         <div class="card-body">
             <h5 class="card-title">{{$apartment->title}}</h5>
-            <p class="card-text">Indirizzo: {{$apartment->address}}</p>         
+            <p class="card-text">Indirizzo: {{$apartment->address}}</p>
+            <input type="hidden" value="{{$apartment->longitude}}" id="long">
+            <input type="hidden" value="{{$apartment->latitude}}" id="lat">         
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">N. Rooms: {{$apartment->n_rooms}}</li>
@@ -85,13 +87,37 @@
                 </div> 
             </form>      
           @endif
+    </div>
+    <div class="col-12">
+      <div id="map"></div>
     </div>   
 </div>
-  
+<style>
+  #map { width: 100%; height: 50vh; }
+  #marker::before {
+  font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\e065";
+  font-size: 2em;
+  }
+</style>
 <script>
   function submit() {
     form.submit();
   }
+  
+  const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
+  let long = document.getElementById('long').value;
+  let lat = document.getElementById('lat').value;
+
+  var map = tt.map({
+      key: API_KEY,
+      container: 'map',
+      center: [long, lat],
+      zoom: 14,
+      });
+
+  var element = document.createElement('div');
+  element.id = 'marker';
+  var marker = new tt.Marker({element: element}).setLngLat([long, lat]).addTo(map);
 </script>
 @endsection
 

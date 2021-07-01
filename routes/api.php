@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/search', 'SearchController@index');
+Route::get('/search/filter', 'SearchController@filter');

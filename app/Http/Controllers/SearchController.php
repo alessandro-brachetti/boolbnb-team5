@@ -29,64 +29,31 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function filter(Request $request)
     {
-        //
-    }
+        // // dd($request->service);
+        // // $data = $request['service'];
+        // $prova = ['service_name' => ['WIFI','Posto macchina']];
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        
+        
+        // // $prova = explode(',', $request->service);
+        // // $array = [];
+        // // for ($i=0; $i < count($prova) ; $i++) { 
+        // //     $array[] = ['service_name'=> $prova[$i]];
+        // // }
+        // // dd($array);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        // $apartments = Apartment::whereHas('services', function($query) use ($prova) {        
+        //     $query->where('service_name' => ['WIFI','Posto macchina']);             
+        // })->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // dd($apartments);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        // return response()->json([
+        //     'data' => $request->service,
+        //     'success' => true,
+        // ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

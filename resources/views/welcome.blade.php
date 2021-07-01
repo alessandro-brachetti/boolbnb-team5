@@ -5,6 +5,9 @@
 
 <div class="container">
     <div class="row">
+        <h2>Appartamenti in evidenza:</h2>
+    </div>
+    <div class="row">
         <div class="apartments d-flex flex-wrap">
             @foreach($apartments as $apartment)
                 <div class="col-sm">
@@ -15,7 +18,6 @@
                         <div class="form-group">
                             <input type="hidden" name="apartment_id" value="{{$apartment->id}}">       
                         </div>
-                        
                         <div class="card" style="width: 18rem;" onclick="event.preventDefault(); document.getElementById('{{$apartment->id}}').submit()">
                             <div class="card-img-top" style="background: url({{asset($apartment->img)}}); height: 14rem; background-size: cover;"></div>
                             <div class="card-body">

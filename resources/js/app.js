@@ -173,15 +173,15 @@ let search = new Vue({
       zoom: 10,
       });
 
-      console.log(this.results);
-      for (let i = 0; i < this.results.length; i++) {
-        console.log(this.results);
-        var long = this.results[i].longitude
-        var lati = this.results[i].latitude
-        console.log(lon, lat)
-        var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
+      // console.log(this.results);
+      // for (let i = 0; i < this.results.length; i++) {
+      //   console.log(this.results);
+      //   var long = this.results[i].longitude
+      //   var lati = this.results[i].latitude
+      //   console.log(lon, lat)
+      //   var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
 
-      }
+      // }
       // MARKERS PER MAPPA
       // var element2 = document.createElement('div');
       // element2.class = 'marker2';
@@ -210,6 +210,8 @@ let search = new Vue({
         }
       }
     });
+    var prova = ['WIFI', 'Posto macchina'];
+    
     }
   },
   computed: {
@@ -217,24 +219,27 @@ let search = new Vue({
         if (this.checkedItems.length == 0) {
           return this.results;
         }else{
-          var results = []
-
-          this.results.forEach(element => {
-            element.services.filter(item => {
-              // console.log('item',item)
-              // console.log('include ', this.checkedItems.includes(item.service_name))
-
-              if(this.checkedItems.includes(item.service_name) == true){
-                console.log('prima cond');
-                // console.log('da pushare se non esiste', results.indexOf(element) == -1)
-                if(results.indexOf(element) == -1){
-                  results.push(element)
-                  console.log('seconda cond');
-                }
-              }
-            });
+          axios.get('/api/search/filter?service=' + this.checkedItems).then((response)=>{
+            console.log('FILTRO', response);
           });
-          return results
+          // var results = []
+
+          // this.results.forEach(element => {
+          //   element.services.filter(item => {
+          //     // console.log('item',item)
+          //     // console.log('include ', this.checkedItems.includes(item.service_name))
+
+          //     if(this.checkedItems.includes(item.service_name) == true){
+          //       console.log('prima cond');
+          //       // console.log('da pushare se non esiste', results.indexOf(element) == -1)
+          //       if(results.indexOf(element) == -1){
+          //         results.push(element)
+          //         console.log('seconda cond');
+          //       }
+          //     }
+          //   });
+          // });
+          // return results
         }
       }
   },

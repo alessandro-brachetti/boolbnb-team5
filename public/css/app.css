@@ -11074,6 +11074,15 @@ main#index-admin .card .my-card-body .my-card-text .actions {
   font-weight: 500;
 }
 
+main#index-admin .card .my-card-body .my-card-text .rooms,
+main#index-admin .card .my-card-body .my-card-text .beds {
+  color: #838282;
+}
+
+main#index-admin .card .my-card-body .my-card-text .rooms {
+  padding-right: 5px;
+}
+
 main #create .title {
   color: red;
 }

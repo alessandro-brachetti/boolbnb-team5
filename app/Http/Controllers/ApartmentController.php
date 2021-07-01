@@ -20,7 +20,7 @@ class ApartmentController extends Controller
         $apartments= [];
         foreach ($apartments_get as $apartment) {
             foreach ($apartment->sponsors as $sponsor) {
-                if(($now)->gt($sponsor->pivot->expiration_date) == false){
+                if(($now)->gt($sponsor->pivot->expiration_date) == false && !in_array($apartment, $apartments)){
                     $apartments[] = $apartment;
                 }
 

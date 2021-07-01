@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- {{dd($apartments)}} --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-2">
@@ -9,7 +10,7 @@
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Ciao {{ Auth::user()->name }} </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -22,6 +23,24 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+    @foreach ($apartments as $apartment)
+    {{-- {{dd($apartment)}} --}}
+    <div class="row justify-content-center">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title my-card-title">{{$apartment->title}}</h5>
+                    <img src="{{asset($apartment->img)}}" alt="" class="rounded float-left" style="height:50px;">
+                    @foreach ($apartment->sponsors as $sponsor)
+                    @if ($loop->first) Data scadenza sponsor:
+                        <p> {!! date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)) !!} </p>             
+                    @endif               
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div> 
+    @endforeach 
 </div>
 @endsection

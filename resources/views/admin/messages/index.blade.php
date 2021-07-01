@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+  <main id="index-messages">
     <div class="container">
       <div class="row">
 
@@ -16,4 +17,5 @@
 
       </div>
     </div>
+  </main>
 @endsection

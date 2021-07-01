@@ -1,0 +1,12 @@
+$padding-directions: pt, pb;
+@each $padding in $padding-directions {
+  @for $i from 1 through 10 {
+    .#{$padding}-#{$i*5} {
+      @if $padding == pt {
+        padding-top: 5px * $i;
+      } @else {
+        padding-bottom: 5px * $i;
+      }
+    }
+  }
+}

@@ -1,28 +1,43 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <div class="apartments d-flex flex-wrap">
-        @foreach(Auth::user()->apartments as $apartment)
-        <a href="{{route('admin.apartments.show', ['apartment'=> $apartment->id])}}" class="card-link">
-          <div class="card" style="width: 18rem;">
-            <div class="card-img-top" style="background: url({{asset($apartment->img)}}); height: 14rem; background-size: cover;"></div>
-            <div class="card-body">
-              <h5 class="card-title">{{$apartment->title}}</h5>
-              <p class="card-text">Indirizzo: {{$apartment->address}}</p>
-              <div class="card-text">
-                <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="card-link">Modifica</a>
-                <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="card-link">Messaggi</a>
-                <a href="{{route('admin.sponsor.index', ['apartment'=>$apartment->id])}}" class="card-link">Sponsor</a>
+<main id="index-admin">
+  <div class="container">
+    <div class="row ">
+
+      @foreach(Auth::user()->apartments as $apartment)
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="apartments d-flex flex-wrap">
+          <a href="{{route('admin.apartments.show', ['apartment'=> $apartment->id])}}" class="card-link">
+            <div class="card" style="width: 18rem;">
+              <div class="card-img-top my-card-img-top">
+                <img src="{{asset($apartment->img)}}" alt="">
               </div>
-            </div>   
-          </div>
-        </a>    
-        @endforeach
+              <div class="card-body my-card-body">
+                <h5 class="card-title my-card-title">{{$apartment->title}}</h5>
+                <div class="card-text my-card-text">
+                  <p class="address">Indirizzo: {{$apartment->address}}</p>
+                  <p><span class="rooms">Stanze: {{$apartment->n_rooms}}</span> <span class="beds">Letti: {{$apartment->n_beds}}</span></p>
+                  <div class="actions">
+                    <div class="links">
+                      <a href="{{route('admin.apartments.edit', ['apartment'=>$apartment->id])}}" class="">Modifica</a>
+                    </div>
+                    <div class="links">
+                      <a href="{{route('admin.message.index', ['apartment'=>$apartment->id])}}" class="">Messaggi</a>
+                    </div>
+                    <div class="links">
+                      <a href="{{route('admin.sponsor.index', ['apartment'=>$apartment->id])}}" class="">Sponsor</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
+      @endforeach
+
     </div>
   </div>
-</div>
-  
+</main>
+
 @endsection

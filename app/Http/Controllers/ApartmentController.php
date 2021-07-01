@@ -14,7 +14,12 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::whereHas('sponsors')->where('visible','=', 1)->get();
+        $apartments = Apartment::with('sponsors')->whereHas('sponsors')->where('visible','=', 1)->get();
+
+        for ($i=0; $i < count($apartments); $i++) { 
+            $expDate = $apartments[$i]->sponsors;
+        }
+        dd($expDate);
         return view('welcome', compact('apartments'));
     }
 

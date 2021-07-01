@@ -1,0 +1,17 @@
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin button-style {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+}
+
+@mixin background-cover{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

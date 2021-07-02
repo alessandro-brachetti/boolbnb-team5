@@ -70,7 +70,7 @@ let payment = new Vue({
           container: '#dropin-container'
         }, function (createErr, instance) {
           document.querySelector('#submit-button').addEventListener('click', function (e) {
-            console.log(this.clicked)
+            console.log(this.clicked);
             e.preventDefault();
             instance.requestPaymentMethod(function (err, payload) {
               document.querySelector('#nonce').value = payload.nonce;
@@ -83,13 +83,12 @@ let payment = new Vue({
       this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
       this.form.sponsor = this.selected;
       axios.post('/admin/payment/make', this.form).then((response) => {
-
         if(response.data.response.success = true){
           axios.post('/admin/sponsor/', {
             sponsor_type: this.selected,
             apartment_id: apartment_id
           }).then((response)=>{
-            console.log(response)
+            console.log(response);
           })
         }
       })
@@ -163,11 +162,11 @@ let search = new Vue({
         this.lon = lon;
         this.lat = lat;
 
-        
+
 
       // MARKERS PER MAPPA
 
-      
+
     });
     // API TO GET APARTMENTS
     axios.get('/api/search').then((response)=>{
@@ -194,7 +193,7 @@ let search = new Vue({
         this.generateMarker(map);
 
       }
-    }); 
+    });
     }
   },
   computed: {
@@ -249,11 +248,11 @@ let search = new Vue({
           if (distancekm <= range ) {
             if(this.results.some(result => result.id === temp)){
               console.log("Object found inside the array.", distancekm <= range);
-              this.generateMarker(map);             
+              this.generateMarker(map);
 
             } else{
               this.results.push(response.data.data[i]);
-              this.generateMarker(map);             
+              this.generateMarker(map);
             }
 
           }else{
@@ -279,18 +278,18 @@ let search = new Vue({
 
       map.addControl(new tt.FullscreenControl());
       map.addControl(new tt.NavigationControl());
-      
+
       return map;
     },
     generateMarker(map) {
       for (let i = 0; i < this.results.length; i++) {
-        
+
         let lon1 = this.results[i].longitude;
         let lat1 = this.results[i].latitude;
 
         var element = document.createElement('div');
         element.id = 'marker';
-        var marker = new tt.Marker({element: element}).setLngLat([lon1, lat1]).addTo(map);       
+        var marker = new tt.Marker({element: element}).setLngLat([lon1, lat1]).addTo(map);
       }
     }
   }

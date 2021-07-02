@@ -1,49 +1,88 @@
 main#index-admin{
-  .card{
-    border-radius: 12px;
-    .my-card-img-top{
-      img{
-        max-width: 100%;
-        border-radius: 21px;
-        padding: 14px;
-      }
+  .info{
+    @include flex-align-center;
+    justify-content: space-between;
+    h4{
+      font-weight: 800;
     }
-    .my-card-body{
-      padding-top: 0;
-      a{
-        margin-left: 0;
+  }
+
+  .apartments{
+    .my-card{
+      border-radius: 11px;
+      &:hover{
+        border: 2px solid $myblack;
       }
-      .my-card-title{
-        text-transform: capitalize;
-        font-size: 0.9rem;
-        font-weight: 600;
+      p{
+        margin-bottom: 0;
       }
-      .my-card-text{
-        font-size: 0.8rem;
-        .address{
-          font-weight: 500;
+      a[title]:hover::after{
+        font-size: 3em;
+      }
+
+      .my-card-img-top{
+        img{
+          max-width: 100%;
+          border-radius: 21px;
+          padding: 14px;
         }
-        .actions{
-          display: flex;
-          justify-content: space-between;
+      }
+
+      .my-card-body{
+        padding-top: 0;
+        padding-left: 16px;
+        padding-right: 16px;
+        a{
+          margin-left: 0;
+        }
+
+        .my-card-title{
+          text-transform: capitalize;
+          font-size: 0.9rem;
+          font-weight: 800;
+          margin-bottom: 4px;
+        }
+        .my-card-text{
           font-size: 0.8rem;
-          font-weight: 500;
-        }
-        .rooms, .beds{
-          color: $greytext;
-        }
-        .rooms{
-          padding-right: 5px;
+
+          .address{
+            font-weight: 700;
+            text-transform: capitalize;
+          }
+          .actions{
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+
+            a{
+              &:hover i{
+                transform: scale(1.2);
+                color: $myorange;
+              }
+            }
+          }
+          .beds-rooms{
+            font-weight: 600;
+            color: $greytext;
+            .rooms{
+              padding-right: 7px;
+            }
+            .beds{
+              padding-left: 7px;
+            }
+            .circle{
+              font-size: 1.1rem;
+            }
+          }
         }
       }
     }
   }
-
 }
 
 
 main #create{
-  .title{
-    color: red;
-  }
+
 }

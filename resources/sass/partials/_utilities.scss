@@ -1,10 +1,27 @@
-$padding-directions: pt, pb;
+// margin
+// mmt-5, mmt-10,... fino a 150 per mmt ed mmb
+$margin-directions: mmt, mmb;
+@each $margin in $margin-directions {
+  @for $i from 1 through 30 {
+    .#{$margin}-#{$i*5} {
+      @if $margin == mmt {
+        margin-top: 5px * $i;
+      } @elseif $margin == mmb {
+        margin-bottom: 5px * $i;
+      }
+    }
+  }
+}
+
+// padding
+// mpt-5, mpt-10,... fino a 150 per mpt e mpb
+$padding-directions: mpt, mpb;
 @each $padding in $padding-directions {
-  @for $i from 1 through 10 {
+  @for $i from 1 through 30 {
     .#{$padding}-#{$i*5} {
-      @if $padding == pt {
+      @if $padding == mpt {
         padding-top: 5px * $i;
-      } @else {
+      } @elseif $padding == mpb {
         padding-bottom: 5px * $i;
       }
     }

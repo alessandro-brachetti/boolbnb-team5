@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 class ApartmentController extends Controller
 {
     /**
@@ -14,7 +15,19 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::whereHas('sponsors')->where('visible','=', 1)->get();
+        $now = Carbon::now();
+        $apartments_get = Apartment::with('sponsors')->whereHas('sponsors')->get();
+        $apartments= [];
+        foreach ($apartments_get as $apartment) {
+            foreach ($apartment->sponsors as $sponsor) {
+                if(($now)->gt($sponsor->pivot->expiration_date) == false && !in_array($apartment, $apartments)){
+                    $apartments[] = $apartment;
+                }
+
+            }
+            
+        }
+
         return view('welcome', compact('apartments'));
     }
 

@@ -37550,31 +37550,15 @@ var search = new Vue({
         var lon = response.data.results[0].position.lon;
         var lat = response.data.results[0].position.lat;
         _this5.lon = lon;
-        _this5.lat = lat;
-        var API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
-        var map = tt.map({
-          key: API_KEY,
-          container: 'map',
-          center: [lon, lat],
-          zoom: 10
-        }); // console.log(this.results);
-        // for (let i = 0; i < this.results.length; i++) {
-        //   console.log(this.results);
-        //   var long = this.results[i].longitude
-        //   var lati = this.results[i].latitude
-        //   console.log(lon, lat)
-        //   var marker = new tt.Marker().setLngLat([long, lati]).addTo(map);
-        // }
-        // MARKERS PER MAPPA
-        // var element2 = document.createElement('div');
-        // element2.class = 'marker2';
-        // new tt.Marker({element: element2}).setLngLat([lon, lat]).addTo(map);
-        // var element = document.createElement('div');
-        // element.id = 'marker';
-        // var marker = new tt.Marker({element: element}).setLngLat([lon, lat]).addTo(map);
+        _this5.lat = lat; // MARKERS PER MAPPA
       }); // API TO GET APARTMENTS
 
       axios.get('/api/search').then(function (response) {
+        var lon = _this5.lon;
+        var lat = _this5.lat;
+
+        var map = _this5.generateTomTomMap();
+
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
@@ -37586,9 +37570,10 @@ var search = new Vue({
           if (distancekm <= range) {
             _this5.results.push(response.data.data[i]);
           }
+
+          _this5.generateMarker(map);
         }
       });
-      var prova = ['WIFI', 'Posto macchina'];
     }
   },
   computed: {
@@ -37623,6 +37608,11 @@ var search = new Vue({
       var _this6 = this;
 
       axios.get('/api/search').then(function (response) {
+        var lon = _this6.lon;
+        var lat = _this6.lat;
+
+        var map = _this6.generateTomTomMap();
+
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
@@ -37638,8 +37628,12 @@ var search = new Vue({
               return result.id === temp;
             })) {
               console.log("Object found inside the array.", distancekm <= range);
+
+              _this6.generateMarker(map);
             } else {
               _this6.results.push(response.data.data[i]);
+
+              _this6.generateMarker(map);
             }
           } else {
             var index = _this6.results.indexOf(_this6.results.find(function (result) {
@@ -37654,7 +37648,31 @@ var search = new Vue({
           }
         }
       });
-    }, 1000)
+    }, 1000),
+    generateTomTomMap: function generateTomTomMap() {
+      var lon = this.lon;
+      var lat = this.lat;
+      var map = tt.map({
+        container: 'map',
+        key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+        center: [lon, lat],
+        zoom: 10
+      });
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+      return map;
+    },
+    generateMarker: function generateMarker(map) {
+      for (var i = 0; i < this.results.length; i++) {
+        var lon1 = this.results[i].longitude;
+        var lat1 = this.results[i].latitude;
+        var element = document.createElement('div');
+        element.id = 'marker';
+        var marker = new tt.Marker({
+          element: element
+        }).setLngLat([lon1, lat1]).addTo(map);
+      }
+    }
   }
 });
 

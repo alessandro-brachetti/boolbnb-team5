@@ -37461,10 +37461,11 @@ var payment = new Vue({
         container: '#dropin-container'
       }, function (createErr, instance) {
         document.querySelector('#submit-button').addEventListener('click', function (e) {
-          console.log(this.clicked);
+          console.log('ECCOMI', this.clicked);
           e.preventDefault();
           instance.requestPaymentMethod(function (err, payload) {
             document.querySelector('#nonce').value = payload.nonce;
+            console.log(this.clicked);
           });
         });
       });
@@ -37475,6 +37476,8 @@ var payment = new Vue({
       this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
       this.form.sponsor = this.selected;
       axios.post('/admin/payment/make', this.form).then(function (response) {
+        console.log(response);
+
         if (response.data.response.success = true) {
           axios.post('/admin/sponsor/', {
             sponsor_type: _this3.selected,

@@ -2,10 +2,18 @@
 @section('content')
 <main id="create">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- searchbar -->
+  <div class="search row justify-content-center">
+    <div class="col-lg-4 text-center">
+        <input type="text" name="" value="" placeholder="Cerca un appartamento" class="form-control">
+    </div>
+  </div>
+
   <div class="container">
-      <div class="row">
+      <div class="row mpt-30">
         <div class="col-md-12">
-          <h2 class="title">Crea Appartamento</h2>
+          <h5 class="title-admin">Crea Appartamento</h5>
         </div>
       </div>
         <div  class="row justify-content-center">
@@ -121,5 +129,6 @@
             </div>
         </div>
       </div>
+   </div>
 </main>
 @endsection

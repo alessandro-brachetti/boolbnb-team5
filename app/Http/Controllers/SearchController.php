@@ -14,8 +14,8 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::with('services');
-    
+        $apartments = Apartment::with('services')->where('visible', '=', 1);
+
         $results = $apartments->get();
 
         return response()->json([
@@ -31,29 +31,23 @@ class SearchController extends Controller
      */
     public function filter(Request $request)
     {
-        // // dd($request->service);
+        // dd($request->input());
         // // $data = $request['service'];
-        // $prova = ['service_name' => ['WIFI','Posto macchina']];
+        $prova = $request->input('service');
+        // $array = ['WIFI', 'Posto macchina'];
 
-        
-        
-        // // $prova = explode(',', $request->service);
-        // // $array = [];
-        // // for ($i=0; $i < count($prova) ; $i++) { 
-        // //     $array[] = ['service_name'=> $prova[$i]];
-        // // }
-        // // dd($array);
 
-        // $apartments = Apartment::whereHas('services', function($query) use ($prova) {        
-        //     $query->where('service_name' => ['WIFI','Posto macchina']);             
-        // })->get();
+        $query = Apartment::with('services');
+        foreach ($prova as $service) {
+            $query->whereHas('services', function ($q) use ($service) {
+                $q->where('service_name', $service);
+            });
+        }
+        $apartments = $query->get();
 
-        // dd($apartments);
-
-        // return response()->json([
-        //     'data' => $request->service,
-        //     'success' => true,
-        // ]);
-
+        return response()->json([
+            'data' => $apartments,
+            'success' => true,
+        ]);
     }
 }

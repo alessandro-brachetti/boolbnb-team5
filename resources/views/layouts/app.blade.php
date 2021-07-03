@@ -28,10 +28,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/images/logo_small.png" alt="" style="max-width: 150px;">
+                    <img src="/images/logo_large.png" alt="" style="max-width: 170px;">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -93,3 +93,9 @@
     </script> --}}
 </body>
 </html>
+
+<style>
+    [v-cloak] {
+  display: none;
+}
+</style>

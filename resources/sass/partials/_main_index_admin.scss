@@ -1,0 +1,50 @@
+main#index-admin{
+
+  .info{
+    @include flex-align-center;
+    justify-content: space-between;
+  }
+
+  .apartments{
+    .my-card{
+
+      .my-card-img-top{
+        padding: 14px;
+        img{
+          max-width: 100%;
+          border-radius: 21px;
+          padding: 14px;
+        }        
+      }
+
+      .actions{
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        font-weight: 700;
+        font-size: 1.4rem;
+
+        a{
+          &:hover i{
+            transform: scale(1.2);
+            color: $myorange;
+          }
+        }
+      }
+      .beds-rooms{
+        font-weight: 600;
+        color: $greytext;
+        .rooms{
+          padding-right: 7px;
+        }
+        .beds{
+          padding-left: 7px;
+        }
+        .circle{
+          font-size: 1.1rem;
+        }
+      }
+
+    }
+  }
+}

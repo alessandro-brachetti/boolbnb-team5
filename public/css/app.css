@@ -11426,6 +11426,36 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1050px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1250px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1450px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1650px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .container {
+    max-width: 1850px;
+  }
+}
+
 a {
   text-decoration: none;
   color: #000000;
@@ -11434,6 +11464,74 @@ a {
 a:hover {
   color: #000000;
   text-decoration: none;
+}
+
+.search {
+  border: 2px solid #ededed;
+  background-color: #faf9f8;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.search input {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  outline: none;
+}
+
+.title-admin {
+  font-weight: 800;
+}
+
+.my-card {
+  border-radius: 8px;
+}
+
+.my-card:hover {
+  border: 2px solid #000000;
+}
+
+.my-card p {
+  margin-bottom: 0;
+}
+
+.my-card a[title]:hover::after {
+  font-size: 3em;
+}
+
+.my-card .my-card-img-top .cover {
+  background-position: center;
+  background-size: cover;
+  height: 180px;
+  border-radius: 8px;
+}
+
+.my-card .my-card-body {
+  padding-top: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.my-card .my-card-body a {
+  margin-left: 0;
+}
+
+.my-card .my-card-body .my-card-title {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.my-card .my-card-body .my-card-text {
+  font-size: 0.8rem;
+}
+
+.my-card .my-card-body .my-card-text .address {
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
 .white-btn {
@@ -11566,24 +11664,8 @@ main#index-admin .info {
   justify-content: space-between;
 }
 
-main#index-admin .info h4 {
-  font-weight: 800;
-}
-
-main#index-admin .apartments .my-card {
-  border-radius: 11px;
-}
-
-main#index-admin .apartments .my-card:hover {
-  border: 2px solid #000000;
-}
-
-main#index-admin .apartments .my-card p {
-  margin-bottom: 0;
-}
-
-main#index-admin .apartments .my-card a[title]:hover::after {
-  font-size: 3em;
+main#index-admin .apartments .my-card .my-card-img-top {
+  padding: 14px;
 }
 
 main#index-admin .apartments .my-card .my-card-img-top img {
@@ -11592,33 +11674,7 @@ main#index-admin .apartments .my-card .my-card-img-top img {
   padding: 14px;
 }
 
-main#index-admin .apartments .my-card .my-card-body {
-  padding-top: 0;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-main#index-admin .apartments .my-card .my-card-body a {
-  margin-left: 0;
-}
-
-main#index-admin .apartments .my-card .my-card-body .my-card-title {
-  text-transform: capitalize;
-  font-size: 0.9rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-main#index-admin .apartments .my-card .my-card-body .my-card-text {
-  font-size: 0.8rem;
-}
-
-main#index-admin .apartments .my-card .my-card-body .my-card-text .address {
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-main#index-admin .apartments .my-card .my-card-body .my-card-text .actions {
+main#index-admin .apartments .my-card .actions {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
@@ -11626,25 +11682,82 @@ main#index-admin .apartments .my-card .my-card-body .my-card-text .actions {
   font-size: 1.4rem;
 }
 
-main#index-admin .apartments .my-card .my-card-body .my-card-text .actions a:hover i {
+main#index-admin .apartments .my-card .actions a:hover i {
   transform: scale(1.2);
   color: #fa6933;
 }
 
-main#index-admin .apartments .my-card .my-card-body .my-card-text .beds-rooms {
+main#index-admin .apartments .my-card .beds-rooms {
   font-weight: 600;
   color: #838282;
 }
 
-main#index-admin .apartments .my-card .my-card-body .my-card-text .beds-rooms .rooms {
+main#index-admin .apartments .my-card .beds-rooms .rooms {
   padding-right: 7px;
 }
 
-main#index-admin .apartments .my-card .my-card-body .my-card-text .beds-rooms .beds {
+main#index-admin .apartments .my-card .beds-rooms .beds {
   padding-left: 7px;
 }
 
-main#index-admin .apartments .my-card .my-card-body .my-card-text .beds-rooms .circle {
+main#index-admin .apartments .my-card .beds-rooms .circle {
   font-size: 1.1rem;
+}
+
+main#dashboard .search {
+  display: flex;
+  align-items: center;
+}
+
+main#dashboard .info .user {
+  font-size: 2rem;
+}
+
+main#dashboard .info .user span {
+  color: #fa6933;
+}
+
+main#dashboard .content .tools .my-card p {
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+main#dashboard .content .tools .my-card i {
+  padding-right: 10px;
+  font-size: 1.4rem;
+}
+
+main#dashboard .content .tools .my-card i:hover {
+  transform: scale(1.2);
+  color: #fa6933;
+}
+
+main#dashboard .content .apartments .my-card .my-card-img-top img {
+  max-width: 100%;
+  border-radius: 21px;
+  padding: 14px;
+}
+
+main#dashboard .content .apartments .my-card .my-card-body .my-card-title {
+  font-size: 1.1rem;
+}
+
+main#dashboard .content .apartments .my-card .my-card-body .my-card-text {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+main#dashboard .content .apartments .my-card .my-card-body .my-card-text .expiration {
+  color: #fa6933;
+}
+
+main#dashboard .content .apartments .my-card .my-card-body .my-card-text .expiration span {
+  color: #000000;
+}
+
+html {
+  overflow-x: hidden;
 }
 

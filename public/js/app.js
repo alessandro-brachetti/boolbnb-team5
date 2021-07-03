@@ -37353,12 +37353,12 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 Vue.config.devtools = true;
 var app = new Vue({
-  el: '#root',
+  el: "#root",
   data: {
-    search: '',
+    search: "",
     results: [],
-    lat: '',
-    lon: ''
+    lat: "",
+    lon: ""
   },
   computed: {
     filteredList: function filteredList() {
@@ -37373,10 +37373,10 @@ var app = new Vue({
     responseApi: _.debounce(function () {
       var _this2 = this;
 
-      if (this.search != '') {
-        axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+      if (this.search != "") {
+        axios.get("https://api.tomtom.com/search/2/geocode/" + this.search + ".json", {
           params: {
-            key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+            key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL"
           }
         }).then(function (response) {
           _this2.results = response.data.results;
@@ -37398,26 +37398,26 @@ var app = new Vue({
 });
 Vue.config.devtools = true;
 var payment = new Vue({
-  el: '#payment',
+  el: "#payment",
   data: {
     clicked: false,
-    selected: '',
+    selected: "",
     form: {
-      payment_Method_Nonce: '',
-      sponsor: ''
+      payment_Method_Nonce: "",
+      sponsor: ""
     }
   },
   methods: {
     startPayment: function startPayment() {
       braintree.dropin.create({
         authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
-        container: '#dropin-container'
+        container: "#dropin-container"
       }, function (createErr, instance) {
-        document.querySelector('#submit-button').addEventListener('click', function (e) {
-          console.log('ECCOMI', this.clicked);
+        document.querySelector("#submit-button").addEventListener("click", function (e) {
+          console.log("ECCOMI", this.clicked);
           e.preventDefault();
           instance.requestPaymentMethod(function (err, payload) {
-            document.querySelector('#nonce').value = payload.nonce;
+            document.querySelector("#nonce").value = payload.nonce;
             console.log(this.clicked);
           });
         });
@@ -37426,13 +37426,14 @@ var payment = new Vue({
     postResult: function postResult(apartment_id) {
       var _this3 = this;
 
-      this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
+      this.form.payment_Method_Nonce = document.querySelector("#nonce").value;
       this.form.sponsor = this.selected;
-      axios.post('/admin/payment/make', this.form).then(function (response) {
+      axios.post("/admin/payment/make", this.form).then(function (response) {
         console.log(response);
 
         if (response.data.response.success = true) {
-          axios.post('/admin/sponsor/', {
+          $('#exampleModal').modal('show');
+          axios.post("/admin/sponsor/", {
             sponsor_type: _this3.selected,
             apartment_id: apartment_id
           }).then(function (response) {
@@ -37447,19 +37448,19 @@ var payment = new Vue({
   }
 });
 var welcome = new Vue({
-  el: '#welcome',
+  el: "#welcome",
   data: {
-    search: '',
+    search: "",
     results: []
   },
   methods: {
     responseApi: _.debounce(function () {
       var _this4 = this;
 
-      if (this.search != '') {
-        axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+      if (this.search != "") {
+        axios.get("https://api.tomtom.com/search/2/geocode/" + this.search + ".json", {
           params: {
-            key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+            key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL"
           }
         }).then(function (response) {
           _this4.results = response.data.results;
@@ -37476,40 +37477,42 @@ var welcome = new Vue({
   }
 });
 var search = new Vue({
-  el: '#search',
+  el: "#search",
   data: {
     city: null,
     results: [],
-    lon: '',
-    lat: '',
+    filteredResults: [],
+    prova: [],
+    lon: "",
+    lat: "",
     range: 20,
     filter: {
       rooms: 1,
       beds: 1
     },
-    services: ['WIFI', 'Posto macchina', 'Aria condizionata', 'Riscaldamento', 'TV', 'Bagno privato', 'Piscina', 'Portineria', 'Sauna', 'Vista mare'],
+    services: ["WIFI", "Posto macchina", "Aria condizionata", "Riscaldamento", "TV", "Bagno privato", "Piscina", "Portineria", "Sauna", "Vista mare"],
     checkedItems: []
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this5 = this;
 
     var path = window.location.pathname;
-    this.city = path.split('/search/')[1];
+    this.city = path.split("/search/")[1];
 
     if (this.city != null) {
-      axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
+      axios.get("https://api.tomtom.com/search/2/geocode/" + this.city + ".json", {
         params: {
-          key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+          key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL"
         }
       }).then(function (response) {
         console.log(response);
         var lon = response.data.results[0].position.lon;
         var lat = response.data.results[0].position.lat;
         _this5.lon = lon;
-        _this5.lat = lat; // MARKERS PER MAPPA
+        _this5.lat = lat;
       }); // API TO GET APARTMENTS
 
-      axios.get('/api/search').then(function (response) {
+      axios.get("/api/search").then(function (response) {
         var lon = _this5.lon;
         var lat = _this5.lat;
 
@@ -37530,76 +37533,86 @@ var search = new Vue({
           _this5.generateMarker(map);
         }
       });
+      this.filteredServices;
+    }
+  },
+  watch: {
+    checkedItems: function checkedItems(newval, oldval) {
+      this.filteredServices;
     }
   },
   computed: {
     filteredServices: function filteredServices() {
+      var _this6 = this;
+
       if (this.checkedItems.length == 0) {
-        return this.results;
+        this.filteredResults = this.results;
+        console.log(this.filteredResults);
+        return;
       } else {
-        axios.get('/api/search/filter?service=' + this.checkedItems).then(function (response) {
-          console.log('FILTRO', response);
-        }); // var results = []
-        // this.results.forEach(element => {
-        //   element.services.filter(item => {
-        //     // console.log('item',item)
-        //     // console.log('include ', this.checkedItems.includes(item.service_name))
-        //     if(this.checkedItems.includes(item.service_name) == true){
-        //       console.log('prima cond');
-        //       // console.log('da pushare se non esiste', results.indexOf(element) == -1)
-        //       if(results.indexOf(element) == -1){
-        //         results.push(element)
-        //         console.log('seconda cond');
-        //       }
-        //     }
-        //   });
-        // });
-        // return results
-      }
+        axios.get("/api/search/filter", {
+          params: {
+            service: this.checkedItems
+          }
+        }).then(function (response) {
+          console.log("FILTRO", response);
+          _this6.filteredResults = [];
+
+          for (var i = 0; i < response.data.data.length; i++) {
+            _this6.filteredResults.push(response.data.data[i]);
+          }
+
+          console.log(_this6.filteredResults);
+          return;
+        });
+      } // console.log(this.filteredResults);
+
+
+      return;
     }
   },
   methods: {
+    // callFilters() {
+    // },
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
-      var _this6 = this;
+      var _this7 = this;
 
-      axios.get('/api/search').then(function (response) {
-        var lon = _this6.lon;
-        var lat = _this6.lat;
+      axios.get("/api/search").then(function (response) {
+        var lon = _this7.lon;
+        var lat = _this7.lat;
 
-        var map = _this6.generateTomTomMap();
+        var map = _this7.generateTomTomMap();
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
-          var range = _this6.range;
-          var y = lat1 - _this6.lat;
-          var x = lon1 - _this6.lon;
-          var distancekm = Math.sqrt(x * x + y * y) * 100; // console.log(distancekm)
-
+          var range = _this7.range;
+          var y = lat1 - _this7.lat;
+          var x = lon1 - _this7.lon;
+          var distancekm = Math.sqrt(x * x + y * y) * 100;
           var temp = response.data.data[i].id;
 
           if (distancekm <= range) {
-            if (_this6.results.some(function (result) {
+            var marker = _this7.generateMarker(map);
+
+            if (_this7.results.some(function (result) {
               return result.id === temp;
             })) {
               console.log("Object found inside the array.", distancekm <= range);
-
-              _this6.generateMarker(map);
             } else {
-              _this6.results.push(response.data.data[i]);
+              _this7.results.push(response.data.data[i]); // this.generateMarker(map);
 
-              _this6.generateMarker(map);
             }
           } else {
-            var index = _this6.results.indexOf(_this6.results.find(function (result) {
+            var index = _this7.results.indexOf(_this7.results.find(function (result) {
               return result.id === temp;
             }));
 
-            if (index != -1 && distancekm > range && _this6.results.some(function (result) {
+            if (index != -1 && distancekm > range && _this7.results.some(function (result) {
               return result.id === temp;
             })) {
-              _this6.results.splice(index, 1);
+              _this7.results.splice(index, 1);
             }
           }
         }
@@ -37609,10 +37622,10 @@ var search = new Vue({
       var lon = this.lon;
       var lat = this.lat;
       var map = tt.map({
-        container: 'map',
-        key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+        container: "map",
+        key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
         center: [lon, lat],
-        zoom: 10
+        zoom: 13
       });
       map.addControl(new tt.FullscreenControl());
       map.addControl(new tt.NavigationControl());
@@ -37622,8 +37635,8 @@ var search = new Vue({
       for (var i = 0; i < this.results.length; i++) {
         var lon1 = this.results[i].longitude;
         var lat1 = this.results[i].latitude;
-        var element = document.createElement('div');
-        element.id = 'marker';
+        var element = document.createElement("div");
+        element.id = "marker";
         var marker = new tt.Marker({
           element: element
         }).setLngLat([lon1, lat1]).addTo(map);

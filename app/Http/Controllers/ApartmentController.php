@@ -6,6 +6,7 @@ use App\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+
 class ApartmentController extends Controller
 {
     /**
@@ -17,21 +18,19 @@ class ApartmentController extends Controller
     {
         $now = Carbon::now();
         $apartments_get = Apartment::with('sponsors')->whereHas('sponsors')->get();
-        $apartments= [];
+        $apartments = [];
         foreach ($apartments_get as $apartment) {
             foreach ($apartment->sponsors as $sponsor) {
-                if(($now)->gt($sponsor->pivot->expiration_date) == false && !in_array($apartment, $apartments)){
+                if (($now)->gt($sponsor->pivot->expiration_date) == false && !in_array($apartment, $apartments)) {
                     $apartments[] = $apartment;
                 }
-
             }
-            
         }
 
         return view('welcome', compact('apartments'));
     }
 
-     /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Apartment  $apartment
@@ -39,12 +38,11 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment)
-    {   
-        if($apartment->visible == 1) {
+    {
+        if ($apartment->visible == 1) {
             return view('guests.show', compact('apartment'));
         } else {
             return abort(404);
         }
     }
-
 }

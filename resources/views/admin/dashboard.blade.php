@@ -38,7 +38,7 @@
         </div> -->
     </div>
     <div class="content row mpt-30">
-      <div class="tools col-lg-4 col-md-4 col-sm-12">
+      <div class="tools col-lg-3 col-md-3 col-sm-12">
         <a href="{{route('admin.apartments.index')}}">
           <div class="card my-card mmb-20" style="width: 18rem;">
             <div class="card-body">
@@ -59,6 +59,30 @@
       <div class="col-lg-8 col-md-8 col-sm-12">
         <div class="apartments row">
           {{count(Auth::user()->apartments)}}
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card my-card mmb-20" style="width: 18rem;">
+          <div class="card-body">
+            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Annunci Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card my-card mmb-20" style="width: 18rem;">
+          <div class="card-body">
+            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Messaggi Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card my-card mmb-20" style="width: 18rem;">
+          <div class="card-body">
+            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Visualizzazioni totali Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- <div class="apartments row">
         @foreach ($apartments as $apartment)
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="card my-card mmb-30" style="width: 21rem;" title="Vedi i dettagli dell'appartamento">
@@ -71,7 +95,7 @@
                     <p class="address mpt-10">Indirizzo: {{$apartment->address}}</p>
                     @foreach ($apartment->sponsors as $sponsor)
                     @if ($loop->first)
-                      <p class="expiration"> <span>Fino al:</span> {!! date('d/m/Y', strtotime($sponsor->pivot->expiration_date)) !!} </p>
+                      <p class="expiration"> <span>Fino al:</span> {!! date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)) !!} </p>
                     @endif
                     @endforeach
                   </div>
@@ -79,23 +103,44 @@
               </div>
             </div>
             @endforeach
-            <!-- <div class="col-lg-6">
-                <div class="card my-card mmb-20">
-                    <div class="card-body my-card-body">
-                        <h5 class="card-title my-card-title">Appartamento: {{$apartment->title}}</h5>
-                        <img src="{{asset($apartment->img)}}" alt="" class="rounded float-left" style="height:50px;">
-                        @foreach ($apartment->sponsors as $sponsor)
-                        @if ($loop->first) Scadenza sponsor:
-                            <p> {!! date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)) !!} </p>
-                        @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div> -->
+        </div> -->
 
 
-        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-12 offset-lg-3">
+        <table class="table table-hover mmt-30">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
     </div>
   </div>
 </main>

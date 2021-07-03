@@ -104,6 +104,7 @@ let payment = new Vue({
             axios.post("/admin/payment/make", this.form).then(response => {
                 console.log(response);
                 if ((response.data.response.success = true)) {
+                  $('#exampleModal').modal('show')
                     axios
                         .post("/admin/sponsor/", {
                             sponsor_type: this.selected,

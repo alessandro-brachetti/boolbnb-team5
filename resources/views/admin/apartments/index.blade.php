@@ -23,12 +23,15 @@
     <div class="apartments row mpt-30">
       @foreach(Auth::user()->apartments as $apartment)
 
-      <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="d-flex flex-wrap justify-content-center">
           <a href="{{route('admin.apartments.show', ['apartment'=> $apartment->id])}}">
-            <div class="card my-card mmb-30" style="width: 20rem;" title="Vedi i dettagli dell'appartamento">
+            <div class="card my-card mmb-30" style="width: 23rem;" title="Vedi i dettagli dell'appartamento">
               <div class="card-img-top my-card-img-top">
-                <img class="card-img-top" src="{{asset($apartment->img)}}" alt="Card image cap">
+                <div class="cover" style="background-image: url('{{asset($apartment->img)}}')">
+
+                </div>
+                <!-- <img class="card-img-top" src="{{asset($apartment->img)}}" alt="Card image cap"> -->
               </div>
               <div class="card-body my-card-body">
                 <h5 class="card-title my-card-title">{{$apartment->title}}</h5>

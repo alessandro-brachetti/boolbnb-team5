@@ -15,7 +15,7 @@ class SearchController extends Controller
     public function index()
     {
         $apartments = Apartment::with('services')->where('visible', '=', 1);
-    
+
         $results = $apartments->get();
 
         return response()->json([
@@ -35,20 +35,19 @@ class SearchController extends Controller
         // // $data = $request['service'];
         $prova = $request->input('service');
         // $array = ['WIFI', 'Posto macchina'];
-      
+
 
         $query = Apartment::with('services');
-        foreach($prova as $service){
-        $query->whereHas('services', function($q) use ($service){
-        $q->where('service_name', $service);
-        });
+        foreach ($prova as $service) {
+            $query->whereHas('services', function ($q) use ($service) {
+                $q->where('service_name', $service);
+            });
         }
         $apartments = $query->get();
-        
+
         return response()->json([
             'data' => $apartments,
             'success' => true,
         ]);
-
     }
 }

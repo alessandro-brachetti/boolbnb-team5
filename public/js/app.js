@@ -109,6 +109,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
+var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
 var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
@@ -129,7 +130,7 @@ module.exports = function xhrAdapter(config) {
     // HTTP basic authentication
     if (config.auth) {
       var username = config.auth.username || '';
-      var password = config.auth.password || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
@@ -210,8 +211,6 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
-
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
@@ -277,7 +276,7 @@ module.exports = function xhrAdapter(config) {
       });
     }
 
-    if (requestData === undefined) {
+    if (!requestData) {
       requestData = null;
     }
 
@@ -345,6 +344,9 @@ axios.all = function all(promises) {
   return Promise.all(promises);
 };
 axios.spread = __webpack_require__(/*! ./helpers/spread */ "./node_modules/axios/lib/helpers/spread.js");
+
+// Expose isAxiosError
+axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_modules/axios/lib/helpers/isAxiosError.js");
 
 module.exports = axios;
 
@@ -554,9 +556,10 @@ Axios.prototype.getUri = function getUri(config) {
 utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
   /*eslint func-names:0*/
   Axios.prototype[method] = function(url, config) {
-    return this.request(utils.merge(config || {}, {
+    return this.request(mergeConfig(config || {}, {
       method: method,
-      url: url
+      url: url,
+      data: (config || {}).data
     }));
   };
 });
@@ -564,7 +567,7 @@ utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData
 utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
   /*eslint func-names:0*/
   Axios.prototype[method] = function(url, data, config) {
-    return this.request(utils.merge(config || {}, {
+    return this.request(mergeConfig(config || {}, {
       method: method,
       url: url,
       data: data
@@ -824,7 +827,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   error.response = response;
   error.isAxiosError = true;
 
-  error.toJSON = function() {
+  error.toJSON = function toJSON() {
     return {
       // Standard
       message: this.message,
@@ -873,59 +876,73 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
-  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
   var defaultToConfig2Keys = [
-    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
-    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
-    'httpsAgent', 'cancelToken', 'socketPath'
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress',
+    'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'
   ];
+  var directMergeKeys = ['validateStatus'];
+
+  function getMergedValue(target, source) {
+    if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
+      return utils.merge(target, source);
+    } else if (utils.isPlainObject(source)) {
+      return utils.merge({}, source);
+    } else if (utils.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  function mergeDeepProperties(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  }
 
   utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
     }
   });
 
-  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
-    if (utils.isObject(config2[prop])) {
-      config[prop] = utils.deepMerge(config1[prop], config2[prop]);
-    } else if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (utils.isObject(config1[prop])) {
-      config[prop] = utils.deepMerge(config1[prop]);
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
-    }
-  });
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
 
   utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
     }
   });
 
   var axiosKeys = valueFromConfig2Keys
     .concat(mergeDeepPropertiesKeys)
-    .concat(defaultToConfig2Keys);
+    .concat(defaultToConfig2Keys)
+    .concat(directMergeKeys);
 
   var otherKeys = Object
-    .keys(config2)
+    .keys(config1)
+    .concat(Object.keys(config2))
     .filter(function filterAxiosKeys(key) {
       return axiosKeys.indexOf(key) === -1;
     });
 
-  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
-    }
-  });
+  utils.forEach(otherKeys, mergeDeepProperties);
 
   return config;
 };
@@ -954,7 +971,7 @@ var createError = __webpack_require__(/*! ./createError */ "./node_modules/axios
  */
 module.exports = function settle(resolve, reject, response) {
   var validateStatus = response.config.validateStatus;
-  if (!validateStatus || validateStatus(response.status)) {
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
     resolve(response);
   } else {
     reject(createError(
@@ -1086,6 +1103,7 @@ var defaults = {
   xsrfHeaderName: 'X-XSRF-TOKEN',
 
   maxContentLength: -1,
+  maxBodyLength: -1,
 
   validateStatus: function validateStatus(status) {
     return status >= 200 && status < 300;
@@ -1149,7 +1167,6 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 
 function encode(val) {
   return encodeURIComponent(val).
-    replace(/%40/gi, '@').
     replace(/%3A/gi, ':').
     replace(/%24/g, '$').
     replace(/%2C/gi, ',').
@@ -1330,6 +1347,29 @@ module.exports = function isAbsoluteURL(url) {
   // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
   // by any combination of letters, digits, plus, period, or hyphen.
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAxiosError.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
 
@@ -1659,6 +1699,21 @@ function isObject(val) {
 }
 
 /**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
  * Determine if a value is a Date
  *
  * @param {Object} val The value to test
@@ -1814,34 +1869,12 @@ function forEach(obj, fn) {
 function merge(/* obj1, obj2, obj3, ... */) {
   var result = {};
   function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
       result[key] = merge(result[key], val);
-    } else {
-      result[key] = val;
-    }
-  }
-
-  for (var i = 0, l = arguments.length; i < l; i++) {
-    forEach(arguments[i], assignValue);
-  }
-  return result;
-}
-
-/**
- * Function equal to merge with the difference being that no reference
- * to original objects is kept.
- *
- * @see merge
- * @param {Object} obj1 Object to merge
- * @returns {Object} Result of all merge properties
- */
-function deepMerge(/* obj1, obj2, obj3, ... */) {
-  var result = {};
-  function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
-      result[key] = deepMerge(result[key], val);
-    } else if (typeof val === 'object') {
-      result[key] = deepMerge({}, val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
     } else {
       result[key] = val;
     }
@@ -1872,6 +1905,19 @@ function extend(a, b, thisArg) {
   return a;
 }
 
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
 module.exports = {
   isArray: isArray,
   isArrayBuffer: isArrayBuffer,
@@ -1881,6 +1927,7 @@ module.exports = {
   isString: isString,
   isNumber: isNumber,
   isObject: isObject,
+  isPlainObject: isPlainObject,
   isUndefined: isUndefined,
   isDate: isDate,
   isFile: isFile,
@@ -1891,9 +1938,9 @@ module.exports = {
   isStandardBrowserEnv: isStandardBrowserEnv,
   forEach: forEach,
   merge: merge,
-  deepMerge: deepMerge,
   extend: extend,
-  trim: trim
+  trim: trim,
+  stripBOM: stripBOM
 };
 
 
@@ -37353,12 +37400,12 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 Vue.config.devtools = true;
 var app = new Vue({
-  el: '#root',
+  el: "#root",
   data: {
-    search: '',
+    search: "",
     results: [],
-    lat: '',
-    lon: ''
+    lat: "",
+    lon: ""
   },
   computed: {
     filteredList: function filteredList() {
@@ -37373,10 +37420,10 @@ var app = new Vue({
     responseApi: _.debounce(function () {
       var _this2 = this;
 
-      if (this.search != '') {
-        axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+      if (this.search != "") {
+        axios.get("https://api.tomtom.com/search/2/geocode/" + this.search + ".json", {
           params: {
-            key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+            key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL"
           }
         }).then(function (response) {
           _this2.results = response.data.results;
@@ -37398,26 +37445,26 @@ var app = new Vue({
 });
 Vue.config.devtools = true;
 var payment = new Vue({
-  el: '#payment',
+  el: "#payment",
   data: {
     clicked: false,
-    selected: '',
+    selected: "",
     form: {
-      payment_Method_Nonce: '',
-      sponsor: ''
+      payment_Method_Nonce: "",
+      sponsor: ""
     }
   },
   methods: {
     startPayment: function startPayment() {
       braintree.dropin.create({
         authorization: "sandbox_ndhxjk7r_6x5mkttghp3xt46h",
-        container: '#dropin-container'
+        container: "#dropin-container"
       }, function (createErr, instance) {
-        document.querySelector('#submit-button').addEventListener('click', function (e) {
-          console.log('ECCOMI', this.clicked);
+        document.querySelector("#submit-button").addEventListener("click", function (e) {
+          console.log("ECCOMI", this.clicked);
           e.preventDefault();
           instance.requestPaymentMethod(function (err, payload) {
-            document.querySelector('#nonce').value = payload.nonce;
+            document.querySelector("#nonce").value = payload.nonce;
             console.log(this.clicked);
           });
         });
@@ -37426,13 +37473,13 @@ var payment = new Vue({
     postResult: function postResult(apartment_id) {
       var _this3 = this;
 
-      this.form.payment_Method_Nonce = document.querySelector('#nonce').value;
+      this.form.payment_Method_Nonce = document.querySelector("#nonce").value;
       this.form.sponsor = this.selected;
-      axios.post('/admin/payment/make', this.form).then(function (response) {
+      axios.post("/admin/payment/make", this.form).then(function (response) {
         console.log(response);
 
         if (response.data.response.success = true) {
-          axios.post('/admin/sponsor/', {
+          axios.post("/admin/sponsor/", {
             sponsor_type: _this3.selected,
             apartment_id: apartment_id
           }).then(function (response) {
@@ -37447,19 +37494,19 @@ var payment = new Vue({
   }
 });
 var welcome = new Vue({
-  el: '#welcome',
+  el: "#welcome",
   data: {
-    search: '',
+    search: "",
     results: []
   },
   methods: {
     responseApi: _.debounce(function () {
       var _this4 = this;
 
-      if (this.search != '') {
-        axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+      if (this.search != "") {
+        axios.get("https://api.tomtom.com/search/2/geocode/" + this.search + ".json", {
           params: {
-            key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+            key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL"
           }
         }).then(function (response) {
           _this4.results = response.data.results;
@@ -37476,31 +37523,32 @@ var welcome = new Vue({
   }
 });
 var search = new Vue({
-  el: '#search',
+  el: "#search",
   data: {
     city: null,
     results: [],
     filteredResults: [],
-    lon: '',
-    lat: '',
+    prova: [],
+    lon: "",
+    lat: "",
     range: 20,
     filter: {
       rooms: 1,
       beds: 1
     },
-    services: ['WIFI', 'Posto macchina', 'Aria condizionata', 'Riscaldamento', 'TV', 'Bagno privato', 'Piscina', 'Portineria', 'Sauna', 'Vista mare'],
+    services: ["WIFI", "Posto macchina", "Aria condizionata", "Riscaldamento", "TV", "Bagno privato", "Piscina", "Portineria", "Sauna", "Vista mare"],
     checkedItems: []
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this5 = this;
 
     var path = window.location.pathname;
-    this.city = path.split('/search/')[1];
+    this.city = path.split("/search/")[1];
 
     if (this.city != null) {
-      axios.get('https://api.tomtom.com/search/2/geocode/' + this.city + '.json', {
+      axios.get("https://api.tomtom.com/search/2/geocode/" + this.city + ".json", {
         params: {
-          key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL'
+          key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL"
         }
       }).then(function (response) {
         console.log(response);
@@ -37510,7 +37558,7 @@ var search = new Vue({
         _this5.lat = lat;
       }); // API TO GET APARTMENTS
 
-      axios.get('/api/search').then(function (response) {
+      axios.get("/api/search").then(function (response) {
         var lon = _this5.lon;
         var lat = _this5.lat;
 
@@ -37531,6 +37579,12 @@ var search = new Vue({
           _this5.generateMarker(map);
         }
       });
+      this.filteredServices;
+    }
+  },
+  watch: {
+    checkedItems: function checkedItems(newval, oldval) {
+      this.filteredServices;
     }
   },
   computed: {
@@ -37538,30 +37592,39 @@ var search = new Vue({
       var _this6 = this;
 
       if (this.checkedItems.length == 0) {
-        return this.results;
+        this.filteredResults = this.results;
+        console.log(this.filteredResults);
+        return;
       } else {
-        axios.get('/api/search/filter', {
+        axios.get("/api/search/filter", {
           params: {
             service: this.checkedItems
           }
         }).then(function (response) {
-          console.log('FILTRO', response);
+          console.log("FILTRO", response);
+          _this6.filteredResults = [];
 
-          _this6.filteredResults.push(response.data.data); // console.log(this.filteredResults);  
+          for (var i = 0; i < response.data.data.length; i++) {
+            _this6.filteredResults.push(response.data.data[i]);
+          }
 
+          console.log(_this6.filteredResults);
+          return;
         });
-      }
+      } // console.log(this.filteredResults);
 
-      console.log(this.filteredResults);
-      return this.filteredResults;
+
+      return;
     }
   },
   methods: {
+    // callFilters() {
+    // },
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
       var _this7 = this;
 
-      axios.get('/api/search').then(function (response) {
+      axios.get("/api/search").then(function (response) {
         var lon = _this7.lon;
         var lat = _this7.lat;
 
@@ -37578,8 +37641,6 @@ var search = new Vue({
 
           if (distancekm <= range) {
             var marker = _this7.generateMarker(map);
-
-            marker.remove();
 
             if (_this7.results.some(function (result) {
               return result.id === temp;
@@ -37607,10 +37668,10 @@ var search = new Vue({
       var lon = this.lon;
       var lat = this.lat;
       var map = tt.map({
-        container: 'map',
-        key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+        container: "map",
+        key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
         center: [lon, lat],
-        zoom: 10
+        zoom: 13
       });
       map.addControl(new tt.FullscreenControl());
       map.addControl(new tt.NavigationControl());
@@ -37620,8 +37681,8 @@ var search = new Vue({
       for (var i = 0; i < this.results.length; i++) {
         var lon1 = this.results[i].longitude;
         var lat1 = this.results[i].latitude;
-        var element = document.createElement('div');
-        element.id = 'marker';
+        var element = document.createElement("div");
+        element.id = "marker";
         var marker = new tt.Marker({
           element: element
         }).setLngLat([lon1, lat1]).addTo(map);

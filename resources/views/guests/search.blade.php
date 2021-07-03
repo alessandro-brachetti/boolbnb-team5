@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container" id="search">
+<div class="container-fluid" id="search">
     <div class="row">
         <div class="col-6">
             <div>
@@ -32,7 +32,7 @@
                 {{-- <div v-for="result in results" v-if="result.n_rooms >= filter.rooms && result.n_beds >= filter.beds">
                     <a :href="`/guests/${result.id}`">@{{result.title}}</a>   
                 </div> --}}
-                <div v-for="apartment in filteredServices" v-if="apartment.n_rooms >= filter.rooms && apartment.n_beds >= filter.beds">
+                <div v-for="apartment in filteredResults" v-if="apartment.n_rooms >= filter.rooms && apartment.n_beds >= filter.beds">
                     <p>FIltrati:@{{apartment.title}}</p>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 </div>
 
 <style>
-    #map { width: 100%; height: 50vh; }
+    #map { width: 100%; height: calc(100vh - 4.375rem); }
 
     #marker::before {
     font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\e065";

@@ -26,17 +26,17 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {
         $now = Carbon::now();
-        $apartments_get = Apartment::where('user_id','=',Auth::user()->id)->with('sponsors')->whereHas('sponsors')->get();
+        $apartments_get = Apartment::where('user_id', '=', Auth::user()->id)->with('sponsors')->whereHas('sponsors')->get();
         // dd($apartments_get);
-        $apartments= [];
+        $apartments = [];
         foreach ($apartments_get as $apartment) {
             foreach ($apartment->sponsors as $sponsor) {
-                if(($now)->gt($sponsor->pivot->expiration_date) == false && !in_array($apartment, $apartments)){
+                if (($now)->gt($sponsor->pivot->expiration_date) == false && !in_array($apartment, $apartments)) {
                     $apartments[] = $apartment;
                 }
-            }         
+            }
         }
         return view('admin.dashboard', compact('apartments'));
     }

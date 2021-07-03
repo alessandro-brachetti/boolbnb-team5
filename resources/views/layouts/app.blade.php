@@ -48,7 +48,7 @@
                         {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
                         <div class="">
                           <ul>
-                            <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
+                            <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
                           </ul>
                         </div>
                     </div>
@@ -102,3 +102,9 @@
     </script> --}}
 </body>
 </html>
+
+<style>
+    [v-cloak] {
+  display: none;
+}
+</style>

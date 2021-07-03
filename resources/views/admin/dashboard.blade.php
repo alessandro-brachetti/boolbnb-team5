@@ -58,7 +58,7 @@
 
       <div class="col-lg-8 col-md-8 col-sm-12">
         <div class="apartments row">
-
+          {{count(Auth::user()->apartments)}}
         @foreach ($apartments as $apartment)
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="card my-card mmb-30" style="width: 21rem;" title="Vedi i dettagli dell'appartamento">

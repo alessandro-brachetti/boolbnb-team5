@@ -1,0 +1,59 @@
+main#dashboard{
+  .search{
+    @include flex-align-center;
+  }
+  .info{
+    .user {
+      font-size: 2rem;
+      span{
+        color: $myorange;
+      }
+    }
+  }
+
+  .content{
+    .tools{
+      .my-card{
+        p{
+          font-size: 1rem;
+          font-weight: 700;
+          @include flex-align-center;
+        }
+        i{
+          padding-right: 10px;
+          font-size: 1.4rem;
+          &:hover{
+            transform: scale(1.2);
+            color: $myorange;
+          }
+        }
+      }
+    }
+    .apartments{
+      .my-card{
+        .my-card-img-top{
+          img{
+            max-width: 100%;
+            border-radius: 21px;
+            padding: 14px;
+          }
+        }
+        .my-card-body{
+          .my-card-title{
+            font-size: 1.1rem;
+          }
+          .my-card-text{
+            font-size: 1rem;
+            font-weight: 700;
+            .expiration{
+              span{
+                color: $blacktext;
+              }
+              color: $myorange;
+            }
+          }
+        }
+      }
+    }
+  }
+}

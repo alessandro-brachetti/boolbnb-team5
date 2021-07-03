@@ -11426,6 +11426,36 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1050px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1250px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1450px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1650px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .container {
+    max-width: 1850px;
+  }
+}
+
 a {
   text-decoration: none;
   color: #000000;
@@ -11456,7 +11486,7 @@ a:hover {
 }
 
 .my-card {
-  border-radius: 9px;
+  border-radius: 8px;
 }
 
 .my-card:hover {
@@ -11469,6 +11499,13 @@ a:hover {
 
 .my-card a[title]:hover::after {
   font-size: 3em;
+}
+
+.my-card .my-card-img-top .cover {
+  background-position: center;
+  background-size: cover;
+  height: 180px;
+  border-radius: 8px;
 }
 
 .my-card .my-card-body {
@@ -11514,6 +11551,10 @@ main#index-admin .info {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+main#index-admin .apartments .my-card .my-card-img-top {
+  padding: 14px;
 }
 
 main#index-admin .apartments .my-card .my-card-img-top img {

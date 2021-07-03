@@ -1,88 +1,12 @@
-main#index-admin{
-  .info{
-    @include flex-align-center;
-    justify-content: space-between;
-    h4{
-      font-weight: 800;
-    }
-  }
+@import '_main_create.scss';
+@import '_main_index_admin.scss';
+@import '_main_dashboard.scss';
+@import '_main_edit.scss';
+@import '_main_messages.scss';
+@import '_main_sponsors.scss';
+@import '_main_welcome.scss';
+@import '_main_advanced_search.scss';
 
-  .apartments{
-    .my-card{
-      border-radius: 11px;
-      &:hover{
-        border: 2px solid $myblack;
-      }
-      p{
-        margin-bottom: 0;
-      }
-      a[title]:hover::after{
-        font-size: 3em;
-      }
-
-      .my-card-img-top{
-        img{
-          max-width: 100%;
-          border-radius: 21px;
-          padding: 14px;
-        }
-      }
-
-      .my-card-body{
-        padding-top: 0;
-        padding-left: 16px;
-        padding-right: 16px;
-        a{
-          margin-left: 0;
-        }
-
-        .my-card-title{
-          text-transform: capitalize;
-          font-size: 0.9rem;
-          font-weight: 800;
-          margin-bottom: 4px;
-        }
-        .my-card-text{
-          font-size: 0.8rem;
-
-          .address{
-            font-weight: 700;
-            text-transform: capitalize;
-          }
-          .actions{
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            font-weight: 700;
-            font-size: 1.4rem;
-
-            a{
-              &:hover i{
-                transform: scale(1.2);
-                color: $myorange;
-              }
-            }
-          }
-          .beds-rooms{
-            font-weight: 600;
-            color: $greytext;
-            .rooms{
-              padding-right: 7px;
-            }
-            .beds{
-              padding-left: 7px;
-            }
-            .circle{
-              font-size: 1.1rem;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-
-main #create{
-
+html{
+  overflow-x: hidden;
 }

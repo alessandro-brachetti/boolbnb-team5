@@ -43,15 +43,6 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-                    <div class="form-inline my-2 my-lg-0" id="welcome">
-                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
-                        
-                        <div class="">
-                          <ul>
-                            <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
-                          </ul>
-                        </div>
-                    </div>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
                         </div>
-                        <div class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
+                        <div onclick="event.preventDefault(); document.getElementById('{{$apartment->id}}').submit()" class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
                           <div class="card-img-top my-card-img-top">
                             <img src="{{asset($apartment->img)}}" alt="">
                           </div>

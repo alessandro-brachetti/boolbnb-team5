@@ -185,7 +185,7 @@ let search = new Vue({
             "Sauna",
             "Vista mare"
         ],
-        checkedItems: []
+        checkedItems: [],
     },
     mounted() {
         let path = window.location.pathname;
@@ -215,7 +215,16 @@ let search = new Vue({
                 let lon = this.lon;
                 let lat = this.lat;
 
-                var map = this.generateTomTomMap();
+                var map = tt.map({
+                    container: "map",
+                    key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
+                    center: [lon, lat],
+                    zoom: 13
+                });
+    
+                map.addControl(new tt.FullscreenControl());
+                map.addControl(new tt.NavigationControl());
+    
 
                 for (var i = 0; i < response.data.data.length; i++) {
                     let lat1 = response.data.data[i].latitude;
@@ -228,10 +237,17 @@ let search = new Vue({
                     let distancekm = Math.sqrt(x * x + y * y) * 100;
 
                     if (distancekm <= range) {
+
                         this.results.push(response.data.data[i]);
+
+                    var element = document.createElement("div");
+                    element.id = "marker";
+
+                    var marker = new tt.Marker({ element: element })
+                    .setLngLat([lon1, lat1])
+                    .addTo(map);
                     }
 
-                    this.generateMarker(map);
                 }
             });
 
@@ -244,10 +260,11 @@ let search = new Vue({
         }
     },
     computed: {
-        filteredServices() {
+        filteredServices() {            
             if (this.checkedItems.length == 0) {
+
                 this.filteredResults = this.results;
-                console.log(this.filteredResults);
+              
                 return;
             } else {
                 axios
@@ -257,28 +274,20 @@ let search = new Vue({
                         }
                     })
                     .then(response => {
-                        console.log("FILTRO", response);
                         this.filteredResults = [];
 
                         for (let i = 0; i < response.data.data.length; i++) {
                             this.filteredResults.push(response.data.data[i]);
                         }
-
-                        console.log(this.filteredResults);
-
+                        var map = this.generateTomTomMap();
+                        this.generateMarker(map);
                         return;
                     });
             }
-            // console.log(this.filteredResults);
-
             return;
         }
     },
     methods: {
-        // callFilters() {
-
-        // },
-
         // FUNCTION THAT CHANGES SEARCH RANGE
         onRangeChange: _.debounce(function() {
             axios.get("/api/search").then(response => {
@@ -297,17 +306,19 @@ let search = new Vue({
                     let distancekm = Math.sqrt(x * x + y * y) * 100;
 
                     var temp = response.data.data[i].id;
-                    if (distancekm <= range) {
-                        var marker = this.generateMarker(map);
+                    // this.generateMarker(map);
 
+                    if (distancekm <= range) {                        
                         if (this.results.some(result => result.id === temp)) {
+                            // this.generateMarker(map);
+
                             console.log(
                                 "Object found inside the array.",
                                 distancekm <= range
                             );
                         } else {
                             this.results.push(response.data.data[i]);
-                            // this.generateMarker(map);
+
                         }
                     } else {
                         let index = this.results.indexOf(
@@ -320,6 +331,7 @@ let search = new Vue({
                             this.results.some(result => result.id === temp)
                         ) {
                             this.results.splice(index, 1);
+                            this.generateMarker(map);
                         }
                     }
                 }
@@ -327,8 +339,10 @@ let search = new Vue({
         }, 1000),
 
         generateTomTomMap() {
+
             let lon = this.lon;
             let lat = this.lat;
+           
             var map = tt.map({
                 container: "map",
                 key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
@@ -341,17 +355,26 @@ let search = new Vue({
 
             return map;
         },
-        generateMarker(map) {
-            for (let i = 0; i < this.results.length; i++) {
-                let lon1 = this.results[i].longitude;
-                let lat1 = this.results[i].latitude;
+        // removeMarker() {
+        //     for (let i = 0; i < this.results.length; i++) {
+        //         document.getElementById('marker').remove();                 
+        //     }          
+        // },
+        generateMarker(map) {    
+            // this.removeMarker();
 
-                var element = document.createElement("div");
-                element.id = "marker";
-                var marker = new tt.Marker({ element: element })
-                    .setLngLat([lon1, lat1])
-                    .addTo(map);
-            }
-        }
+                for (let i = 0; i < this.filteredResults.length; i++) { 
+                document.getElementById('marker').remove();                 
+
+                    let lon1 = this.filteredResults[i].longitude;
+                    let lat1 = this.filteredResults[i].latitude;
+    
+                    var element = document.createElement("div");
+                    element.id = "marker";
+                    var marker = new tt.Marker({ element: element })
+                        .setLngLat([lon1, lat1])
+                        .addTo(map);
+                }         
+        },
     }
 });

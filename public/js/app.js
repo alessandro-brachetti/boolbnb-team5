@@ -37562,8 +37562,14 @@ var search = new Vue({
       axios.get("/api/search").then(function (response) {
         var lon = _this5.lon;
         var lat = _this5.lat;
-
-        var map = _this5.generateTomTomMap();
+        var map = tt.map({
+          container: "map",
+          key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
+          center: [lon, lat],
+          zoom: 13
+        });
+        map.addControl(new tt.FullscreenControl());
+        map.addControl(new tt.NavigationControl());
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
@@ -37575,9 +37581,13 @@ var search = new Vue({
 
           if (distancekm <= range) {
             _this5.results.push(response.data.data[i]);
-          }
 
-          _this5.generateMarker(map);
+            var element = document.createElement("div");
+            element.id = "marker";
+            var marker = new tt.Marker({
+              element: element
+            }).setLngLat([lon1, lat1]).addTo(map);
+          }
         }
       });
       this.filteredServices;
@@ -37594,7 +37604,6 @@ var search = new Vue({
 
       if (this.checkedItems.length == 0) {
         this.filteredResults = this.results;
-        console.log(this.filteredResults);
         return;
       } else {
         axios.get("/api/search/filter", {
@@ -37602,25 +37611,24 @@ var search = new Vue({
             service: this.checkedItems
           }
         }).then(function (response) {
-          console.log("FILTRO", response);
           _this6.filteredResults = [];
 
           for (var i = 0; i < response.data.data.length; i++) {
             _this6.filteredResults.push(response.data.data[i]);
           }
 
-          console.log(_this6.filteredResults);
+          var map = _this6.generateTomTomMap();
+
+          _this6.generateMarker(map);
+
           return;
         });
-      } // console.log(this.filteredResults);
-
+      }
 
       return;
     }
   },
   methods: {
-    // callFilters() {
-    // },
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
       var _this7 = this;
@@ -37638,18 +37646,16 @@ var search = new Vue({
           var y = lat1 - _this7.lat;
           var x = lon1 - _this7.lon;
           var distancekm = Math.sqrt(x * x + y * y) * 100;
-          var temp = response.data.data[i].id;
+          var temp = response.data.data[i].id; // this.generateMarker(map);
 
           if (distancekm <= range) {
-            var marker = _this7.generateMarker(map);
-
             if (_this7.results.some(function (result) {
               return result.id === temp;
             })) {
+              // this.generateMarker(map);
               console.log("Object found inside the array.", distancekm <= range);
             } else {
-              _this7.results.push(response.data.data[i]); // this.generateMarker(map);
-
+              _this7.results.push(response.data.data[i]);
             }
           } else {
             var index = _this7.results.indexOf(_this7.results.find(function (result) {
@@ -37660,6 +37666,8 @@ var search = new Vue({
               return result.id === temp;
             })) {
               _this7.results.splice(index, 1);
+
+              _this7.generateMarker(map);
             }
           }
         }
@@ -37678,10 +37686,17 @@ var search = new Vue({
       map.addControl(new tt.NavigationControl());
       return map;
     },
+    // removeMarker() {
+    //     for (let i = 0; i < this.results.length; i++) {
+    //         document.getElementById('marker').remove();                 
+    //     }          
+    // },
     generateMarker: function generateMarker(map) {
-      for (var i = 0; i < this.results.length; i++) {
-        var lon1 = this.results[i].longitude;
-        var lat1 = this.results[i].latitude;
+      // this.removeMarker();
+      for (var i = 0; i < this.filteredResults.length; i++) {
+        document.getElementById('marker').remove();
+        var lon1 = this.filteredResults[i].longitude;
+        var lat1 = this.filteredResults[i].latitude;
         var element = document.createElement("div");
         element.id = "marker";
         var marker = new tt.Marker({

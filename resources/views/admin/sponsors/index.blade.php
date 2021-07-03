@@ -31,7 +31,7 @@
 
               </div>
 
-              <button v-if="clicked == true" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Sponsorizza </button>
+              <button v-if="clicked == true" class="btn btn-success"> Sponsorizza </button>
               </form>
               <button v-if="clicked == false" class="btn btn-success" id="submit-button" @click="clicked = true"> Conferma </button>
 

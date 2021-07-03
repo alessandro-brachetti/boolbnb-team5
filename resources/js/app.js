@@ -23,32 +23,32 @@ let app = new Vue({
         }
       },
 
-      methods:{
-          responseApi:_.debounce(function() {
-            if (this.search != '') {
-              axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
-                params:{
-                    key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
-                },
-            }).then((response) =>{
-                this.results = response.data.results;
-                console.log(this.results);
-            });
-            } else {
-              this.results = [];
-            }
-          }, 1000),
-
-          getCords(lat,lon) {
-            this.lat = lat;
-            this.lon = lon;
+    methods:{
+        responseApi:_.debounce(function() {
+          if (this.search != '') {
+            axios.get('https://api.tomtom.com/search/2/geocode/' + this.search + '.json', {
+              params:{
+                  key: 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL',
+              },
+          }).then((response) =>{
+              this.results = response.data.results;
+              console.log(this.results);
+          });
+          } else {
             this.results = [];
-          },
-
-          getAddress(address){
-            this.search=address;
           }
-      }
+        }, 1000),
+
+        getCords(lat,lon) {
+          this.lat = lat;
+          this.lon = lon;
+          this.results = [];
+        },
+
+        getAddress(address){
+          this.search=address;
+        }
+    }
 
 });
 
@@ -137,6 +137,7 @@ let search = new Vue({
   data:{
     city: null,
     results: [],
+    filteredResults: [],
     lon: '',
     lat: '',
     range: 20,
@@ -162,11 +163,6 @@ let search = new Vue({
         let lat = response.data.results[0].position.lat;
         this.lon = lon;
         this.lat = lat;
-
-
-
-      // MARKERS PER MAPPA
-
 
     });
     // API TO GET APARTMENTS
@@ -198,35 +194,32 @@ let search = new Vue({
     }
   },
   computed: {
-      filteredServices() {
-        if (this.checkedItems.length == 0) {
-          return this.results;
-        }else{
-          axios.get('/api/search/filter?service=' + this.checkedItems).then((response)=>{
-            console.log('FILTRO', response);
-          });
-          // var results = []
+    filteredServices() {
+      if (this.checkedItems.length == 0) {
+        return this.results;
+      }else{
+        axios.get('/api/search/filter', {
+          params: {
+            service: this.checkedItems
+          }
+        }).then((response)=>{
+          console.log('FILTRO', response);
 
-          // this.results.forEach(element => {
-          //   element.services.filter(item => {
-          //     // console.log('item',item)
-          //     // console.log('include ', this.checkedItems.includes(item.service_name))
 
-          //     if(this.checkedItems.includes(item.service_name) == true){
-          //       console.log('prima cond');
-          //       // console.log('da pushare se non esiste', results.indexOf(element) == -1)
-          //       if(results.indexOf(element) == -1){
-          //         results.push(element)
-          //         console.log('seconda cond');
-          //       }
-          //     }
-          //   });
-          // });
-          // return results
-        }
+        this.filteredResults.push(response.data.data);
+        // console.log(this.filteredResults);  
+
+        });
       }
+      console.log(this.filteredResults); 
+
+      return this.filteredResults;
+
+       
+    }
   },
   methods:{
+    
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function() {
       axios.get('/api/search').then((response)=>{
@@ -244,19 +237,23 @@ let search = new Vue({
           let y = lat1 - this.lat;
           let x = lon1 - this.lon;
           let distancekm = Math.sqrt(x*x+y*y)*100;
-          // console.log(distancekm)
+
           var temp = response.data.data[i].id
           if (distancekm <= range ) {
+
+          var marker = this.generateMarker(map);
+          marker.remove();
+
             if(this.results.some(result => result.id === temp)){
               console.log("Object found inside the array.", distancekm <= range);
-              this.generateMarker(map);
 
             } else{
               this.results.push(response.data.data[i]);
-              this.generateMarker(map);
+              // this.generateMarker(map);
             }
 
           }else{
+
             let index = this.results.indexOf(this.results.find(result => result.id === temp))
 
             if (index != -1 && distancekm > range && this.results.some(result => result.id === temp ) ) {
@@ -264,6 +261,8 @@ let search = new Vue({
             }
           }
         }
+
+
       });
     }, 1000),
 

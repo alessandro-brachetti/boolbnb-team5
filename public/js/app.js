@@ -37480,6 +37480,7 @@ var search = new Vue({
   data: {
     city: null,
     results: [],
+    filteredResults: [],
     lon: '',
     lat: '',
     range: 20,
@@ -37506,7 +37507,7 @@ var search = new Vue({
         var lon = response.data.results[0].position.lon;
         var lat = response.data.results[0].position.lat;
         _this5.lon = lon;
-        _this5.lat = lat; // MARKERS PER MAPPA
+        _this5.lat = lat;
       }); // API TO GET APARTMENTS
 
       axios.get('/api/search').then(function (response) {
@@ -37534,72 +37535,69 @@ var search = new Vue({
   },
   computed: {
     filteredServices: function filteredServices() {
+      var _this6 = this;
+
       if (this.checkedItems.length == 0) {
         return this.results;
       } else {
-        axios.get('/api/search/filter?service=' + this.checkedItems).then(function (response) {
+        axios.get('/api/search/filter', {
+          params: {
+            service: this.checkedItems
+          }
+        }).then(function (response) {
           console.log('FILTRO', response);
-        }); // var results = []
-        // this.results.forEach(element => {
-        //   element.services.filter(item => {
-        //     // console.log('item',item)
-        //     // console.log('include ', this.checkedItems.includes(item.service_name))
-        //     if(this.checkedItems.includes(item.service_name) == true){
-        //       console.log('prima cond');
-        //       // console.log('da pushare se non esiste', results.indexOf(element) == -1)
-        //       if(results.indexOf(element) == -1){
-        //         results.push(element)
-        //         console.log('seconda cond');
-        //       }
-        //     }
-        //   });
-        // });
-        // return results
+
+          _this6.filteredResults.push(response.data.data); // console.log(this.filteredResults);  
+
+        });
       }
+
+      console.log(this.filteredResults);
+      return this.filteredResults;
     }
   },
   methods: {
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('/api/search').then(function (response) {
-        var lon = _this6.lon;
-        var lat = _this6.lat;
+        var lon = _this7.lon;
+        var lat = _this7.lat;
 
-        var map = _this6.generateTomTomMap();
+        var map = _this7.generateTomTomMap();
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
-          var range = _this6.range;
-          var y = lat1 - _this6.lat;
-          var x = lon1 - _this6.lon;
-          var distancekm = Math.sqrt(x * x + y * y) * 100; // console.log(distancekm)
-
+          var range = _this7.range;
+          var y = lat1 - _this7.lat;
+          var x = lon1 - _this7.lon;
+          var distancekm = Math.sqrt(x * x + y * y) * 100;
           var temp = response.data.data[i].id;
 
           if (distancekm <= range) {
-            if (_this6.results.some(function (result) {
+            var marker = _this7.generateMarker(map);
+
+            marker.remove();
+
+            if (_this7.results.some(function (result) {
               return result.id === temp;
             })) {
               console.log("Object found inside the array.", distancekm <= range);
-
-              _this6.generateMarker(map);
             } else {
-              _this6.results.push(response.data.data[i]);
+              _this7.results.push(response.data.data[i]); // this.generateMarker(map);
 
-              _this6.generateMarker(map);
             }
           } else {
-            var index = _this6.results.indexOf(_this6.results.find(function (result) {
+            var index = _this7.results.indexOf(_this7.results.find(function (result) {
               return result.id === temp;
             }));
 
-            if (index != -1 && distancekm > range && _this6.results.some(function (result) {
+            if (index != -1 && distancekm > range && _this7.results.some(function (result) {
               return result.id === temp;
             })) {
-              _this6.results.splice(index, 1);
+              _this7.results.splice(index, 1);
             }
           }
         }

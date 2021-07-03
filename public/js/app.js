@@ -37519,7 +37519,7 @@ var search = new Vue({
           container: "map",
           key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
           center: [lon, lat],
-          zoom: 13
+          zoom: 12
         });
         map.addControl(new tt.FullscreenControl());
         map.addControl(new tt.NavigationControl());
@@ -37557,6 +37557,7 @@ var search = new Vue({
 
       if (this.checkedItems.length == 0) {
         this.filteredResults = this.results;
+        this.generateTomTomMapFiltered();
         return;
       } else {
         axios.get("/api/search/filter", {
@@ -37567,14 +37568,21 @@ var search = new Vue({
           _this6.filteredResults = [];
 
           for (var i = 0; i < response.data.data.length; i++) {
-            _this6.filteredResults.push(response.data.data[i]);
+            var lat1 = response.data.data[i].latitude;
+            var lon1 = response.data.data[i].longitude;
+            var range = _this6.range;
+            var y = lat1 - _this6.lat;
+            var x = lon1 - _this6.lon;
+            var distancekm = Math.sqrt(x * x + y * y) * 100;
+
+            if (distancekm <= range) {
+              _this6.filteredResults.push(response.data.data[i]);
+
+              _this6.generateTomTomMapComputed();
+            }
           }
 
-          var map = _this6.generateTomTomMap();
-
-          _this6.generateMarker(map);
-
-          return;
+          console.log(_this6.filteredResults); // this.generateMarker(map);
         });
       }
 
@@ -37589,8 +37597,6 @@ var search = new Vue({
       axios.get("/api/search").then(function (response) {
         var lon = _this7.lon;
         var lat = _this7.lat;
-
-        var map = _this7.generateTomTomMap();
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
@@ -37609,6 +37615,8 @@ var search = new Vue({
               console.log("Object found inside the array.", distancekm <= range);
             } else {
               _this7.results.push(response.data.data[i]);
+
+              _this7.generateTomTomMapFiltered();
             }
           } else {
             var index = _this7.results.indexOf(_this7.results.find(function (result) {
@@ -37618,34 +37626,27 @@ var search = new Vue({
             if (index != -1 && distancekm > range && _this7.results.some(function (result) {
               return result.id === temp;
             })) {
-              _this7.results.splice(index, 1);
+              _this7.results.splice(index, 1); // this.generateMarker(map);
 
-              _this7.generateMarker(map);
+
+              _this7.generateTomTomMapFiltered();
             }
           }
         }
       });
     }, 1000),
-    generateTomTomMap: function generateTomTomMap() {
+    generateTomTomMapComputed: function generateTomTomMapComputed() {
       var lon = this.lon;
       var lat = this.lat;
       var map = tt.map({
         container: "map",
         key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
         center: [lon, lat],
-        zoom: 13
+        zoom: 12
       });
       map.addControl(new tt.FullscreenControl());
       map.addControl(new tt.NavigationControl());
-      return map;
-    },
-    // removeMarker() {
-    //     for (let i = 0; i < this.results.length; i++) {
-    //         document.getElementById('marker').remove();                 
-    //     }          
-    // },
-    generateMarker: function generateMarker(map) {
-      // this.removeMarker();
+
       for (var i = 0; i < this.filteredResults.length; i++) {
         document.getElementById('marker').remove();
         var lon1 = this.filteredResults[i].longitude;
@@ -37656,6 +37657,36 @@ var search = new Vue({
           element: element
         }).setLngLat([lon1, lat1]).addTo(map);
       }
+
+      return map;
+    },
+    generateTomTomMapFiltered: function generateTomTomMapFiltered() {
+      var lon = this.lon;
+      var lat = this.lat;
+      var map = tt.map({
+        container: "map",
+        key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
+        center: [lon, lat],
+        zoom: 12
+      });
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+
+      for (var i = 0; i < this.results.length; i++) {
+        if (i == 1) {
+          document.getElementById('marker').remove();
+        }
+
+        var lon1 = this.results[i].longitude;
+        var lat1 = this.results[i].latitude;
+        var element = document.createElement("div");
+        element.id = "marker";
+        var marker = new tt.Marker({
+          element: element
+        }).setLngLat([lon1, lat1]).addTo(map);
+      }
+
+      return map;
     }
   }
 });

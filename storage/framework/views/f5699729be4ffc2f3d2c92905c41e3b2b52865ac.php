@@ -58,6 +58,10 @@
 
       </div>
 
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="apartments row">
+          <?php echo e(count(Auth::user()->apartments)); ?>
+
       <div class="col-lg-3 col-md-3 col-sm-12">
         <div class="card my-card mmb-20" style="width: 18rem;">
           <div class="card-body">

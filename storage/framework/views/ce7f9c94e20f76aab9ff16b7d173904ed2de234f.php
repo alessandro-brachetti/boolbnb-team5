@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 
 <div class="container-fluid my-container-fluid">
@@ -29,7 +29,7 @@
             <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
             <div class="">
               <ul>
-                <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
+                <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
               </ul>
             </div>
         </div>
@@ -46,31 +46,33 @@
     </div>
     <div class="row">
         <div class="apartments d-flex flex-wrap">
-            @foreach($apartments as $apartment)
+            <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-sm">
-                    <form id='{{$apartment->id}}' action="{{route('views.store', ['apartment'=>$apartment->id])}}" method="post">
-                        @csrf
-                        @method('POST')
+                    <form id='<?php echo e($apartment->id); ?>' action="<?php echo e(route('views.store', ['apartment'=>$apartment->id])); ?>" method="post">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('POST'); ?>
 
                         <div class="form-group">
-                            <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
+                            <input type="hidden" name="apartment_id" value="<?php echo e($apartment->id); ?>">
                         </div>
-                        <div onclick="event.preventDefault(); document.getElementById('{{$apartment->id}}').submit()" class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
+                        <div onclick="event.preventDefault(); document.getElementById('<?php echo e($apartment->id); ?>').submit()" class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
                           <div class="card-img-top my-card-img-top">
-                            <img src="{{asset($apartment->img)}}" alt="">
+                            <img src="<?php echo e(asset($apartment->img)); ?>" alt="">
                           </div>
                           <div class="card-body my-card-body">
-                            <h5 class="card-title my-card-title">{{$apartment->title}}</h5>
+                            <h5 class="card-title my-card-title"><?php echo e($apartment->title); ?></h5>
                             <div class="card-text my-card-text">
-                              <p class="address">Indirizzo: {{$apartment->address}}</p>
-                              <p class="beds-rooms mpt-10"><span class="rooms">Stanze: {{$apartment->n_rooms}}</span> <span class="circle">&#183;</span> <span class="beds">Letti: {{$apartment->n_beds}}</span></p>
+                              <p class="address">Indirizzo: <?php echo e($apartment->address); ?></p>
+                              <p class="beds-rooms mpt-10"><span class="rooms">Stanze: <?php echo e($apartment->n_rooms); ?></span> <span class="circle">&#183;</span> <span class="beds">Letti: <?php echo e($apartment->n_beds); ?></span></p>
                             </div>
                           </div>
                         </div>
                     </form>
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\views/welcome.blade.php ENDPATH**/ ?>

@@ -37557,7 +37557,7 @@ var search = new Vue({
 
       if (this.checkedItems.length == 0) {
         this.filteredResults = this.results;
-        this.generateTomTomMapFiltered();
+        this.generateTomTomMapComputed();
         return;
       } else {
         axios.get("/api/search/filter", {

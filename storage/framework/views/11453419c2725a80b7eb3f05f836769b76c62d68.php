@@ -6,12 +6,12 @@
         <div class="col-6">
             <div>
                 <label for="points">Numero minimo stanze:</label>
-                <input type="number" id="points" name="points" min="1" max="20" v-model="filter.rooms">
+                <input type="number" id="points" name="points" min="1" max="20" v-model="rooms">
             </div>
             
             <div>
                 <label for="points">Numero minimo posti letto:</label>
-                <input type="number" id="points" name="points" min="1" max="20" v-model="filter.beds">
+                <input type="number" id="points" name="points" min="1" max="20" v-model="beds">
             </div>
 
             <div class="form-group">
@@ -24,13 +24,13 @@
 
             <div>
                 <span>{{range}} Km</span>
-                <input type="range" v-model='range' name="" id="" min="20" max="100" @input="onRangeChange">
+                <input type="range" v-model='range' name="" id="" min="15" max="100" @input="onRangeChange">
                 <span>100 Km</span>
             </div>
             
             <div>               
                 
-                <div v-for="apartment in filteredResults" v-if="apartment.n_rooms >= filter.rooms && apartment.n_beds >= filter.beds">
+                <div v-for="apartment in filteredResults" v-if="apartment.n_rooms >= rooms && apartment.n_beds >= beds">
                     <p>FIltrati:{{apartment.title}}</p>
                 </div>
             </div>

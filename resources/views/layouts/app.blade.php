@@ -31,7 +31,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/images/logo_large.png" alt="" style="max-width: 170px;">
+                    <img src="/images/logo_boolbnb_4.png" alt="" style="max-width: 120px;">
+                    <!-- <span style="font-size: 1.3rem; font-weight: 700; padding-left: 5px;">Boolbnb</span> -->
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -43,6 +44,15 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <!-- <div class="form-inline my-2 my-lg-0" id="welcome">
+                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
+                        {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
+                        <div class="">
+                          <ul>
+                            <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
+                          </ul>
+                        </div>
+                    </div> -->
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

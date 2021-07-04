@@ -1,7 +1,9 @@
+// font
 body{
 font-family: 'Nunito', sans-serif;
 }
 
+// container media query
 .container{
   @media (min-width: 1200px){
   max-width: 1050px;
@@ -20,6 +22,7 @@ font-family: 'Nunito', sans-serif;
   }
 }
 
+// stile link
 a{
   text-decoration: none;
   color: $blacktext;
@@ -29,11 +32,20 @@ a{
   }
 }
 
+// search pagine admin
 .search{
   border: 2px solid $mygrey;
   background-color: $mylightgrey;
   padding: 8px 0;
   text-align: center;
+  .searchbar{
+    @include flex-align-center;
+    input{
+        @media (max-width: 992px){
+          width: 50%;
+        }
+    }
+  }
 
   input{
     width: 100%;
@@ -44,15 +56,16 @@ a{
   }
 }
 
+// titolo pagine admin
 .title-admin{
-  font-weight: 800;
+  font-weight: 700;
 }
 
+// card
 .my-card{
-  border-radius: 8px;
-  &:hover{
-    border: 2px solid $myblack;
-  }
+  width: 100%;
+  border-radius: 9px;
+  border: 2px solid $mygrey;
   p{
     margin-bottom: 0;
   }
@@ -64,8 +77,8 @@ a{
     .cover{
       background-position: center;
       background-size: cover;
-      height: 180px;
-      border-radius: 8px;
+      height: 190px;
+      border-radius: 9px;
     }
   }
   .my-card-body{
@@ -85,10 +98,23 @@ a{
       font-size: 0.8rem;
 
       .address{
-        font-weight: 700;
+        padding-top: 3px;
+        font-weight: 800;
         text-transform: capitalize;
+        .via{
+          font-weight: 600;
+        }
       }
-
     }
   }
+}
+
+// dropdown menu
+.nav-link{
+  text-align: right;
+  margin-top: 15px;
+}
+.dropdown-menu{
+  text-align: right;
+  border: none;
 }

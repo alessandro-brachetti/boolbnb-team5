@@ -17,7 +17,7 @@ class ApartmentController extends Controller
     public function index()
     {
         $now = Carbon::now();
-        $apartments_get = Apartment::with('sponsors')->whereHas('sponsors')->get();
+        $apartments_get = Apartment::with('sponsors')->where('visible','=', 1)->whereHas('sponsors')->get();
         $apartments = [];
         foreach ($apartments_get as $apartment) {
             foreach ($apartment->sponsors as $sponsor) {

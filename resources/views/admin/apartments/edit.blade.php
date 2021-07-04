@@ -52,14 +52,14 @@
                   @enderror
                 </div>
 
-                <div id="root">
-                  <p @click="getAddress('{{$apartment->address}}')">Clicca qui per prendere il vecchio indirizzo</p>
+                <div v-cloak id="root">
+                  <p @click="getAddress('{{$apartment->address}}','{{$apartment->longitude}}','{{$apartment->latitude}}')">Clicca qui per prendere il vecchio indirizzo</p>
                   <div class="form-group">
                     <label for="address">Indirizzo</label>
 
                       <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
                       <ul class="results">
-                        <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">@{{result.address.freeformAddress}}</li>
+                        <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">@{{result.address.freeformAddress}}</li>
                       </ul>
 
                     @error('address')
@@ -68,43 +68,20 @@
                   </div>
 
                   <div class="form-group">
-                    <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" :value="lat">
+                    <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                     @error('latitude')
                       <small class="text-danger"> {{ $message }}</small>
                     @enderror
                   </div>
 
                   <div class="form-group">
-                    <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" name="longitude" :value="lon">
+                    <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
                     @error('longitude')
                       <small class="text-danger"> {{ $message }}</small>
                     @enderror
                   </div>
                 </div>
 
-                <!-- <div class="form-group">
-                  <label for="address">Indirizzo</label>
-                  <input class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" value="{{ old('address', $apartment->address) }}">
-                  @error('address')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="latitude">Latitudine</label>
-                  <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" max="100" name="latitude" value="{{ old('latitude', $apartment->latitude) }}">
-                  @error('latitude')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="longitude">Longitudine</label>
-                  <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" max="100" name="longitude" value="{{ old('longitude', $apartment->longitude) }}">
-                  @error('longitude')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div> -->
                 <img src="{{asset($apartment->img)}}" class="img-fluid img-thumbnail" alt="{{$apartment->title}}">
                 <div class="form-group">
                   <label for="img">Immagine</label>

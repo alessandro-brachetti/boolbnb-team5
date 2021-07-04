@@ -11473,6 +11473,17 @@ a:hover {
   text-align: center;
 }
 
+.search .searchbar {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .search .searchbar input {
+    width: 50%;
+  }
+}
+
 .search input {
   width: 100%;
   padding: 5px 10px;
@@ -11482,15 +11493,13 @@ a:hover {
 }
 
 .title-admin {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .my-card {
-  border-radius: 8px;
-}
-
-.my-card:hover {
-  border: 2px solid #000000;
+  width: 100%;
+  border-radius: 9px;
+  border: 2px solid #ededed;
 }
 
 .my-card p {
@@ -11504,8 +11513,8 @@ a:hover {
 .my-card .my-card-img-top .cover {
   background-position: center;
   background-size: cover;
-  height: 180px;
-  border-radius: 8px;
+  height: 190px;
+  border-radius: 9px;
 }
 
 .my-card .my-card-body {
@@ -11530,8 +11539,23 @@ a:hover {
 }
 
 .my-card .my-card-body .my-card-text .address {
-  font-weight: 700;
+  padding-top: 3px;
+  font-weight: 800;
   text-transform: capitalize;
+}
+
+.my-card .my-card-body .my-card-text .address .via {
+  font-weight: 600;
+}
+
+.nav-link {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.dropdown-menu {
+  text-align: right;
+  border: none;
 }
 
 .white-btn {
@@ -11558,18 +11582,28 @@ a:hover {
   overflow: hidden;
 }
 
-#my-carousel .my-carousel-inner .my-carousel-item img {
-  max-width: 100%;
-  max-height: 100%;
-  filter: grayscale(70%);
+#my-carousel .my-carousel-inner .my-carousel-item .bg-slider {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-#my-carousel .p-absolute {
+#my-carousel .my-search {
+  width: 40%;
   z-index: 1;
   position: absolute;
-  top: 30%;
-  left: 20%;
+  top: 15%;
+  left: 50%;
   transform: translate(-50%, -50%);
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  #my-carousel .my-search {
+    width: 70%;
+  }
 }
 
 #my-carousel .my-input-group #welcome {
@@ -11577,15 +11611,24 @@ a:hover {
 }
 
 #my-carousel .my-input-group #welcome input {
-  width: 250px;
+  margin-right: 0 !important;
+  height: 50px;
   border-radius: 15px;
+  box-shadow: none;
+  outline: none;
+}
+
+#my-carousel .my-input-group #welcome input:focus {
+  border: 1px solid lightgrey;
 }
 
 #my-carousel .my-input-group #welcome .my-results {
+  width: 100%;
   z-index: 1;
   position: absolute;
-  top: 35%;
-  left: 9%;
+  top: 430%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 15px;
 }
 
@@ -11593,9 +11636,8 @@ a:hover {
   -webkit-padding-start: 0;
           padding-inline-start: 0;
   border-radius: 15px;
-  border: 1px solid black;
   list-style: none;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #my-carousel .my-input-group #welcome .my-results ul li {
@@ -11604,82 +11646,10 @@ a:hover {
   text-align: center;
 }
 
-.my-card {
-  border-radius: 11px;
-}
-
-.my-card:hover {
-  border: 2px solid #000000;
-}
-
-.my-card p {
-  margin-bottom: 0;
-}
-
-.my-card a[title]:hover::after {
-  font-size: 3em;
-}
-
-.my-card .my-card-img-top img {
-  max-width: 100%;
-  border-radius: 21px;
-  padding: 14px;
-}
-
-.my-card .my-card-body {
-  padding-top: 0;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.my-card .my-card-body a {
-  margin-left: 0;
-}
-
-.my-card .my-card-body .my-card-title {
-  text-transform: capitalize;
-  font-size: 0.9rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.my-card .my-card-body .my-card-text {
-  font-size: 0.8rem;
-}
-
-.my-card .my-card-body .my-card-text .address {
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-.my-card .my-card-body .my-card-text .actions {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  font-weight: 700;
-  font-size: 1.4rem;
-}
-
-.my-card .my-card-body .my-card-text .actions a:hover i {
-  transform: scale(1.2);
-  color: #fa6933;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms {
-  font-weight: 600;
-  color: #838282;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms .rooms {
-  padding-right: 7px;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms .beds {
-  padding-left: 7px;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms .circle {
-  font-size: 1.1rem;
+@media (max-width: 600px) {
+  #my-carousel .my-input-group #welcome .my-results {
+    height: 300px;
+  }
 }
 
 main#index-admin .info {
@@ -11688,20 +11658,29 @@ main#index-admin .info {
   justify-content: space-between;
 }
 
+main#index-admin .apartments .my-card:hover {
+  border: 2px solid #fa6933;
+}
+
 main#index-admin .apartments .my-card .my-card-img-top {
   padding: 14px;
 }
 
-main#index-admin .apartments .my-card .my-card-img-top img {
-  max-width: 100%;
-  border-radius: 21px;
-  padding: 14px;
+@media (min-width: 600px) {
+  main#index-admin .apartments .my-card .my-card-img-top .cover {
+    height: 160px;
+  }
+}
+
+@media (min-width: 1550px) {
+  main#index-admin .apartments .my-card .my-card-img-top .cover {
+    height: 210px;
+  }
 }
 
 main#index-admin .apartments .my-card .actions {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
   font-weight: 700;
   font-size: 1.4rem;
 }
@@ -11728,17 +11707,13 @@ main#index-admin .apartments .my-card .beds-rooms .circle {
   font-size: 1.1rem;
 }
 
-main#dashboard .search {
-  display: flex;
-  align-items: center;
-}
-
 main#dashboard .info .user {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-size: 700;
 }
 
-main#dashboard .info .user span {
-  color: #fa6933;
+main#dashboard .content .tools .my-card:hover {
+  border: 2px solid #fa6933;
 }
 
 main#dashboard .content .tools .my-card p {
@@ -11758,27 +11733,92 @@ main#dashboard .content .tools .my-card i:hover {
   color: #fa6933;
 }
 
-main#dashboard .content .apartments .my-card .my-card-img-top img {
-  max-width: 100%;
-  border-radius: 21px;
-  padding: 14px;
-}
-
-main#dashboard .content .apartments .my-card .my-card-body .my-card-title {
-  font-size: 1.1rem;
-}
-
-main#dashboard .content .apartments .my-card .my-card-body .my-card-text {
-  font-size: 1rem;
+main#dashboard .content .totals .my-card .number {
+  padding-bottom: 10px;
+  font-size: 1.5rem;
   font-weight: 700;
+  display: flex;
+  align-items: center;
 }
 
-main#dashboard .content .apartments .my-card .my-card-body .my-card-text .expiration {
+main#dashboard .content .totals .my-card .my-card-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #838282;
+}
+
+main#dashboard .content .totals .my-card i {
+  padding-right: 10px;
+  font-size: 2rem;
   color: #fa6933;
 }
 
-main#dashboard .content .apartments .my-card .my-card-body .my-card-text .expiration span {
-  color: #000000;
+main#dashboard .content .totals .my-card .my-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-right: 20px;
+}
+
+main#dashboard .sponsors .my-card-body {
+  padding: 9px 25px;
+}
+
+main#dashboard .sponsors .my-card-body .my-table {
+  margin: 0;
+}
+
+main#welcome .title {
+  font-weight: 1400;
+  color: #373a3d;
+  letter-spacing: 2.5px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.partnership {
+  position: absolute;
+  width: 100px;
+  height: 1.4rem;
+  background-color: #fa723f;
+  border-radius: 6px;
+  top: 20px;
+  left: 20px;
+}
+
+.partnership span {
+  color: white;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.my-card:hover {
+  border: 2px solid #fa6933;
+}
+
+.my-card .my-card-img-top {
+  padding: 14px;
+}
+
+@media (min-width: 600px) {
+  .my-card .my-card-img-top .cover {
+    height: 160px;
+  }
+}
+
+@media (min-width: 1550px) {
+  .my-card .my-card-img-top .cover {
+    height: 210px;
+  }
+}
+
+main#login {
+  margin-top: 30px;
+}
+
+main#register {
+  padding: 30px;
 }
 
 html {

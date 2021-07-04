@@ -6,13 +6,19 @@
   <div id="my-carousel" class="carousel slide carousel-fade col-md-12 col-sm-12 col-xs-12" data-ride="carousel" style="padding-left:0; padding-right: 0;">
     <div class="carousel-inner my-carousel-inner">
         <div class="carousel-item my-carousel-item active">
-          <img class="d-block w-100" src="/images/panorama-1.jpg" alt="First slide">
+          <div class="bg-slider" style="background-image: url('/images/01.jpg')">
+
+          </div>
         </div>
         <div class="carousel-item my-carousel-item">
-          <img class="d-block w-100" src="/images/panorama-2.jpg" alt="Second slide">
+          <div class="bg-slider" style="background-image: url('/images/02.jpg')">
+
+          </div>
         </div>
         <div class="carousel-item my-carousel-item">
-          <img class="d-block w-100" src="/images/panorama-3.jpg" alt="Third slide">
+          <div class="bg-slider" style="background-image: url('/images/03.jpg')">
+
+          </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#my-carousel" role="button" data-slide="prev">
@@ -25,14 +31,14 @@
     </a>
       <div class="my-input-group">
         <div class="form-inline my-2 my-lg-0 my-welcome" id="welcome">
-          <div class="p-absolute">
-            <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
-        </div>
+        <div class="d-flex flex-column my-search">
+            <input class="form-control my-form control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
         <div class="my-results">
           <ul>
             <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
           </ul>
         </div>
+      </div>
       </div>
     </div>
 
@@ -43,15 +49,15 @@
 <main id="welcome">
   <div class="container">
     <div class="row">
-      <div class="col-md-12 d-flex">
+      <div class="col-md-6 offset-md-3 d-flex justify-content-center title text-center">
         <h2>Appartamenti in evidenza</h2>
       </div>
     </div>
-    <div class="row sponsorized">
+    <div class="row sponsorized d-flex">
       <div class="apartments d-flex flex-wrap">
         <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="col-sm">
-          <form id='<?php echo e($apartment->id); ?>' action="<?php echo e(route('views.store', ['apartment'=>$apartment->id])); ?>" method="post">
+          <form id='<?php echo e($apartment->id); ?>' action="<?php echo e(route('views.store', ['apartment'=>$apartment->id])); ?>" method="post" style="display: flex; justify-content: center;">
             <?php echo csrf_field(); ?>
             <?php echo method_field('POST'); ?>
 
@@ -60,7 +66,11 @@
             </div>
             <div onclick="event.preventDefault(); document.getElementById('<?php echo e($apartment->id); ?>').submit()" class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
               <div class="card-img-top my-card-img-top">
-                <img src="<?php echo e(asset($apartment->img)); ?>" alt="">
+                <div class="cover" style="background-image: url('<?php echo e(asset($apartment->img)); ?>')">
+                </div>
+                <div class="partnership d-flex justify-content-center align-items-center">
+                  <span class="">Consigliato</span>
+                </div>
               </div>
               <div class="card-body my-card-body">
                 <h5 class="card-title my-card-title"><?php echo e($apartment->title); ?></h5>
@@ -74,6 +84,14 @@
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-center title text-center">
+        <h5>Appartamenti disponibili</h2>
+      </div>
+    </div>
+    <div class="row apartments">
+
     </div>
   </div>
 

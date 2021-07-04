@@ -4,25 +4,29 @@
 <main id="dashboard">
 
   <!-- searchbar -->
-  <div class="search row justify-content-right">
+  <div class="search">
     <div class="container">
-      <div class="col-lg-4 offset-lg-8">
-        <input type="text" name="" value="" placeholder="Cerca un appartamento">
+      <div class="row justify-content-right">
+        <div id="welcome" class=" searchbar col-lg-4 offset-lg-4 col-md-6">
+          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
+          
+          <div class="">
+            <ul>
+              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
     <div class="info row mpt-30">
-      <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="col-lg-4 col-md-12 col-sm-12">
         <h5 class="title-admin user">
-          Ciao, <span><?php echo e(Auth::user()->name); ?></span>
+          Ciao, <?php echo e(Auth::user()->name); ?>
+
         </h5>
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-12">
-        <h4 class="title-admin">
-          I tuoi annunci sponsorizzati:
-        </h4>
       </div>
         <!-- <div class="col-md-8">
             <div class="card"> -->
@@ -40,50 +44,89 @@
         </div> -->
     </div>
     <div class="content row mpt-30">
-      <div class="tools col-lg-3 col-md-3 col-sm-12">
-        <a href="<?php echo e(route('admin.apartments.index')); ?>">
-          <div class="card my-card mmb-20" style="width: 18rem;">
+      <div class="tools col-lg-3 col-md-12 col-sm-12 d-flex flex-wrap">
+          <div class="card my-card mmb-15">
+            <a href="<?php echo e(route('admin.apartments.index')); ?>">
+              <div class="card-body">
+                <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Gestisci gli annunci</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="card my-card mmb-15">
+            <a href="<?php echo e(route('admin.apartments.create')); ?>">
+              <div class="card-body">
+                <p class="card-text my-card-text"> <i class="far fa-plus-square"></i>Crea un annuncio</p>
+              </div>
+            </a>
+          </div>
+          <div class="card my-card mmb-15">
+            <a href="<?php echo e(route('logout')); ?>"
+             onclick="event.preventDefault();
+             document.getElementById('logout-form').submit();">
             <div class="card-body">
-              <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Gestisci gli annunci</p>
+               <p class="card-text my-card-text">
+                 <i class="fas fa-arrow-circle-left"></i>  <?php echo e(__('Logout')); ?></p>
+            </div>
+
+            </a>
+          </div>
+
+      </div>
+
+      <div class="totals col-lg-3 col-md-4 col-sm-12 d-flex flex-wrap">
+        <div class="card my-card mmb-15">
+          <div class="card-body my-card-body">
+            <div class="title">
+              <p class="number"><?php echo e(count(Auth::user()->apartments)); ?></p>
+              <p class="card-text my-card-text">Annunci</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="totals col-lg-3 col-md-4 col-sm-12 d-flex flex-wrap">
+        <div class="card my-card mmb-15">
+          <div class="card-body my-card-body">
+            <div class="title">
+                <?php ($count=0); ?>
+                <?php $__currentLoopData = Auth::user()->apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $apartment->messages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $message): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php ($count++); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <p class="number"><?php echo e($count); ?></p>
+                <p class="card-text my-card-text">Messaggi</p>
+            </div>
+            <div class="icon">
+              <i class="far fa-envelope"></i>
             </div>
           </div>
-        </a>
-        <a href="<?php echo e(route('admin.apartments.create')); ?>">
-          <div class="card my-card" style="width: 18rem;">
-            <div class="card-body">
-              <p class="card-text my-card-text"> <i class="far fa-plus-square"></i>Crea un annuncio</p>
+        </div>
+      </div>
+      <div class="totals col-lg-3 col-md-4 col-sm-12 d-flex flex-wrap">
+        <div class="card my-card mmb-15">
+          <div class="card-body my-card-body">
+            <div class="title">
+                <?php ($count=0); ?>
+                <?php $__currentLoopData = Auth::user()->apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $apartment->views; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $view): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php ($count++); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <p class="number"><?php echo e($count); ?></p>
+              </p>
+              <p class="card-text my-card-text">Visualizzazioni</p>
+            </div>
+            <div class="icon">
+              <i class="far fa-eye"></i>
             </div>
           </div>
-        </a>
-
-      </div>
-
-      <div class="col-lg-8 col-md-8 col-sm-12">
-        <div class="apartments row">
-          <?php echo e(count(Auth::user()->apartments)); ?>
-
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card my-card mmb-20" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Annunci Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
-          </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card my-card mmb-20" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Messaggi Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card my-card mmb-20" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Visualizzazioni totali Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-        </div>
-      </div>
-
 
         <!-- <div class="apartments row">
         <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -108,40 +151,34 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div> -->
 
-
     </div>
 
-    <div class="row">
-      <div class="col-lg-9 col-md-9 col-sm-12 offset-lg-3">
-        <table class="table table-hover mmt-30">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row sponsors">
+      <div class="col-lg-9 col-md-12 col-sm-12 offset-lg-3">
+        <div class="card my-card">
+          <div class="my-card-body">
+            <table class="table table-borderless my-table">
+              <thead>
+                <tr>
+                  <th scope="col" col-span=2>Alloggio</th>
+                  <th scope="col">Scadenza promozione</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <?php $__currentLoopData = $apartment->sponsors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sponsor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                  <td style="width: 70%;"><?php echo e($apartment->title); ?></td>
+                  <?php if($loop->first): ?>
+                  <td> <?php echo date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)); ?> </td>
+                    <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
     </div>

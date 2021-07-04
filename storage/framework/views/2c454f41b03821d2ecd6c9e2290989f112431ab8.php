@@ -131,7 +131,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
-              <div id="root">
+              <div v-cloak id="root">
                 <div class="form-group">
                   <label for="address">Indirizzo</label>
 
@@ -144,7 +144,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="address" type="text" name="address" @input="responseApi">
                     <ul class="results">
-                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">{{result.address.freeformAddress}}</li>
+                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">{{result.address.freeformAddress}}</li>
                     </ul>
 
                   <?php $__errorArgs = ['address'];
@@ -160,7 +160,6 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div class="form-group">
-                  
                   <input class="form-control <?php $__errorArgs = ['latitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -168,7 +167,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="latitude" type="number" step="any" name="latitude" :value="lat">
+unset($__errorArgs, $__bag); ?>" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                   <?php $__errorArgs = ['latitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -182,7 +181,6 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div class="form-group">
-                  
                   <input class="form-control <?php $__errorArgs = ['longitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -190,7 +188,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="longitude" type="number" step="any" name="longitude" :value="lon">
+unset($__errorArgs, $__bag); ?>" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
                   <?php $__errorArgs = ['longitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

@@ -2,10 +2,18 @@
 @section('content')
 <main id="index-admin">
   <!-- searchbar -->
-  <div class="search row justify-content-right">
+  <div class="search">
     <div class="container">
-      <div class="col-lg-4 offset-lg-8">
-          <input type="text" name="" value="" placeholder="Cerca un appartamento">
+      <div class="row justify-content-right">
+        <div class="searchbar col-lg-3 offset-lg-9" id="welcome">
+          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
+          {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
+          <div class="">
+            <ul>
+              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -26,17 +34,15 @@
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="d-flex flex-wrap justify-content-center">
           <a href="{{route('admin.apartments.show', ['apartment'=> $apartment->id])}}">
-            <div class="card my-card mmb-30" style="width: 23rem;" title="Vedi i dettagli dell'appartamento">
+            <div class="card my-card mmb-30" title="Vedi i dettagli dell'appartamento">
               <div class="card-img-top my-card-img-top">
                 <div class="cover" style="background-image: url('{{asset($apartment->img)}}')">
-
                 </div>
-                <!-- <img class="card-img-top" src="{{asset($apartment->img)}}" alt="Card image cap"> -->
               </div>
               <div class="card-body my-card-body">
                 <h5 class="card-title my-card-title">{{$apartment->title}}</h5>
                 <div class="card-text my-card-text">
-                  <p class="address">Indirizzo: {{$apartment->address}}</p>
+                  <p class="address">Indirizzo: <span class="via">{{$apartment->address}}</span> </p>
                   <p class="beds-rooms mpt-10"><span class="rooms">Stanze: {{$apartment->n_rooms}}</span> <span class="circle">&#183;</span> <span class="beds">Letti: {{$apartment->n_beds}}</span></p>
 
                   <!-- azioni admin -->

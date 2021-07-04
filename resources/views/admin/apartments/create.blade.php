@@ -4,9 +4,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- searchbar -->
-  <div class="search row justify-content-center">
-    <div class="col-lg-4 text-center">
-        <input type="text" name="" value="" placeholder="Cerca un appartamento" class="form-control">
+  <div class="search">
+    <div class="container">
+      <div class="row justify-content-right">
+        <div class="searchbar col-lg-3 offset-lg-9">
+          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
+          {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
+          <div class="">
+            <ul>
+              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -61,13 +71,13 @@
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror
                 </div>
-              <div id="root">
+              <div v-cloak id="root">
                 <div class="form-group">
                   <label for="address">Indirizzo</label>
 
                     <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
                     <ul class="results">
-                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">@{{result.address.freeformAddress}}</li>
+                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">@{{result.address.freeformAddress}}</li>
                     </ul>
 
                   @error('address')
@@ -76,16 +86,14 @@
                 </div>
 
                 <div class="form-group">
-                  {{-- <label for="latitude">Latitudine</label> --}}
-                  <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" :value="lat">
+                  <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                   @error('latitude')
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror
                 </div>
 
                 <div class="form-group">
-                  {{-- <label for="longitude">Longitudine</label> --}}
-                  <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" name="longitude" :value="lon">
+                  <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
                   @error('longitude')
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror

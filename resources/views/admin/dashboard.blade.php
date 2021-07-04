@@ -7,7 +7,7 @@
   <div class="search">
     <div class="container">
       <div class="row justify-content-right">
-        <div id="welcome" class=" searchbar col-lg-4 offset-lg-4 col-md-6">
+        <div class="searchbar col-lg-3 offset-lg-9" id="welcome">
           <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
           {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
           <div class="">
@@ -71,7 +71,6 @@
 
       </div>
 
-<<<<<<< HEAD
       <div class="totals col-lg-3 col-md-4 col-sm-12 d-flex flex-wrap">
         <div class="card my-card mmb-15">
           <div class="card-body my-card-body">
@@ -82,15 +81,6 @@
             <div class="icon">
               <i class="fas fa-bullhorn"></i>
             </div>
-=======
-      <div class="col-lg-8 col-md-8 col-sm-12">
-        <div class="apartments row">
-          {{count(Auth::user()->apartments)}}
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card my-card mmb-20" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Annunci Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
->>>>>>> 1bae5cce1d3b8a39eed6a07e0a1a655aaff2dcac
           </div>
         </div>
       </div>
@@ -123,7 +113,7 @@
                 @php($count++)
                 @endforeach
                 @endforeach
-                <p class="number">{{$count}}</p>
+                <p class="views">{{$count}}</p>
               </p>
               <p class="card-text my-card-text">Visualizzazioni</p>
             </div>
@@ -166,15 +156,15 @@
             <table class="table table-borderless my-table">
               <thead>
                 <tr>
-                  <th scope="col" col-span=2>Alloggio</th>
-                  <th scope="col">Scadenza promozione</th>
+                  <th scope="col" col-span=2>Annunci in evidenza</th>
+                  <th scope="col">Scadenza sponsor</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($apartments as $apartment)
                   @foreach($apartment->sponsors as $sponsor)
                 <tr>
-                  <td style="width: 70%;">{{$apartment->title}}</td>
+                  <td style="width: 70%;" class="apartment-title">{{$apartment->title}}</td>
                   @if ($loop->first)
                   <td> {!! date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)) !!} </td>
                     @endif

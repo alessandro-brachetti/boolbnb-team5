@@ -11506,8 +11506,8 @@ a:hover {
   margin-bottom: 0;
 }
 
-.my-card a[title]:hover::after {
-  font-size: 3em;
+.my-card .my-card-img-top {
+  padding: 14px;
 }
 
 .my-card .my-card-img-top .cover {
@@ -11517,8 +11517,19 @@ a:hover {
   border-radius: 9px;
 }
 
+@media (min-width: 600px) {
+  .my-card .my-card-img-top .cover {
+    height: 160px;
+  }
+}
+
+@media (min-width: 1550px) {
+  .my-card .my-card-img-top .cover {
+    height: 210px;
+  }
+}
+
 .my-card .my-card-body {
-  padding-top: 0;
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -11556,6 +11567,13 @@ a:hover {
 .dropdown-menu {
   text-align: right;
   border: none;
+}
+
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: #fa6933;
 }
 
 .white-btn {
@@ -11692,22 +11710,6 @@ main#index-admin .apartments .my-card:hover {
   border: 2px solid #fa6933;
 }
 
-main#index-admin .apartments .my-card .my-card-img-top {
-  padding: 14px;
-}
-
-@media (min-width: 600px) {
-  main#index-admin .apartments .my-card .my-card-img-top .cover {
-    height: 160px;
-  }
-}
-
-@media (min-width: 1550px) {
-  main#index-admin .apartments .my-card .my-card-img-top .cover {
-    height: 210px;
-  }
-}
-
 main#index-admin .apartments .my-card .actions {
   display: flex;
   justify-content: space-between;
@@ -11753,6 +11755,12 @@ main#dashboard .content .tools .my-card p {
   align-items: center;
 }
 
+@media (max-width: 992px) {
+  main#dashboard .content .tools .my-card p {
+    justify-content: center;
+  }
+}
+
 main#dashboard .content .tools .my-card i {
   padding-right: 10px;
   font-size: 1.4rem;
@@ -11763,12 +11771,35 @@ main#dashboard .content .tools .my-card i:hover {
   color: #fa6933;
 }
 
+main#dashboard .content .totals .my-card:hover {
+  border: 2px solid #ededed;
+}
+
 main#dashboard .content .totals .my-card .number {
   padding-bottom: 10px;
   font-size: 1.5rem;
   font-weight: 700;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 1200px) {
+  main#dashboard .content .totals .my-card .number {
+    padding-top: 12px;
+    padding-left: 20px;
+  }
+}
+
+main#dashboard .content .totals .my-card .views {
+  padding-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  main#dashboard .content .totals .my-card .views {
+    padding-left: 40px;
+  }
 }
 
 main#dashboard .content .totals .my-card .my-card-text {
@@ -11791,12 +11822,77 @@ main#dashboard .content .totals .my-card .my-card-body {
   padding-right: 20px;
 }
 
-main#dashboard .sponsors .my-card-body {
+@media (max-width: 1200px) {
+  main#dashboard .content .totals .my-card .my-card-body {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+main#dashboard .sponsors .my-card:hover {
+  border: 2px solid #ededed;
+}
+
+main#dashboard .sponsors .my-card .my-card-body {
   padding: 9px 25px;
 }
 
-main#dashboard .sponsors .my-card-body .my-table {
+main#dashboard .sponsors .my-card .my-card-body .my-table {
   margin: 0;
+}
+
+main#dashboard .sponsors .my-card .my-card-body .my-table tbody {
+  font-weight: 600;
+  color: #838282;
+}
+
+main#dashboard .sponsors .my-card .my-card-body .my-table tbody .apartment-title {
+  color: #000000;
+  text-transform: capitalize;
+}
+
+main#index-messages .my-card:hover {
+  border: 2px solid #ededed;
+}
+
+main#index-messages .my-card .my-card-body {
+  padding-top: 20px;
+}
+
+main#index-messages .my-card .my-card-body .user,
+main#index-messages .my-card .my-card-body .email,
+main#index-messages .my-card .my-card-body .message {
+  padding-bottom: 17px;
+}
+
+main#index-messages .my-card .my-card-body .title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+main#index-messages .my-card .my-card-body .content {
+  font-weight: 500;
+}
+
+main#index-messages .my-card .my-card-body i {
+  padding-right: 10px;
+  font-size: 1.5rem;
+  color: #fa6933;
+}
+
+main#index-sponsors {
+  background-color: red;
+}
+
+main#index-sponsors button {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
 }
 
 main#login {

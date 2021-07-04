@@ -1,0 +1,26 @@
+main#index-messages{
+  .my-card{
+    &:hover{
+      border: 2px solid $mygrey;
+    }
+    .my-card-body{
+      padding-top: 20px;
+      .user, .email, .message{
+        padding-bottom: 17px;
+      }
+      
+      .title{
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .content{
+        font-weight: 500;
+      }
+      i{
+        padding-right: 10px;
+        font-size: 1.5rem;
+        color: $myorange;
+      }
+    }
+  }
+}

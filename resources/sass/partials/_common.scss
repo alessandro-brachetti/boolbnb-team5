@@ -41,9 +41,9 @@ a{
   .searchbar{
     @include flex-align-center;
     input{
-        @media (max-width: 992px){
-          width: 50%;
-        }
+      @media (max-width: 992px){
+        width: 50%;
+      }
     }
   }
 
@@ -69,20 +69,22 @@ a{
   p{
     margin-bottom: 0;
   }
-  a[title]:hover::after{
-    font-size: 3em;
-  }
-
   .my-card-img-top{
+    padding: 14px;
     .cover{
       background-position: center;
       background-size: cover;
       height: 190px;
       border-radius: 9px;
+      @media (min-width: 600px){
+        height: 160px;
+      }
+      @media (min-width: 1550px){
+        height: 210px;
+      }
     }
   }
   .my-card-body{
-    padding-top: 0;
     padding-left: 16px;
     padding-right: 16px;
     a{
@@ -117,4 +119,7 @@ a{
 .dropdown-menu{
   text-align: right;
   border: none;
+}
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:focus, .dropdown-item:hover{
+  background-color: $myorange;
 }

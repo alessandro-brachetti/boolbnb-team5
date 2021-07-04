@@ -6,6 +6,7 @@
         <img class="card-img-top" src="{{asset($apartment->img)}}" alt="{{$apartment->title}}">
         <div class="card-body">
             <h5 class="card-title">{{$apartment->title}}</h5>
+            {{$apartment->views}}
             <p class="card-text">Indirizzo: {{$apartment->address}}</p>
         </div>
         <ul class="list-group list-group-flush">
@@ -19,7 +20,7 @@
             @foreach($apartment->services as $service)
                 @if ($loop->last)
                     <span>{{$service->service_name}}</span>
-                @else 
+                @else
                     <span>{{$service->service_name}},</span>
                 @endif
             @endforeach

@@ -9,19 +9,7 @@ main#index-admin{
     .my-card{
       &:hover{
         border: 2px solid $myorange;
-      }
-
-      .my-card-img-top{
-        padding: 14px;
-        .cover{
-          @media (min-width: 600px){
-            height: 160px;
-          }
-          @media (min-width: 1550px){
-            height: 210px;
-          }
-        }
-      }
+      }     
 
       .actions{
         display: flex;

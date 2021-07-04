@@ -21,7 +21,7 @@
   <div class="container">
     <div class="info row mpt-30">
       <div class="col-lg-6">
-        <h4 class="title-admin">I tuoi annunci:</h4>
+        <h4 class="title-admin">I tuoi annunci</h4>
       </div>
       <div class="dashboard col-lg-6 text-right">
         <!-- <a href="{{route('dashboard')}}"><button type="button" name="button" class="white-btn">Torna alla dashboard</button></a> -->

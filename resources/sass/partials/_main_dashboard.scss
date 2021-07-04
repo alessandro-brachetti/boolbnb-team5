@@ -16,6 +16,9 @@ main#dashboard{
           font-size: 1rem;
           font-weight: 700;
           @include flex-align-center;
+          @media (max-width: 992px){
+            justify-content: center;
+          }
         }
         i{
           padding-right: 10px;
@@ -30,11 +33,26 @@ main#dashboard{
 
     .totals{
       .my-card{
+        &:hover{
+          border: 2px solid $mygrey;
+        }
         .number{
           padding-bottom: 10px;
           font-size: 1.5rem;
           font-weight: 700;
           @include flex-align-center;
+          @media (max-width: 1200px){
+            padding-top: 12px;
+            padding-left: 20px;
+          }
+        }
+        .views{
+          padding-bottom: 10px;
+          font-size: 1.5rem;
+          font-weight: 700;
+          @media (max-width: 1200px){
+          padding-left: 40px;
+          }
         }
         .my-card-text{
           font-size: 1rem;
@@ -52,6 +70,10 @@ main#dashboard{
           justify-content: space-between;
           padding-left: 25px;
           padding-right: 20px;
+            @media (max-width: 1200px){
+              flex-direction: column;
+              justify-content: space-around;
+            }
         }
       }
     }
@@ -86,12 +108,24 @@ main#dashboard{
 
   }
   .sponsors{
-    .my-card-body{
-      padding: 9px 25px;
-      .my-table{
-        margin: 0;
+    .my-card{
+      &:hover{
+        border: 2px solid #ededed;
+      }
+      .my-card-body{
+        padding: 9px 25px;
+        .my-table{
+          margin: 0;
+          tbody{
+            font-weight: 600;
+            color: $greytext;
+            .apartment-title{
+              color: $blacktext;
+              text-transform: capitalize;
+            }
+          }
+        }
       }
     }
-
   }
 }

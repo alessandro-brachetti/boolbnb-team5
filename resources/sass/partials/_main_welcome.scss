@@ -1,0 +1,42 @@
+main#welcome{
+  .title{
+    font-weight: 1400;
+    color: #373a3d;
+    letter-spacing: 2.5px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+}
+
+.partnership{
+  position: absolute;
+  width: 100px;
+  height: 1.4rem;
+  background-color: #fa723f;
+  border-radius: 6px;
+  top: 20px;
+  left: 20px;
+  span{
+    color: white;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+}
+
+.my-card{
+      &:hover{
+        border: 2px solid $myorange;
+      }
+
+      .my-card-img-top{
+        padding: 14px;
+        .cover{
+          @media (min-width: 600px){
+            height: 160px;
+          }
+          @media (min-width: 1550px){
+            height: 210px;
+          }
+        }
+      }
+    }

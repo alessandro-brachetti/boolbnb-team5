@@ -30,7 +30,7 @@
   <div class="container-fluid content mpt-20 mpb-20">
       <div class="container">
         <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
-        <div class="row d-flex justify-content-center mmb-20">
+          <div class="row d-flex justify-content-center mmb-20">
               @csrf
               @method('POST')
             <div class="col-md-4">
@@ -142,7 +142,7 @@
             </div>
             <div class="col-md-2 offset-md-3">
               <div class="form-group">
-                <label for="visible" class="bold ">Visibile</label>
+                <label for="visible" class="bold">Visibile</label>
                 <select class="form-control w-half @error('visible') is-invalid @enderror" id="visible" name="visible">
                     <option value="1">SI</option>
                     <option value="0">NO</option>

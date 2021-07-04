@@ -24,7 +24,7 @@
 
             <div>
                 <span>{{range}} Km</span>
-                <input type="range" v-model='range' name="" id="" min="20" max="100" @input="onRangeChange">
+                <input type="range" v-model='range' name="" id="" min="15" max="100" @input="onRangeChange">
                 <span>100 Km</span>
             </div>
             

@@ -1,13 +1,11 @@
 .my-container-fluid{
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 30px;
 }
 
 #my-carousel{
-  border-radius: 15px;
   .my-carousel-inner{
-    border-radius: 30px;
     .my-carousel-item{
       height: 70vh;
       overflow: hidden;
@@ -21,9 +19,36 @@
   .p-absolute{
     z-index: 1;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 30%;
+    left: 20%;
     transform: translate(-50%, -50%);
+  }
+  .my-input-group{
+    #welcome{
+      flex-direction: column!important;
+      input{
+        max-width: 250px;
+        border-radius: 15px;
+      }
+      .my-results{
+        z-index: 1;
+        position: absolute;
+        top: 35%;
+        left: 9%;
+        border-radius: 15px;
+        ul{
+          padding-inline-start: 0;
+          border-radius: 15px;
+          list-style: none;
+          background-color: rgba(255, 255, 255, 0.1);
+          li{
+            color: white;
+            line-height: 2;
+            text-align: center;
+          }
+        }
+      }
+    }
   }
 }
 

@@ -3,7 +3,7 @@
 
 
 <div class="container-fluid my-container-fluid">
-  <div id="my-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+  <div id="my-carousel" class="carousel slide carousel-fade col-md-12 col-sm-12 col-xs-12" data-ride="carousel" style="padding-left:0; padding-right: 0;">
     <div class="carousel-inner my-carousel-inner">
         <div class="carousel-item my-carousel-item active">
           <img class="d-block w-100" src="/images/panorama-1.jpg" alt="First slide">
@@ -23,54 +23,59 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-    <div class="p-absolute">
-      <div class="input-group">
-        <div class="form-inline my-2 my-lg-0" id="welcome">
+      <div class="my-input-group">
+        <div class="form-inline my-2 my-lg-0 my-welcome" id="welcome">
+          <div class="p-absolute">
             <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
-            <div class="">
-              <ul>
-                <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
-              </ul>
-            </div>
+        </div>
+        <div class="my-results">
+          <ul>
+            <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
+          </ul>
         </div>
       </div>
     </div>
+
+
   </div>
 
 </div>
-<div class="container">
+<main id="welcome">
+  <div class="container">
     <div class="row">
       <div class="col-md-12 d-flex">
         <h2>Appartamenti in evidenza</h2>
       </div>
     </div>
-    <div class="row">
-        <div class="apartments d-flex flex-wrap">
-            @foreach($apartments as $apartment)
-                <div class="col-sm">
-                    <form id='{{$apartment->id}}' action="{{route('views.store', ['apartment'=>$apartment->id])}}" method="post">
-                        @csrf
-                        @method('POST')
+    <div class="row sponsorized">
+      <div class="apartments d-flex flex-wrap">
+        @foreach($apartments as $apartment)
+        <div class="col-sm">
+          <form id='{{$apartment->id}}' action="{{route('views.store', ['apartment'=>$apartment->id])}}" method="post">
+            @csrf
+            @method('POST')
 
-                        <div class="form-group">
-                            <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
-                        </div>
-                        <div class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
-                          <div class="card-img-top my-card-img-top">
-                            <img src="{{asset($apartment->img)}}" alt="">
-                          </div>
-                          <div class="card-body my-card-body">
-                            <h5 class="card-title my-card-title">{{$apartment->title}}</h5>
-                            <div class="card-text my-card-text">
-                              <p class="address">Indirizzo: {{$apartment->address}}</p>
-                              <p class="beds-rooms mpt-10"><span class="rooms">Stanze: {{$apartment->n_rooms}}</span> <span class="circle">&#183;</span> <span class="beds">Letti: {{$apartment->n_beds}}</span></p>
-                            </div>
-                          </div>
-                        </div>
-                    </form>
+            <div class="form-group">
+              <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
+            </div>
+            <div onclick="event.preventDefault(); document.getElementById('{{$apartment->id}}').submit()" class="card my-card mmb-30" style="width: 18rem;" title="Vedi i dettagli dell'appartamento">
+              <div class="card-img-top my-card-img-top">
+                <img src="{{asset($apartment->img)}}" alt="">
+              </div>
+              <div class="card-body my-card-body">
+                <h5 class="card-title my-card-title">{{$apartment->title}}</h5>
+                <div class="card-text my-card-text">
+                  <p class="address">Indirizzo: {{$apartment->address}}</p>
+                  <p class="beds-rooms mpt-10"><span class="rooms">Stanze: {{$apartment->n_rooms}}</span> <span class="circle">&#183;</span> <span class="beds">Letti: {{$apartment->n_beds}}</span></p>
                 </div>
-            @endforeach
+              </div>
+            </div>
+          </form>
         </div>
+        @endforeach
+      </div>
     </div>
-</div>
+  </div>
+
+</main>
 @endsection

@@ -28,10 +28,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px;">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <img src="/images/logo_small.png" alt="" style="max-width: 150px;">
+                    <img src="/images/logo_large.png" alt="" style="max-width: 170px;">
                     
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
@@ -89,4 +89,10 @@
     
 </body>
 </html>
+
+<style>
+    [v-cloak] {
+  display: none;
+}
+</style>
 <?php /**PATH C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\views/layouts/app.blade.php ENDPATH**/ ?>

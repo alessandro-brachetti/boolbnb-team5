@@ -11548,17 +11548,9 @@ a:hover {
 }
 
 .my-container-fluid {
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 30px;
-}
-
-#my-carousel {
-  border-radius: 15px;
-}
-
-#my-carousel .my-carousel-inner {
-  border-radius: 30px;
 }
 
 #my-carousel .my-carousel-inner .my-carousel-item {
@@ -11575,9 +11567,41 @@ a:hover {
 #my-carousel .p-absolute {
   z-index: 1;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 30%;
+  left: 20%;
   transform: translate(-50%, -50%);
+}
+
+#my-carousel .my-input-group #welcome {
+  flex-direction: column !important;
+}
+
+#my-carousel .my-input-group #welcome input {
+  width: 250px;
+  border-radius: 15px;
+}
+
+#my-carousel .my-input-group #welcome .my-results {
+  z-index: 1;
+  position: absolute;
+  top: 35%;
+  left: 9%;
+  border-radius: 15px;
+}
+
+#my-carousel .my-input-group #welcome .my-results ul {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+  border-radius: 15px;
+  border: 1px solid black;
+  list-style: none;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#my-carousel .my-input-group #welcome .my-results ul li {
+  color: white;
+  line-height: 2;
+  text-align: center;
 }
 
 .my-card {

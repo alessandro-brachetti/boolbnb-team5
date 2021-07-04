@@ -6,7 +6,7 @@ $margin-directions: mmt, mmb;
     .#{$margin}-#{$i*5} {
       @if $margin == mmt {
         margin-top: 5px * $i;
-      } @elseif $margin == mmb {
+      } @else if $margin == mmb {
         margin-bottom: 5px * $i;
       }
     }
@@ -21,7 +21,7 @@ $padding-directions: mpt, mpb;
     .#{$padding}-#{$i*5} {
       @if $padding == mpt {
         padding-top: 5px * $i;
-      } @elseif $padding == mpb {
+      } @else if $padding == mpb {
         padding-bottom: 5px * $i;
       }
     }

@@ -1,9 +1,10 @@
 .container-fluid.advanced-search-page{
-    overflow-y: hidden;
+    overflow: hidden;
     button.filter-services-btn{
         @include button-style;
         background-color: $myorange;
         border-radius: 9px;
+        padding: 0 12px;
         color:#fff;
         border: 0;
     }
@@ -18,7 +19,7 @@
     .overflowable{
         
         overflow-y: auto;
-        height: calc(70vh - 72px);
+        height: calc(61vh - 75px);
         .my-search-card{
             margin: 0;
             width: 100%;
@@ -86,10 +87,13 @@
         
     }
 
-    @media screen and (max-width: 1031px) {
+    @media screen and (max-width: 991px) {
         .col-lg-6 #map{
           visibility: hidden;
           display: none;
+        }
+        .overflowable{
+            height: auto;
         }
     }
 }

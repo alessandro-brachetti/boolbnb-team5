@@ -12085,7 +12085,7 @@ main#welcome .title {
 .advanced-search-page.container-md,
 .advanced-search-page.container-lg,
 .advanced-search-page.container-xl {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .container-fluid.advanced-search-page button.filter-services-btn,
@@ -12099,6 +12099,7 @@ main#welcome .title {
   background-color: none;
   background-color: #fa6933;
   border-radius: 9px;
+  padding: 0 12px;
   color: #fff;
   border: 0;
 }
@@ -12118,7 +12119,7 @@ main#welcome .title {
 .advanced-search-page.container-lg .overflowable,
 .advanced-search-page.container-xl .overflowable {
   overflow-y: auto;
-  height: calc(70vh - 72px);
+  height: calc(61vh - 75px);
 }
 
 .container-fluid.advanced-search-page .overflowable .my-search-card,
@@ -12233,7 +12234,7 @@ main#welcome .title {
   color: #838282;
 }
 
-@media screen and (max-width: 1031px) {
+@media screen and (max-width: 991px) {
   .container-fluid.advanced-search-page .col-lg-6 #map,
   .advanced-search-page.container-sm .col-lg-6 #map,
   .advanced-search-page.container-md .col-lg-6 #map,
@@ -12241,6 +12242,14 @@ main#welcome .title {
   .advanced-search-page.container-xl .col-lg-6 #map {
     visibility: hidden;
     display: none;
+  }
+
+  .container-fluid.advanced-search-page .overflowable,
+  .advanced-search-page.container-sm .overflowable,
+  .advanced-search-page.container-md .overflowable,
+  .advanced-search-page.container-lg .overflowable,
+  .advanced-search-page.container-xl .overflowable {
+    height: auto;
   }
 }
 

@@ -11914,7 +11914,7 @@ main#welcome .title {
 .advanced-search-page.container-md,
 .advanced-search-page.container-lg,
 .advanced-search-page.container-xl {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .container-fluid.advanced-search-page button.filter-services-btn,
@@ -11947,7 +11947,7 @@ main#welcome .title {
 .advanced-search-page.container-lg .overflowable,
 .advanced-search-page.container-xl .overflowable {
   overflow-y: auto;
-  height: calc(70vh - 72px);
+  height: calc(61vh - 75px);
 }
 
 .container-fluid.advanced-search-page .overflowable .my-search-card,

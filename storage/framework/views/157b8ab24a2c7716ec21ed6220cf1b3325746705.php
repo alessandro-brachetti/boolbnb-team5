@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 <div class="container-fluid advanced-search-page" id="search" >
     <div class="row">
@@ -28,7 +28,7 @@
                             <h4>Più filtri</h4>
                             <div class="form-check form-check-inline" v-for="service in services">  
                                 <input class="form-check-input" id="services" type="checkbox" v-model="checkedItems" :value="service">
-                                <label> @{{service}} </label>
+                                <label> {{service}} </label>
                             </div>   
                         </div>
                         <div class="modal-footer">
@@ -41,7 +41,7 @@
 
                 <div class="range-changer mt-3">
                     <h5>Aumenta il raggio di ricerca:</h5>
-                    <span>@{{range}} Km</span>
+                    <span>{{range}} Km</span>
                     <input type="range" v-model='range' name="" id="" min="15" max="100" @input="onRangeChange">
                     <span>100 Km</span>
                 </div>
@@ -61,16 +61,16 @@
                             <div class="col-sm-8">
                                 <div class="my-card-body">
                                     <div class="my-card-title">
-                                        <p>@{{apartment.title}}</p>
+                                        <p>{{apartment.title}}</p>
                                     </div>
         
                                     <div class="my-card-text">
                                         <div class="address">
-                                            <div class="via">@{{apartment.address}}</div>
+                                            <div class="via">{{apartment.address}}</div>
                                         </div>
                                         <div class="services d-flex">
                                             <div v-for="service in apartment.services" class="service d-flex flex-wrap mt-3 mr-2">
-                                                <p class="sr"> @{{ service.service_name }} </p>
+                                                <p class="sr"> {{ service.service_name }} </p>
                                             </div>
                                         </div>
                                     </div>
@@ -112,4 +112,6 @@
 
     
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\views/guests/search.blade.php ENDPATH**/ ?>

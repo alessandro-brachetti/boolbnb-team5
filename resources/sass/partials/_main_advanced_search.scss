@@ -1,5 +1,5 @@
 .container-fluid.advanced-search-page{
-    overflow-y: hidden;
+    overflow: hidden;
     button.filter-services-btn{
         @include button-style;
         background-color: $myorange;
@@ -18,7 +18,7 @@
     .overflowable{
         
         overflow-y: auto;
-        height: calc(70vh - 72px);
+        height: calc(61vh - 75px);
         .my-search-card{
             margin: 0;
             width: 100%;

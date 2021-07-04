@@ -37521,7 +37521,7 @@ var search = new Vue({
           container: "map",
           key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
           center: [lon, lat],
-          zoom: 12
+          zoom: 11
         });
 
         _this5.$map.addControl(new tt.FullscreenControl());

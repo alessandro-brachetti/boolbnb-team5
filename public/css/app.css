@@ -11799,6 +11799,170 @@ main#dashboard .sponsors .my-card-body .my-table {
   margin: 0;
 }
 
+.container-fluid.advanced-search-page,
+.advanced-search-page.container-sm,
+.advanced-search-page.container-md,
+.advanced-search-page.container-lg,
+.advanced-search-page.container-xl {
+  overflow-y: hidden;
+}
+
+.container-fluid.advanced-search-page button.filter-services-btn,
+.advanced-search-page.container-sm button.filter-services-btn,
+.advanced-search-page.container-md button.filter-services-btn,
+.advanced-search-page.container-lg button.filter-services-btn,
+.advanced-search-page.container-xl button.filter-services-btn {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+.container-fluid.advanced-search-page .first-line-filters input,
+.advanced-search-page.container-sm .first-line-filters input,
+.advanced-search-page.container-md .first-line-filters input,
+.advanced-search-page.container-lg .first-line-filters input,
+.advanced-search-page.container-xl .first-line-filters input {
+  border-radius: 9px;
+  padding: 0.35rem;
+}
+
+.container-fluid.advanced-search-page .overflowable,
+.advanced-search-page.container-sm .overflowable,
+.advanced-search-page.container-md .overflowable,
+.advanced-search-page.container-lg .overflowable,
+.advanced-search-page.container-xl .overflowable {
+  overflow-y: auto;
+  height: calc(70vh - 72px);
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card,
+.advanced-search-page.container-sm .overflowable .my-search-card,
+.advanced-search-page.container-md .overflowable .my-search-card,
+.advanced-search-page.container-lg .overflowable .my-search-card,
+.advanced-search-page.container-xl .overflowable .my-search-card {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
+  padding: 0.5rem;
+  border: 2px solid #ededed;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card:hover,
+.advanced-search-page.container-sm .overflowable .my-search-card:hover,
+.advanced-search-page.container-md .overflowable .my-search-card:hover,
+.advanced-search-page.container-lg .overflowable .my-search-card:hover,
+.advanced-search-page.container-xl .overflowable .my-search-card:hover {
+  border: 2px solid #fa6933;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-img,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-img,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-img,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-img,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-img {
+  width: 100%;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-img .cover,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-img .cover,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-img .cover,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-img .cover,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-img .cover {
+  background-position: center;
+  background-size: cover;
+  height: 130px;
+  border-radius: 9px;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body {
+  padding-top: 0.75rem;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body a,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body a,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body a,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body a,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body a {
+  margin-left: 0;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body .my-card-title,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body .my-card-title,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body .my-card-title,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body .my-card-title,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body .my-card-title {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body .my-card-text,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body .my-card-text,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body .my-card-text,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body .my-card-text,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body .my-card-text {
+  font-size: 0.8rem;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body .my-card-text .address,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body .my-card-text .address,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body .my-card-text .address,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body .my-card-text .address,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body .my-card-text .address {
+  padding-top: 3px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body .my-card-text .address .via,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body .my-card-text .address .via,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body .my-card-text .address .via,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body .my-card-text .address .via,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body .my-card-text .address .via {
+  font-weight: 600;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body .my-card-text .services,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body .my-card-text .services,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body .my-card-text .services,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body .my-card-text .services,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body .my-card-text .services {
+  padding-top: 3px;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .my-card-body .my-card-text .services .service p.sr,
+.advanced-search-page.container-sm .overflowable .my-search-card .my-card-body .my-card-text .services .service p.sr,
+.advanced-search-page.container-md .overflowable .my-search-card .my-card-body .my-card-text .services .service p.sr,
+.advanced-search-page.container-lg .overflowable .my-search-card .my-card-body .my-card-text .services .service p.sr,
+.advanced-search-page.container-xl .overflowable .my-search-card .my-card-body .my-card-text .services .service p.sr {
+  font-weight: 600;
+  color: #838282;
+}
+
+@media screen and (max-width: 1031px) {
+  .container-fluid.advanced-search-page .col-lg-6 #map,
+  .advanced-search-page.container-sm .col-lg-6 #map,
+  .advanced-search-page.container-md .col-lg-6 #map,
+  .advanced-search-page.container-lg .col-lg-6 #map,
+  .advanced-search-page.container-xl .col-lg-6 #map {
+    visibility: hidden;
+    display: none;
+  }
+}
+
 main#login {
   margin-top: 30px;
 }

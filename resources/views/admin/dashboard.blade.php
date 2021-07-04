@@ -71,7 +71,6 @@
 
       </div>
 
-<<<<<<< HEAD
       <div class="totals col-lg-3 col-md-4 col-sm-12 d-flex flex-wrap">
         <div class="card my-card mmb-15">
           <div class="card-body my-card-body">
@@ -82,15 +81,6 @@
             <div class="icon">
               <i class="fas fa-bullhorn"></i>
             </div>
-=======
-      <div class="col-lg-8 col-md-8 col-sm-12">
-        <div class="apartments row">
-          {{count(Auth::user()->apartments)}}
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card my-card mmb-20" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text my-card-text"> <i class="far fa-list-alt"></i>Annunci Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
->>>>>>> 1bae5cce1d3b8a39eed6a07e0a1a655aaff2dcac
           </div>
         </div>
       </div>

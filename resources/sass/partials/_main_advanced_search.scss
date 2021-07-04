@@ -1,0 +1,95 @@
+.container-fluid.advanced-search-page{
+    overflow-y: hidden;
+    button.filter-services-btn{
+        @include button-style;
+        background-color: $myorange;
+        border-radius: 9px;
+        color:#fff;
+        border: 0;
+    }
+
+    .first-line-filters input{
+        border-radius: 9px;
+        padding: .35rem;
+
+    }
+
+
+    .overflowable{
+        
+        overflow-y: auto;
+        height: calc(70vh - 72px);
+        .my-search-card{
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 9px;
+            padding: .5rem;
+            border: 2px solid $mygrey;
+
+            &:hover{
+                border: 2px solid $myorange;
+            }
+            .my-card-img{
+                width: 100%;
+                .cover{
+                  background-position: center;
+                  background-size: cover;
+                  
+                  height: 130px;
+                  border-radius: 9px;
+                }
+              }
+              .my-card-body{
+                padding-top: 0.75rem;
+                padding-left: 16px;
+                padding-right: 16px;
+                a{
+                  margin-left: 0;
+                }
+                .my-card-title{
+                  text-transform: capitalize;
+                  font-size: 0.9rem;
+                  font-weight: 800;
+                  margin-bottom: 4px;
+                }
+                .my-card-text{
+                  font-size: 0.8rem;
+            
+                  .address{
+                    padding-top: 3px;
+                    font-weight: 800;
+                    text-transform: capitalize;
+                    .via{
+                      font-weight: 600;
+                    }
+                    
+                  }
+
+                  .services{
+                    padding-top: 3px;
+                    
+                    .service{
+                        p.sr{
+                            font-weight: 600;
+                            color: $greytext;
+                        }
+                    }
+                }
+                }
+              }
+        }
+
+
+
+
+        
+    }
+
+    @media screen and (max-width: 1031px) {
+        .col-lg-6 #map{
+          visibility: hidden;
+          display: none;
+        }
+    }
+}

@@ -122,8 +122,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
 
-                <div id="root">
-                  <p @click="getAddress('<?php echo e($apartment->address); ?>')">Clicca qui per prendere il vecchio indirizzo</p>
+                <div v-cloak id="root">
+                  <p @click="getAddress('<?php echo e($apartment->address); ?>','<?php echo e($apartment->longitude); ?>','<?php echo e($apartment->latitude); ?>')">Clicca qui per prendere il vecchio indirizzo</p>
                   <div class="form-group">
                     <label for="address">Indirizzo</label>
 
@@ -136,7 +136,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="address" type="text" name="address" @input="responseApi">
                       <ul class="results">
-                        <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">{{result.address.freeformAddress}}</li>
+                        <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">{{result.address.freeformAddress}}</li>
                       </ul>
 
                     <?php $__errorArgs = ['address'];
@@ -159,7 +159,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="latitude" type="number" step="any" name="latitude" :value="lat">
+unset($__errorArgs, $__bag); ?>" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                     <?php $__errorArgs = ['latitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -180,7 +180,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="longitude" type="number" step="any" name="longitude" :value="lon">
+unset($__errorArgs, $__bag); ?>" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
                     <?php $__errorArgs = ['longitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -194,71 +194,6 @@ unset($__errorArgs, $__bag); ?>
                   </div>
                 </div>
 
-                <!-- <div class="form-group">
-                  <label for="address">Indirizzo</label>
-                  <input class="form-control <?php $__errorArgs = ['address'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="address" type="text" name="address" value="<?php echo e(old('address', $apartment->address)); ?>">
-                  <?php $__errorArgs = ['address'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger"> <?php echo e($message); ?></small>
-                  <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                </div>
-
-                <div class="form-group">
-                  <label for="latitude">Latitudine</label>
-                  <input class="form-control <?php $__errorArgs = ['latitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="latitude" type="number" step="any" max="100" name="latitude" value="<?php echo e(old('latitude', $apartment->latitude)); ?>">
-                  <?php $__errorArgs = ['latitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger"> <?php echo e($message); ?></small>
-                  <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                </div>
-
-                <div class="form-group">
-                  <label for="longitude">Longitudine</label>
-                  <input class="form-control <?php $__errorArgs = ['longitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="longitude" type="number" step="any" max="100" name="longitude" value="<?php echo e(old('longitude', $apartment->longitude)); ?>">
-                  <?php $__errorArgs = ['longitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger"> <?php echo e($message); ?></small>
-                  <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                </div> -->
                 <img src="<?php echo e(asset($apartment->img)); ?>" class="img-fluid img-thumbnail" alt="<?php echo e($apartment->title); ?>">
                 <div class="form-group">
                   <label for="img">Immagine</label>

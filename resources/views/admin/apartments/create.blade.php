@@ -61,13 +61,13 @@
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror
                 </div>
-              <div id="root">
+              <div v-cloak id="root">
                 <div class="form-group">
                   <label for="address">Indirizzo</label>
 
                     <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
                     <ul class="results">
-                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon)">@{{result.address.freeformAddress}}</li>
+                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">@{{result.address.freeformAddress}}</li>
                     </ul>
 
                   @error('address')
@@ -76,16 +76,14 @@
                 </div>
 
                 <div class="form-group">
-                  {{-- <label for="latitude">Latitudine</label> --}}
-                  <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="number" step="any" name="latitude" :value="lat">
+                  <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                   @error('latitude')
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror
                 </div>
 
                 <div class="form-group">
-                  {{-- <label for="longitude">Longitudine</label> --}}
-                  <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="number" step="any" name="longitude" :value="lon">
+                  <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
                   @error('longitude')
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror

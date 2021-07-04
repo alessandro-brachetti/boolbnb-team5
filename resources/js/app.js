@@ -12,7 +12,9 @@ let app = new Vue({
         search: "",
         results: [],
         lat: "",
-        lon: ""
+        lon: "",
+        old_lon: '',
+        old_lat: ''
     },
 
     computed: {
@@ -54,8 +56,10 @@ let app = new Vue({
             this.results = [];
         },
 
-        getAddress(address) {
+        getAddress(address, lon, lat) {
             this.search = address;
+            this.lon = lon;
+            this.lat = lat;
         }
     }
 });
@@ -169,10 +173,8 @@ let search = new Vue({
         lon: "",
         lat: "",
         range: 15,
-        filter: {
-            rooms: 1,
-            beds: 1
-        },
+        rooms: 1,
+        beds: 1, 
         services: [
             "WIFI",
             "Posto macchina",
@@ -257,9 +259,31 @@ let search = new Vue({
     watch: {
         checkedItems(newval, oldval) {
             this.filteredServices;
+        },
+        rooms(newval, oldval) {
+            this.roomsChange;
+        },
+        beds(newval, oldval) {
+            this.bedsChange;
         }
     },
     computed: {
+        roomsChange() {
+            // this.filteredResults = [];
+            this.filteredResults = this.results.filter(apartment => apartment.n_rooms >= this.rooms);
+            
+            this.newMarkerFs();
+
+            return
+        },
+        bedsChange() {
+            // this.filteredResults = [];
+            this.filteredResults = this.results.filter(apartment => apartment.n_beds >= this.beds);
+            
+            this.newMarkerFs();
+            
+            return
+        },
         filteredServices() {            
             if (this.checkedItems.length == 0) {
 
@@ -357,8 +381,6 @@ let search = new Vue({
             this.removeMarker()
             for (let i = 0; i < this.results.length; i++) {               
 
-                
-
                 let lon1 = this.results[i].longitude;
                 let lat1 = this.results[i].latitude;
 
@@ -366,9 +388,7 @@ let search = new Vue({
                 element.id = "marker";
                 var marker = new tt.Marker({ element: element })
                     .setLngLat([lon1, lat1])
-                    .addTo(this.$map);
-
-                
+                    .addTo(this.$map);              
             }     
       },
       newMarkerFs() {

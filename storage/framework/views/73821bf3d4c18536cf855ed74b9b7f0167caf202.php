@@ -23,12 +23,15 @@
     <div class="apartments row mpt-30">
       <?php $__currentLoopData = Auth::user()->apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-      <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="d-flex flex-wrap justify-content-center">
           <a href="<?php echo e(route('admin.apartments.show', ['apartment'=> $apartment->id])); ?>">
-            <div class="card my-card mmb-30" style="width: 20rem;" title="Vedi i dettagli dell'appartamento">
+            <div class="card my-card mmb-30" style="width: 23rem;" title="Vedi i dettagli dell'appartamento">
               <div class="card-img-top my-card-img-top">
-                <img class="card-img-top" src="<?php echo e(asset($apartment->img)); ?>" alt="Card image cap">
+                <div class="cover" style="background-image: url('<?php echo e(asset($apartment->img)); ?>')">
+
+                </div>
+                <!-- <img class="card-img-top" src="<?php echo e(asset($apartment->img)); ?>" alt="Card image cap"> -->
               </div>
               <div class="card-body my-card-body">
                 <h5 class="card-title my-card-title"><?php echo e($apartment->title); ?></h5>

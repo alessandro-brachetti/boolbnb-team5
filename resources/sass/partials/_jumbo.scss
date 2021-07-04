@@ -1,0 +1,100 @@
+.my-container-fluid{
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 30px;
+}
+
+#my-carousel{
+  border-radius: 15px;
+  .my-carousel-inner{
+    border-radius: 30px;
+    .my-carousel-item{
+      height: 70vh;
+      overflow: hidden;
+       img{
+        max-width: 100%;
+        max-height: 100%;
+        filter: grayscale(70%);
+      }
+    }
+  }
+  .p-absolute{
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.my-card{
+  border-radius: 11px;
+  &:hover{
+    border: 2px solid $myblack;
+  }
+  p{
+    margin-bottom: 0;
+  }
+  a[title]:hover::after{
+    font-size: 3em;
+  }
+
+  .my-card-img-top{
+    img{
+      max-width: 100%;
+      border-radius: 21px;
+      padding: 14px;
+    }
+  }
+
+  .my-card-body{
+    padding-top: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    a{
+      margin-left: 0;
+    }
+
+    .my-card-title{
+      text-transform: capitalize;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .my-card-text{
+      font-size: 0.8rem;
+
+      .address{
+        font-weight: 700;
+        text-transform: capitalize;
+      }
+      .actions{
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        font-weight: 700;
+        font-size: 1.4rem;
+
+        a{
+          &:hover i{
+            transform: scale(1.2);
+            color: $myorange;
+          }
+        }
+      }
+      .beds-rooms{
+        font-weight: 600;
+        color: $greytext;
+        .rooms{
+          padding-right: 7px;
+        }
+        .beds{
+          padding-left: 7px;
+        }
+        .circle{
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}

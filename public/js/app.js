@@ -37358,7 +37358,9 @@ var app = new Vue({
     search: "",
     results: [],
     lat: "",
-    lon: ""
+    lon: "",
+    old_lon: '',
+    old_lat: ''
   },
   computed: {
     filteredList: function filteredList() {
@@ -37391,8 +37393,10 @@ var app = new Vue({
       this.lon = lon;
       this.results = [];
     },
-    getAddress: function getAddress(address) {
+    getAddress: function getAddress(address, lon, lat) {
       this.search = address;
+      this.lon = lon;
+      this.lat = lat;
     }
   }
 });
@@ -37485,11 +37489,9 @@ var search = new Vue({
     prova: [],
     lon: "",
     lat: "",
-    range: 20,
-    filter: {
-      rooms: 1,
-      beds: 1
-    },
+    range: 15,
+    rooms: 1,
+    beds: 1,
     services: ["WIFI", "Posto macchina", "Aria condizionata", "Riscaldamento", "TV", "Bagno privato", "Piscina", "Portineria", "Sauna", "Vista mare"],
     checkedItems: []
   },
@@ -37515,8 +37517,16 @@ var search = new Vue({
       axios.get("/api/search").then(function (response) {
         var lon = _this5.lon;
         var lat = _this5.lat;
+        Vue.prototype.$map = tt.map({
+          container: "map",
+          key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
+          center: [lon, lat],
+          zoom: 12
+        });
 
-        var map = _this5.generateTomTomMap();
+        _this5.$map.addControl(new tt.FullscreenControl());
+
+        _this5.$map.addControl(new tt.NavigationControl());
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
@@ -37528,9 +37538,13 @@ var search = new Vue({
 
           if (distancekm <= range) {
             _this5.results.push(response.data.data[i]);
-          }
 
-          _this5.generateMarker(map);
+            var element = document.createElement("div");
+            element.id = "marker";
+            var marker = new tt.Marker({
+              element: element
+            }).setLngLat([lon1, lat1]).addTo(_this5.$map);
+          }
         }
       });
       this.filteredServices;
@@ -37539,15 +37553,41 @@ var search = new Vue({
   watch: {
     checkedItems: function checkedItems(newval, oldval) {
       this.filteredServices;
+    },
+    rooms: function rooms(newval, oldval) {
+      this.roomsChange;
+    },
+    beds: function beds(newval, oldval) {
+      this.bedsChange;
     }
   },
   computed: {
-    filteredServices: function filteredServices() {
+    roomsChange: function roomsChange() {
       var _this6 = this;
+
+      // this.filteredResults = [];
+      this.filteredResults = this.results.filter(function (apartment) {
+        return apartment.n_rooms >= _this6.rooms;
+      });
+      this.newMarkerFs();
+      return;
+    },
+    bedsChange: function bedsChange() {
+      var _this7 = this;
+
+      // this.filteredResults = [];
+      this.filteredResults = this.results.filter(function (apartment) {
+        return apartment.n_beds >= _this7.beds;
+      });
+      this.newMarkerFs();
+      return;
+    },
+    filteredServices: function filteredServices() {
+      var _this8 = this;
 
       if (this.checkedItems.length == 0) {
         this.filteredResults = this.results;
-        console.log(this.filteredResults);
+        this.newMarkerFs();
         return;
       } else {
         axios.get("/api/search/filter", {
@@ -37555,83 +37595,85 @@ var search = new Vue({
             service: this.checkedItems
           }
         }).then(function (response) {
-          console.log("FILTRO", response);
-          _this6.filteredResults = [];
+          _this8.filteredResults = [];
 
           for (var i = 0; i < response.data.data.length; i++) {
-            _this6.filteredResults.push(response.data.data[i]);
+            var lat1 = response.data.data[i].latitude;
+            var lon1 = response.data.data[i].longitude;
+            var range = _this8.range;
+            var y = lat1 - _this8.lat;
+            var x = lon1 - _this8.lon;
+            var distancekm = Math.sqrt(x * x + y * y) * 100;
+
+            if (distancekm <= range) {
+              _this8.filteredResults.push(response.data.data[i]);
+
+              _this8.newMarkerFs();
+            }
           }
-
-          console.log(_this6.filteredResults);
-          return;
         });
-      } // console.log(this.filteredResults);
-
+      }
 
       return;
     }
   },
   methods: {
-    // callFilters() {
-    // },
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
-      var _this7 = this;
+      var _this9 = this;
 
       axios.get("/api/search").then(function (response) {
-        var lon = _this7.lon;
-        var lat = _this7.lat;
-
-        var map = _this7.generateTomTomMap();
+        var lon = _this9.lon;
+        var lat = _this9.lat;
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
-          var range = _this7.range;
-          var y = lat1 - _this7.lat;
-          var x = lon1 - _this7.lon;
+          var range = _this9.range;
+          var y = lat1 - _this9.lat;
+          var x = lon1 - _this9.lon;
           var distancekm = Math.sqrt(x * x + y * y) * 100;
-          var temp = response.data.data[i].id;
+          var temp = response.data.data[i].id; // this.generateMarker(map);
 
           if (distancekm <= range) {
-            var marker = _this7.generateMarker(map);
-
-            if (_this7.results.some(function (result) {
+            if (_this9.results.some(function (result) {
               return result.id === temp;
             })) {
+              // this.generateTomTomMapFiltered()
               console.log("Object found inside the array.", distancekm <= range);
             } else {
-              _this7.results.push(response.data.data[i]); // this.generateMarker(map);
+              _this9.results.push(response.data.data[i]);
 
+              _this9.newMarker();
             }
           } else {
-            var index = _this7.results.indexOf(_this7.results.find(function (result) {
+            var index = _this9.results.indexOf(_this9.results.find(function (result) {
               return result.id === temp;
             }));
 
-            if (index != -1 && distancekm > range && _this7.results.some(function (result) {
+            if (index != -1 && distancekm > range && _this9.results.some(function (result) {
               return result.id === temp;
             })) {
-              _this7.results.splice(index, 1);
+              _this9.results.splice(index, 1); // this.generateMarker(map);
+
+
+              _this9.newMarker();
             }
           }
         }
       });
     }, 1000),
-    generateTomTomMap: function generateTomTomMap() {
-      var lon = this.lon;
-      var lat = this.lat;
-      var map = tt.map({
-        container: "map",
-        key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
-        center: [lon, lat],
-        zoom: 13
-      });
-      map.addControl(new tt.FullscreenControl());
-      map.addControl(new tt.NavigationControl());
-      return map;
+    removeMarker: function removeMarker() {
+      var collection = document.querySelectorAll('#marker');
+
+      for (var i = 0; i < collection.length; i++) {
+        console.log(collection[i]);
+        collection[i].remove();
+      }
     },
-    generateMarker: function generateMarker(map) {
+    newMarker: function newMarker() {
+      this.removeMarker();
+
       for (var i = 0; i < this.results.length; i++) {
         var lon1 = this.results[i].longitude;
         var lat1 = this.results[i].latitude;
@@ -37639,7 +37681,25 @@ var search = new Vue({
         element.id = "marker";
         var marker = new tt.Marker({
           element: element
-        }).setLngLat([lon1, lat1]).addTo(map);
+        }).setLngLat([lon1, lat1]).addTo(this.$map);
+      }
+    },
+    newMarkerFs: function newMarkerFs() {
+      this.removeMarker();
+      console.log(this.filteredResults);
+
+      for (var i = 0; i < this.filteredResults.length; i++) {
+        if (!this.filteredResults.length) {
+          this.removeMarker();
+        } else {
+          var lon1 = this.filteredResults[i].longitude;
+          var lat1 = this.filteredResults[i].latitude;
+          var element = document.createElement("div");
+          element.id = "marker";
+          var marker = new tt.Marker({
+            element: element
+          }).setLngLat([lon1, lat1]).addTo(this.$map);
+        }
       }
     }
   }

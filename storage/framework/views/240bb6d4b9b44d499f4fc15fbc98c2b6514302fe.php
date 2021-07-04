@@ -1,16 +1,36 @@
 
 <?php $__env->startSection('content'); ?>
-<main id="edit">
-  <div class="container">
-      <div class="row">
-        <div class="col-md-12">
+<main id="create">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- searchbar -->
+  <div class="search">
+    <div class="container">
+      <div class="row justify-content-right">
+        <div class="searchbar col-lg-3 offset-lg-9">
+          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
+          
+          <div class="">
+            <ul>
+              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
+            </ul>
+          </div>
         </div>
       </div>
-        <div class="row justify-content-center">
+    </div>
+  </div>
+
+  <div class="container">
+      <div class="row mpt-30">
+        <div class="col-md-12">
+          <h5 class="title-admin">Crea Appartamento</h5>
+        </div>
+      </div>
+        <div  class="row justify-content-center">
             <div class="col-md-8">
-              <form action="<?php echo e(route('admin.apartments.update', ['apartment'=>$apartment->id])); ?>" method="post" enctype="multipart/form-data">
+              <form action="<?php echo e(route('admin.apartments.store')); ?>" method="post" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
-                <?php echo method_field('PUT'); ?>
+                <?php echo method_field('POST'); ?>
                 <input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
                 <div class="form-group">
                   <label for="title">Titolo</label>
@@ -21,13 +41,13 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="title" type="text" name="title" value="<?php echo e(old('title', $apartment->title)); ?>">
+unset($__errorArgs, $__bag); ?>" id="titolo" type="text" name="title" value="<?php echo e(old('title')); ?>">
                   <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger"> <?php echo e($message); ?></small>
+                    <small class="text-danger"><?php echo e($message); ?></small>
                   <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
@@ -43,7 +63,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="n_rooms" type="number" name="n_rooms" value="<?php echo e(old('n_rooms', $apartment->n_rooms)); ?>">
+unset($__errorArgs, $__bag); ?>" id="n_rooms" type="number" name="n_rooms" value="<?php echo e(old('n_rooms')); ?>">
                   <?php $__errorArgs = ['n_rooms'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -65,7 +85,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="n_beds" type="number" name="n_beds" value="<?php echo e(old('n_beds', $apartment->n_beds)); ?>">
+unset($__errorArgs, $__bag); ?>" id="n_beds" type="number" name="n_beds" value="<?php echo e(old('n_beds')); ?>">
                   <?php $__errorArgs = ['n_beds'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -87,7 +107,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="n_bathrooms" type="number" name="n_bathrooms" value="<?php echo e(old('n_bathrooms', $apartment->n_bathrooms)); ?>">
+unset($__errorArgs, $__bag); ?>" id="n_bathrooms" type="number" name="n_bathrooms" value="<?php echo e(old('n_bathrooms')); ?>">
                   <?php $__errorArgs = ['n_bathrooms'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -109,7 +129,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="mq" type="number" name="mq" value="<?php echo e(old('mq', $apartment->mq)); ?>">
+unset($__errorArgs, $__bag); ?>" id="mq" type="number" name="mq" value="<?php echo e(old('mq')); ?>">
                   <?php $__errorArgs = ['mq'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -121,13 +141,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
+              <div v-cloak id="root">
+                <div class="form-group">
+                  <label for="address">Indirizzo</label>
 
-                <div v-cloak id="root">
-                  <p @click="getAddress('<?php echo e($apartment->address); ?>','<?php echo e($apartment->longitude); ?>','<?php echo e($apartment->latitude); ?>')">Clicca qui per prendere il vecchio indirizzo</p>
-                  <div class="form-group">
-                    <label for="address">Indirizzo</label>
-
-                      <input v-model="search" class="form-control <?php $__errorArgs = ['address'];
+                    <input v-model="search" class="form-control <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -135,24 +153,24 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="address" type="text" name="address" @input="responseApi">
-                      <ul class="results">
-                        <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">{{result.address.freeformAddress}}</li>
-                      </ul>
+                    <ul class="results">
+                      <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">{{result.address.freeformAddress}}</li>
+                    </ul>
 
-                    <?php $__errorArgs = ['address'];
+                  <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                      <small class="text-danger"> <?php echo e($message); ?></small>
-                    <?php unset($message);
+                    <small class="text-danger"> <?php echo e($message); ?></small>
+                  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                  </div>
+                </div>
 
-                  <div class="form-group">
-                    <input class="form-control <?php $__errorArgs = ['latitude'];
+                <div class="form-group">
+                  <input class="form-control <?php $__errorArgs = ['latitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -160,20 +178,20 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
-                    <?php $__errorArgs = ['latitude'];
+                  <?php $__errorArgs = ['latitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                      <small class="text-danger"> <?php echo e($message); ?></small>
-                    <?php unset($message);
+                    <small class="text-danger"> <?php echo e($message); ?></small>
+                  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                  </div>
+                </div>
 
-                  <div class="form-group">
-                    <input class="form-control <?php $__errorArgs = ['longitude'];
+                <div class="form-group">
+                  <input class="form-control <?php $__errorArgs = ['longitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -181,20 +199,19 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
-                    <?php $__errorArgs = ['longitude'];
+                  <?php $__errorArgs = ['longitude'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                      <small class="text-danger"> <?php echo e($message); ?></small>
-                    <?php unset($message);
+                    <small class="text-danger"> <?php echo e($message); ?></small>
+                  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                  </div>
                 </div>
+              </div>
 
-                <img src="<?php echo e(asset($apartment->img)); ?>" class="img-fluid img-thumbnail" alt="<?php echo e($apartment->title); ?>">
                 <div class="form-group">
                   <label for="img">Immagine</label>
                   <input class="form-control-file <?php $__errorArgs = ['img'];
@@ -228,7 +245,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="services" type="checkbox" name="service_ids[]" value=" <?php echo e($service->id); ?>" <?php echo e($apartment->services->contains($service) ?  'checked' : ''); ?>>
+unset($__errorArgs, $__bag); ?>" id="services" type="checkbox" name="service_ids[]" value="<?php echo e($service->id); ?>">
                   <label class="form-check-label" for="services"><?php echo e($service->service_name); ?></label>
                   </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -274,7 +291,8 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
       </div>
+   </div>
 </main>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\views/admin/apartments/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\views/admin/apartments/create.blade.php ENDPATH**/ ?>

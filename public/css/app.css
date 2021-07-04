@@ -11590,17 +11590,9 @@ a:hover {
 }
 
 .my-container-fluid {
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 30px;
-}
-
-#my-carousel {
-  border-radius: 15px;
-}
-
-#my-carousel .my-carousel-inner {
-  border-radius: 30px;
 }
 
 #my-carousel .my-carousel-inner .my-carousel-item {
@@ -11608,96 +11600,74 @@ a:hover {
   overflow: hidden;
 }
 
-#my-carousel .my-carousel-inner .my-carousel-item img {
-  max-width: 100%;
-  max-height: 100%;
-  filter: grayscale(70%);
+#my-carousel .my-carousel-inner .my-carousel-item .bg-slider {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-#my-carousel .p-absolute {
+#my-carousel .my-search {
+  width: 40%;
   z-index: 1;
   position: absolute;
-  top: 50%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
+  flex-direction: column;
 }
 
-.my-card {
-  border-radius: 11px;
+@media (max-width: 600px) {
+  #my-carousel .my-search {
+    width: 70%;
+  }
 }
 
-.my-card:hover {
-  border: 2px solid #000000;
+#my-carousel .my-input-group #welcome {
+  flex-direction: column !important;
 }
 
-.my-card p {
-  margin-bottom: 0;
+#my-carousel .my-input-group #welcome input {
+  margin-right: 0 !important;
+  height: 50px;
+  border-radius: 15px;
+  box-shadow: none;
+  outline: none;
 }
 
-.my-card a[title]:hover::after {
-  font-size: 3em;
+#my-carousel .my-input-group #welcome input:focus {
+  border: 1px solid lightgrey;
 }
 
-.my-card .my-card-img-top img {
-  max-width: 100%;
-  border-radius: 21px;
-  padding: 14px;
+#my-carousel .my-input-group #welcome .my-results {
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 430%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
 }
 
-.my-card .my-card-body {
-  padding-top: 0;
-  padding-left: 16px;
-  padding-right: 16px;
+#my-carousel .my-input-group #welcome .my-results ul {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+  border-radius: 15px;
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.my-card .my-card-body a {
-  margin-left: 0;
+#my-carousel .my-input-group #welcome .my-results ul li {
+  color: white;
+  line-height: 2;
+  text-align: center;
 }
 
-.my-card .my-card-body .my-card-title {
-  text-transform: capitalize;
-  font-size: 0.9rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.my-card .my-card-body .my-card-text {
-  font-size: 0.8rem;
-}
-
-.my-card .my-card-body .my-card-text .address {
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-.my-card .my-card-body .my-card-text .actions {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  font-weight: 700;
-  font-size: 1.4rem;
-}
-
-.my-card .my-card-body .my-card-text .actions a:hover i {
-  transform: scale(1.2);
-  color: #fa6933;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms {
-  font-weight: 600;
-  color: #838282;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms .rooms {
-  padding-right: 7px;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms .beds {
-  padding-left: 7px;
-}
-
-.my-card .my-card-body .my-card-text .beds-rooms .circle {
-  font-size: 1.1rem;
+@media (max-width: 600px) {
+  #my-carousel .my-input-group #welcome .my-results {
+    height: 300px;
+  }
 }
 
 main#index-admin .info {
@@ -11893,6 +11863,50 @@ main#index-sponsors button {
   border-radius: 9px;
   color: #fff;
   border: 0;
+}
+
+main#welcome .title {
+  font-weight: 1400;
+  color: #373a3d;
+  letter-spacing: 2.5px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.partnership {
+  position: absolute;
+  width: 100px;
+  height: 1.4rem;
+  background-color: #fa723f;
+  border-radius: 6px;
+  top: 20px;
+  left: 20px;
+}
+
+.partnership span {
+  color: white;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.my-card:hover {
+  border: 2px solid #fa6933;
+}
+
+.my-card .my-card-img-top {
+  padding: 14px;
+}
+
+@media (min-width: 600px) {
+  .my-card .my-card-img-top .cover {
+    height: 160px;
+  }
+}
+
+@media (min-width: 1550px) {
+  .my-card .my-card-img-top .cover {
+    height: 210px;
+  }
 }
 
 main#login {

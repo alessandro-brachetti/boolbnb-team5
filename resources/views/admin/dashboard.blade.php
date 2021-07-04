@@ -7,7 +7,7 @@
   <div class="search">
     <div class="container">
       <div class="row justify-content-right">
-        <div id="welcome" class=" searchbar col-lg-4 offset-lg-4 col-md-6">
+        <div class="searchbar col-lg-3 offset-lg-9" id="welcome">
           <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
           {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
           <div class="">
@@ -113,7 +113,7 @@
                 @php($count++)
                 @endforeach
                 @endforeach
-                <p class="number">{{$count}}</p>
+                <p class="views">{{$count}}</p>
               </p>
               <p class="card-text my-card-text">Visualizzazioni</p>
             </div>
@@ -156,15 +156,15 @@
             <table class="table table-borderless my-table">
               <thead>
                 <tr>
-                  <th scope="col" col-span=2>Alloggio</th>
-                  <th scope="col">Scadenza promozione</th>
+                  <th scope="col" col-span=2>Annunci in evidenza</th>
+                  <th scope="col">Scadenza sponsor</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($apartments as $apartment)
                   @foreach($apartment->sponsors as $sponsor)
                 <tr>
-                  <td style="width: 70%;">{{$apartment->title}}</td>
+                  <td style="width: 70%;" class="apartment-title">{{$apartment->title}}</td>
                   @if ($loop->first)
                   <td> {!! date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)) !!} </td>
                     @endif

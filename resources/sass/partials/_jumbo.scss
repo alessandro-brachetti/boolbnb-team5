@@ -1,100 +1,143 @@
 .my-container-fluid{
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 30px;
 }
 
 #my-carousel{
-  border-radius: 15px;
   .my-carousel-inner{
-    border-radius: 30px;
     .my-carousel-item{
       height: 70vh;
       overflow: hidden;
-       img{
-        max-width: 100%;
-        max-height: 100%;
-        filter: grayscale(70%);
+      .bg-slider{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
       }
     }
   }
-  .p-absolute{
+  .my-search {
+    width: 40%;
     z-index: 1;
     position: absolute;
-    top: 50%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-}
-
-.my-card{
-  border-radius: 11px;
-  &:hover{
-    border: 2px solid $myblack;
-  }
-  p{
-    margin-bottom: 0;
-  }
-  a[title]:hover::after{
-    font-size: 3em;
-  }
-
-  .my-card-img-top{
-    img{
-      max-width: 100%;
-      border-radius: 21px;
-      padding: 14px;
+    flex-direction: column;
+    @media (max-width: 600px){
+      width: 70%;
     }
   }
-
-  .my-card-body{
-    padding-top: 0;
-    padding-left: 16px;
-    padding-right: 16px;
-    a{
-      margin-left: 0;
-    }
-
-    .my-card-title{
-      text-transform: capitalize;
-      font-size: 0.9rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .my-card-text{
-      font-size: 0.8rem;
-
-      .address{
-        font-weight: 700;
-        text-transform: capitalize;
+  .my-input-group{
+    #welcome{
+      flex-direction: column!important;
+      input{
+        margin-right: 0!important;
+        height: 50px;
+        border-radius: 15px;
+        box-shadow: none;
+        outline: none;
+        &:focus{
+          border: 1px solid lightgrey;
+        }
       }
-      .actions{
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        font-weight: 700;
-        font-size: 1.4rem;
-
-        a{
-          &:hover i{
-            transform: scale(1.2);
-            color: $myorange;
+      .my-results{
+        width: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 430%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 15px;
+        ul{
+          padding-inline-start: 0;
+          border-radius: 15px;
+          list-style: none;
+          background-color: rgba(0, 0, 0, 0.5);
+          li{
+            color: white;
+            line-height: 2;
+            text-align: center;
           }
         }
-      }
-      .beds-rooms{
-        font-weight: 600;
-        color: $greytext;
-        .rooms{
-          padding-right: 7px;
-        }
-        .beds{
-          padding-left: 7px;
-        }
-        .circle{
-          font-size: 1.1rem;
+        @media (max-width: 600px){
+          height: 300px;
         }
       }
     }
   }
 }
+
+// .my-card{
+//   border-radius: 11px;
+//   &:hover{
+//     border: 2px solid $myblack;
+//   }
+//   p{
+//     margin-bottom: 0;
+//   }
+//   a[title]:hover::after{
+//     font-size: 3em;
+//   }
+//
+//   .my-card-img-top{
+//     img{
+//       max-width: 100%;
+//       border-radius: 21px;
+//       padding: 14px;
+//     }
+//   }
+//
+//   .my-card-body{
+//     padding-top: 0;
+//     padding-left: 16px;
+//     padding-right: 16px;
+//     a{
+//       margin-left: 0;
+//     }
+//
+//     .my-card-title{
+//       text-transform: capitalize;
+//       font-size: 0.9rem;
+//       font-weight: 800;
+//       margin-bottom: 4px;
+//     }
+//     .my-card-text{
+//       font-size: 0.8rem;
+//
+//       .address{
+//         font-weight: 700;
+//         text-transform: capitalize;
+//       }
+//       .actions{
+//         display: flex;
+//         justify-content: space-between;
+//         font-size: 0.8rem;
+//         font-weight: 700;
+//         font-size: 1.4rem;
+//
+//         a{
+//           &:hover i{
+//             transform: scale(1.2);
+//             color: $myorange;
+//           }
+//         }
+//       }
+//       .beds-rooms{
+//         font-weight: 600;
+//         color: $greytext;
+//         .rooms{
+//           padding-right: 7px;
+//         }
+//         .beds{
+//           padding-left: 7px;
+//         }
+//         .circle{
+//           font-size: 1.1rem;
+//         }
+//       }
+//     }
+//   }
+// }

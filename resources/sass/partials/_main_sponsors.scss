@@ -1,0 +1,10 @@
+main#index-sponsors{
+  background-color: red;
+  button{
+    @include button-style;
+    background-color: $myorange;
+    border-radius: 9px;
+    color:#fff;
+    border: 0;
+  }
+}

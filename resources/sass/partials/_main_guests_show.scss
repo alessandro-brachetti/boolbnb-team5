@@ -1,4 +1,4 @@
-main#show {
+main#g_show {
     .container-fluid {
         background-color: $mylightgrey;
     }
@@ -37,6 +37,18 @@ main#show {
     .ar {
         aspect-ratio: auto 22 / 9;
     }
+
+    input:focus {
+        border: 1px solid #CED4DA;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+      }
+    textarea:focus {
+        border: 1px solid #CED4DA;
+        box-shadow: none;
+      }
+
     @media screen and (max-width: 446px) {
         .child {
           flex: 0 0 100%;

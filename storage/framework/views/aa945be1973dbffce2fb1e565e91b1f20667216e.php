@@ -28,7 +28,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px;">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px; background-color: transparent;">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
                     <img src="/images/logo_boolbnb_4.png" alt="" style="max-width: 120px;">
@@ -92,7 +93,8 @@
                 </div>
             </div>
         </nav>
-
+      </div>
+        
             <?php echo $__env->yieldContent('content'); ?>
 
     </div>

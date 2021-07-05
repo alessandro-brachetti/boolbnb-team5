@@ -26,15 +26,15 @@ class ApartmentController extends Controller
                 }
             }
         }
-
-        return view('welcome', compact('apartments'));
+        $apartmentsNewest = Apartment::orderBy('created_at', 'DESC')->take(10)->get();
+        return view('welcome', compact('apartments', 'apartmentsNewest'));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Apartment  $apartment
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment)

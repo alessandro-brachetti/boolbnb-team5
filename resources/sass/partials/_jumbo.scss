@@ -10,6 +10,7 @@
       height: 70vh;
       overflow: hidden;
       .bg-slider{
+        filter: brightness(90%);
         width: 100%;
         height: 100%;
         background-size: cover;
@@ -19,7 +20,7 @@
     }
   }
   .my-search {
-    width: 40%;
+    width: 50%;
     z-index: 1;
     position: absolute;
     top: 15%;
@@ -27,7 +28,22 @@
     transform: translate(-50%, -50%);
     flex-direction: column;
     @media (max-width: 600px){
-      width: 70%;
+      width: 50%;
+    }
+  }
+  .slogan{
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    p{
+      text-shadow: 1px 1px grey;
+      font-size: 3rem;
+      font-weight: 800;
+    }
+    @media (max-width: 768px){
+      display: none;
     }
   }
   .my-input-group{
@@ -40,30 +56,67 @@
         box-shadow: none;
         outline: none;
         &:focus{
-          border: 1px solid lightgrey;
+          border: 2px solid $mygrey;
         }
       }
-      .my-results{
-        width: 100%;
-        z-index: 1;
+      &.my-dropdown{
         position: absolute;
-        top: 430%;
+        top: 20%;
         left: 50%;
         transform: translate(-50%, -50%);
+        width: 100%;
+        z-index: 1;
+      }
+      .my-dropdown-menu{
+        text-align: left;
+        position: absolute;
+        top: 120%;
+        width: 100%;
+        z-index: 10;
+      }
+
+      // border: 5px solid grey;
+      //     border-radius: 50px;
+      //     background-color: white;
+
+
+      .my-results{
+        // width: 100%;
+        // z-index: 1;
+        // position: absolute;
+        // top: 500%;
+        // left: 50%;
+        // transform: translate(-50%, 50%);
         border-radius: 15px;
+
         ul{
-          padding-inline-start: 0;
           border-radius: 15px;
+          box-shadow: 2px 2px grey;
+          padding-inline-start: 0;
           list-style: none;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: white;
+
+          // background-color: white;
+          // border: 2px solid orange;
           li{
-            color: white;
+            color: black;
             line-height: 2;
-            text-align: center;
+            text-align: left;
+            padding-left: 10px;
+            &:first-child{
+              border-radius: 15px 15px 0 0;
+            }
+            &:last-child{
+              border-radius: 0 0 15px 15px;
+            }
+            &:hover{
+              background-color: #FA6934;
+              color: white;
+            }
           }
+          @media (max-width: 600px){
+            font-size: 12px;
         }
-        @media (max-width: 600px){
-          height: 300px;
         }
       }
     }

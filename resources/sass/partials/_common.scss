@@ -41,9 +41,9 @@ a{
   .searchbar{
     @include flex-align-center;
     input{
-        @media (max-width: 992px){
-          width: 50%;
-        }
+      @media (max-width: 992px){
+        width: 50%;
+      }
     }
   }
 
@@ -69,20 +69,22 @@ a{
   p{
     margin-bottom: 0;
   }
-  a[title]:hover::after{
-    font-size: 3em;
-  }
-
   .my-card-img-top{
+    padding: 14px;
     .cover{
       background-position: center;
       background-size: cover;
       height: 190px;
       border-radius: 9px;
+      @media (min-width: 600px){
+        height: 160px;
+      }
+      @media (min-width: 1550px){
+        height: 210px;
+      }
     }
   }
   .my-card-body{
-    padding-top: 0;
     padding-left: 16px;
     padding-right: 16px;
     a{
@@ -118,3 +120,33 @@ a{
   text-align: right;
   border: none;
 }
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:focus, .dropdown-item:hover{
+  background-color: $myorange;
+}
+
+// checkbox
+input[type='checkbox']:after {
+     width: 17px;
+     height: 17px;
+     top: -2px;
+     left: -1px;
+     position: relative;
+     background-color: #d1d3d1;
+     content: '';
+     display: inline-block;
+     visibility: visible;
+     border: 2px solid white;
+ }
+
+ input[type='checkbox']:checked:after {
+     width: 17px;
+     height: 17px;
+     top: -2px;
+     left: -1px;
+     position: relative;
+     background-color: $myorange;
+     content: '';
+     display: inline-block;
+     visibility: visible;
+     border: 2px solid white;
+ }

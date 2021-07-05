@@ -16,7 +16,7 @@ use App\Service;
 
 
 
-Route::get('/', 'ApartmentController@index');
+Route::get('/', 'ApartmentController@index')->name('welcome');
 Route::get('/apartment/{apartment}', 'ApartmentController@show')->name('guests.show');
 
 

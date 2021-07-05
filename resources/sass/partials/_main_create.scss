@@ -1,3 +1,93 @@
-main#create{
+main#create .content {
+    background-color: #faf9f8;
+  }
+  
+  main#create .content .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+  
+  main#create .content .d-inline {
+    display: inline-block;
+  }
+  
+  main#create .content .orange {
+    color: #FFF;
+    background-color: #fa6933;
+  }
+  
+  main#create .content .child {
+    flex: 1 0 20%;
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  main#create .content .bold {
+    font-weight: bold;
+  }
+  
+  main#create .content .btn {
+    width: 200px;
+  }
+  
+  main#create .content input.form-control:focus {
+    border: 1px solid #CED4DA;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+  
+  main#create .content select.form-control:focus {
+    border: 1px solid #CED4DA;
+    box-shadow: none;
+  }
+  
+  main#create .content input[type=file i]::-webkit-file-upload-button {
+    border: none;
+    background-color: #fa6933;
+    border-radius: 3px;
+    color: #FFF;
+    cursor: pointer;
+    padding: 10px, 5px;
+  }
+  
+  main#create .content button:focus {
+    box-shadow: none;
+  }
 
-}
+  main#create .content textarea:focus {
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #CED4DA;
+  }
+  
+  @media screen and (max-width: 446px) {
+    main#create .content .child {
+      flex: 1 0 100%;
+    }
+  }
+  
+  @media screen and (min-width: 445px) and (max-width: 991px) {
+    main#create .content .child {
+      flex: 1 0 50%;
+    }
+  }
+  
+  @media screen and (min-width: 992px) and (max-width: 1399px) {
+    main#create .content .child {
+      flex: 1 0 33%;
+    }
+  }
+  
+  @media screen and (min-width: 1400px) and (max-width: 1599px) {
+    main#create .content .child {
+      flex: 1 0 25%;
+    }
+  }
+  
+  @media screen and (min-width: 1600px) {
+    main#create .content .child {
+      flex: 1 0 20%;
+    }
+  }

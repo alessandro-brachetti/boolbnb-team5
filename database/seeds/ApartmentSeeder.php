@@ -24,6 +24,7 @@ class ApartmentSeeder extends Seeder
         $apartment->address = $faker->word();
         $apartment->latitude = $faker->randomDigit();
         $apartment->longitude = $faker->randomDigit();
+        $apartment->description = $faker->paragraph();
         $apartment->img = $faker->imageUrl(360, 360, 'animals', true);
         $apartment->visible = $faker->boolean();
         $apartment->user_id = $faker->numberBetween(1,2);

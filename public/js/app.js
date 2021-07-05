@@ -37521,7 +37521,7 @@ var search = new Vue({
           container: "map",
           key: "DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL",
           center: [lon, lat],
-          zoom: 12
+          zoom: 11
         });
 
         _this5.$map.addControl(new tt.FullscreenControl());
@@ -37555,35 +37555,25 @@ var search = new Vue({
       this.filteredServices;
     },
     rooms: function rooms(newval, oldval) {
-      this.roomsChange;
+      this.roomsbedsChange;
     },
     beds: function beds(newval, oldval) {
-      this.bedsChange;
+      this.roomsbedsChange;
     }
   },
   computed: {
-    roomsChange: function roomsChange() {
+    roomsbedsChange: function roomsbedsChange() {
       var _this6 = this;
 
       // this.filteredResults = [];
       this.filteredResults = this.results.filter(function (apartment) {
-        return apartment.n_rooms >= _this6.rooms;
-      });
-      this.newMarkerFs();
-      return;
-    },
-    bedsChange: function bedsChange() {
-      var _this7 = this;
-
-      // this.filteredResults = [];
-      this.filteredResults = this.results.filter(function (apartment) {
-        return apartment.n_beds >= _this7.beds;
+        return apartment.n_rooms >= _this6.rooms && apartment.n_beds >= _this6.beds;
       });
       this.newMarkerFs();
       return;
     },
     filteredServices: function filteredServices() {
-      var _this8 = this;
+      var _this7 = this;
 
       if (this.checkedItems.length == 0) {
         this.filteredResults = this.results;
@@ -37595,20 +37585,24 @@ var search = new Vue({
             service: this.checkedItems
           }
         }).then(function (response) {
-          _this8.filteredResults = [];
+          if (!response.data.data == []) {
+            _this7.removeMarker();
+          }
+
+          _this7.filteredResults = [];
 
           for (var i = 0; i < response.data.data.length; i++) {
             var lat1 = response.data.data[i].latitude;
             var lon1 = response.data.data[i].longitude;
-            var range = _this8.range;
-            var y = lat1 - _this8.lat;
-            var x = lon1 - _this8.lon;
+            var range = _this7.range;
+            var y = lat1 - _this7.lat;
+            var x = lon1 - _this7.lon;
             var distancekm = Math.sqrt(x * x + y * y) * 100;
 
             if (distancekm <= range) {
-              _this8.filteredResults.push(response.data.data[i]);
+              _this7.filteredResults.push(response.data.data[i]);
 
-              _this8.newMarkerFs();
+              _this7.newMarkerFs();
             }
           }
         });
@@ -37620,44 +37614,44 @@ var search = new Vue({
   methods: {
     // FUNCTION THAT CHANGES SEARCH RANGE
     onRangeChange: _.debounce(function () {
-      var _this9 = this;
+      var _this8 = this;
 
       axios.get("/api/search").then(function (response) {
-        var lon = _this9.lon;
-        var lat = _this9.lat;
+        var lon = _this8.lon;
+        var lat = _this8.lat;
 
         for (var i = 0; i < response.data.data.length; i++) {
           var lat1 = response.data.data[i].latitude;
           var lon1 = response.data.data[i].longitude;
-          var range = _this9.range;
-          var y = lat1 - _this9.lat;
-          var x = lon1 - _this9.lon;
+          var range = _this8.range;
+          var y = lat1 - _this8.lat;
+          var x = lon1 - _this8.lon;
           var distancekm = Math.sqrt(x * x + y * y) * 100;
           var temp = response.data.data[i].id; // this.generateMarker(map);
 
           if (distancekm <= range) {
-            if (_this9.results.some(function (result) {
+            if (_this8.results.some(function (result) {
               return result.id === temp;
             })) {
               // this.generateTomTomMapFiltered()
               console.log("Object found inside the array.", distancekm <= range);
             } else {
-              _this9.results.push(response.data.data[i]);
+              _this8.results.push(response.data.data[i]);
 
-              _this9.newMarker();
+              _this8.newMarker();
             }
           } else {
-            var index = _this9.results.indexOf(_this9.results.find(function (result) {
+            var index = _this8.results.indexOf(_this8.results.find(function (result) {
               return result.id === temp;
             }));
 
-            if (index != -1 && distancekm > range && _this9.results.some(function (result) {
+            if (index != -1 && distancekm > range && _this8.results.some(function (result) {
               return result.id === temp;
             })) {
-              _this9.results.splice(index, 1); // this.generateMarker(map);
+              _this8.results.splice(index, 1); // this.generateMarker(map);
 
 
-              _this9.newMarker();
+              _this8.newMarker();
             }
           }
         }

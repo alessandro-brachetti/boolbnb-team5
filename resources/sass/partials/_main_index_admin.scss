@@ -1,5 +1,9 @@
 main#index-admin{
 
+  .grey-container{
+    background-color: $mylightgrey;
+  }
+
   .info{
     @include flex-align-center;
     justify-content: space-between;
@@ -8,19 +12,9 @@ main#index-admin{
   .apartments{
     .my-card{
       &:hover{
+        transition: 0.4s ease;
+        transform: scale(1.05);
         border: 2px solid $myorange;
-      }
-
-      .my-card-img-top{
-        padding: 14px;
-        .cover{
-          @media (min-width: 600px){
-            height: 160px;
-          }
-          @media (min-width: 1550px){
-            height: 210px;
-          }
-        }
       }
 
       .actions{
@@ -31,7 +25,8 @@ main#index-admin{
 
         a{
           &:hover i{
-            transform: scale(1.2);
+            transition: 0.3s ease;
+            transform: scale(1.3);
             color: $myorange;
           }
         }

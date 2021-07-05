@@ -1,0 +1,69 @@
+main#show {
+    .container-fluid {
+        background-color: $mylightgrey;
+    }
+    .thumb {
+        width: 100%;
+        height: 100%;
+    }
+    .mr-10 {
+        margin-right: 10px;
+    }
+    .ml-10 {
+        margin-left: 10px;
+    }
+    .c-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        padding: 20px 0;
+    }
+    .my-card:hover {
+        border: 2px solid $mygrey;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+    .orange {
+        color: #FFF;
+        background-color: #fa6933;
+    }
+    .cover {
+        height: 40.7rem;
+        background-size: cover;
+        background-position: center;
+    }
+    .ar {
+        aspect-ratio: auto 22 / 9;
+    }
+    @media screen and (max-width: 446px) {
+        .child {
+          flex: 0 0 100%;
+        }
+      }
+      
+      @media screen and (min-width: 445px) and (max-width: 991px) {
+        .child {
+          flex: 0 0 50%;
+        }
+      }
+      
+      @media screen and (min-width: 992px) and (max-width: 1399px) {
+        .child {
+          flex: 0 0 33%;
+        }
+      }
+      
+      @media screen and (min-width: 1400px) and (max-width: 1599px) {
+        .child {
+          flex: 0 0 25%;
+        }
+      }
+      
+      @media screen and (min-width: 1600px) {
+        .child {
+          flex: 0 0 20%;
+        }
+      }
+}

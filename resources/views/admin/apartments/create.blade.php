@@ -3,139 +3,159 @@
 <main id="create">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- searchbar -->
-  <div class="search">
-    <div class="container">
-      <div class="row justify-content-right">
-        <div class="searchbar col-lg-3 offset-lg-9">
-          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
-          {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
-          <div class="">
-            <ul>
-              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
-            </ul>
-          </div>
-        </div>
+  <div class="container title text-center mpt-20 mpb-20">
+    <div class="row mpt-30">
+      <div class="col-md-12">
+        <h1 class="title-admin">Aggiungi il tuo appartamento</h1>
+        <p>Boolbnb ti lascia fare soldi affittando i tuoi spazi</p>
       </div>
     </div>
   </div>
-
-  <div class="container">
-      <div class="row mpt-30">
-        <div class="col-md-12">
-          <h5 class="title-admin">Crea Appartamento</h5>
-        </div>
-      </div>
-        <div  class="row justify-content-center">
-            <div class="col-md-8">
-              <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                <div class="form-group">
-                  <label for="title">Titolo</label>
-                  <input class="form-control @error('title') is-invalid @enderror" id="titolo" type="text" name="title" value="{{ old('title') }}">
-                  @error('title')
-                    <small class="text-danger">{{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="n_rooms">Numero Stanze</label>
-                  <input class="form-control @error('n_rooms') is-invalid @enderror" id="n_rooms" type="number" name="n_rooms" value="{{ old('n_rooms') }}">
-                  @error('n_rooms')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="n_beds">Numero Letti</label>
-                  <input class="form-control @error('n_beds') is-invalid @enderror" id="n_beds" type="number" name="n_beds" value="{{ old('n_beds') }}">
-                  @error('n_beds')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="n_bathrooms">Numero Bagni</label>
-                  <input class="form-control @error('n_bathrooms') is-invalid @enderror" id="n_bathrooms" type="number" name="n_bathrooms" value="{{ old('n_bathrooms') }}">
-                  @error('n_bathrooms')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="mq">Metri Quadri</label>
-                  <input class="form-control @error('mq') is-invalid @enderror" id="mq" type="number" name="mq" value="{{ old('mq') }}">
-                  @error('mq')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
+  <div class="container-fluid content mpt-20 mpb-20">
+      <div class="container">
+        <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
+          <div class="row d-flex justify-content-center mmb-20">
+              @csrf
+              @method('POST')
+            <div class="col-md-4">
+              <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+              <div class="form-group">
+                <label for="title" class="bold">Titolo</label>
+                <input class="form-control @error('title') is-invalid @enderror" id="titolo" type="text" name="title" value="{{ old('title') }}">
+                @error('title')
+                  <small class="text-danger">{{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-4">
               <div v-cloak id="root">
                 <div class="form-group">
-                  <label for="address">Indirizzo</label>
-
+                  <label for="address" class="bold">Indirizzo</label>
+  
                     <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
                     <ul class="results">
                       <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">@{{result.address.freeformAddress}}</li>
                     </ul>
-
+  
                   @error('address')
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror
                 </div>
-
+  
                 <div class="form-group">
                   <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
-                  @error('latitude')
+                  {{-- @error('latitude')
                     <small class="text-danger"> {{ $message }}</small>
-                  @enderror
+                  @enderror --}}
                 </div>
-
+  
                 <div class="form-group">
                   <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
-                  @error('longitude')
+                  {{-- @error('longitude')
                     <small class="text-danger"> {{ $message }}</small>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
-
-                <div class="form-group">
-                  <label for="img">Immagine</label>
-                  <input class="form-control-file @error('img') is-invalid @enderror" id="img" type="file" name="img" value="{{old('img')}}">
-                  @error('img')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <p>Servizi</p>
-                  @foreach ($services as $service)
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" @error('services') is-invalid @enderror" id="services" type="checkbox" name="service_ids[]" value="{{$service->id}}">
-                  <label class="form-check-label" for="services">{{$service->service_name}}</label>
-                  </div>
-                  @endforeach
-                  @error('services')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="visible">Visibile</label>
-                  <select class="form-control @error('visible') is-invalid @enderror" id="visible" name="visible">
-                      <option value="1">SI</option>
-                      <option value="0">NO</option>
-                  </select>
-                  @error('visible')
-                    <small class="text-danger"> {{ $message }}</small>
-                  @enderror
-                </div>
-
-                <button class="btn btn-primary" type="submit" name="button">Salva</button>
-              </form>
             </div>
-        </div>
+          </div>
+          <div class="row d-flex justify-content-center mmb-10">
+            <div class="col-md-2 ">
+              <div class="form-group">
+                <label for="n_rooms" class="bold">Numero Stanze</label>
+                <input class="form-control @error('n_rooms') is-invalid @enderror" id="n_rooms" type="number" name="n_rooms" value="{{ old('n_rooms') }}">
+                @error('n_rooms')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="n_beds" class="bold">Numero Letti</label>
+                <input class="form-control @error('n_beds') is-invalid @enderror" id="n_beds" type="number" name="n_beds" value="{{ old('n_beds') }}">
+                @error('n_beds')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="n_bathrooms" class="bold">Numero Bagni</label>
+                <input class="form-control @error('n_bathrooms') is-invalid @enderror" id="n_bathrooms" type="number" name="n_bathrooms" value="{{ old('n_bathrooms') }}">
+                @error('n_bathrooms')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="mq" class="bold">Metri Quadri</label>
+                <input class="form-control @error('mq') is-invalid @enderror" id="mq" type="number" name="mq" value="{{ old('mq') }}">
+                @error('mq')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center mmb-10">
+            <div class="col-md-8 col-sm-12">
+              <div class="form-group">
+                <p class="bold">Servizi</p>
+                <div class="d-flex justify-content-center flex-wrap">
+                  @foreach ($services as $key => $service )
+                <div class="form-check child">
+                  <input class="form-check-input" @error('services') is-invalid @enderror" id="{{$service->service_name}}" type="checkbox" name="service_ids[]" value="{{$service->id}}">
+                <label class="form-check-label" for="services"><span><img class="icon" src="../../icons/{{$service->service_name}}.svg" alt=""></span><span>{{$service->service_name}}</span></label>
+                </div> 
+                @endforeach
+                @error('services')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+                </div>      
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center mmb-10">
+            <div class="col-md-8 col-sm-12">
+              <div class="form-group">
+                <label for="description" class="bold">Descrizione</label>
+                <textarea class="form-control" @error('description') is-invalid @enderror id="exampleFormControlTextarea3" name="description" rows="7"></textarea>
+                @error('description')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-flex justify-space-between last mmb-10">
+            <div class="col-md-3 offset-md-2">
+              <div class="form-group">
+                <label for="img" class="bold">Immagine</label>
+                <input class="form-control-file @error('img') is-invalid @enderror" id="img" type="file" name="img" value="{{old('img')}}">
+                @error('img')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-2 offset-md-3">
+              <div class="form-group">
+                <label for="visible" class="bold">Visibile</label>
+                <select class="form-control w-half @error('visible') is-invalid @enderror" id="visible" name="visible">
+                    <option value="1">SI</option>
+                    <option value="0">NO</option>
+                </select>
+                @error('visible')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+          </div>       
+          <div class="row text-center mpt-30">
+            <div class="col-md-12">
+              <button class="btn orange" type="submit" name="button">Aggiungi</button>
+            </div>
+          </div>    
+          </form>
+      </div>
       </div>
    </div>
 </main>

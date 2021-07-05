@@ -11962,6 +11962,92 @@ main#dashboard .sponsors .my-card .my-card-body .my-table tbody .apartment-title
   text-transform: capitalize;
 }
 
+main#edit .content {
+  background-color: #faf9f8;
+}
+
+main#edit .content .icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+main#edit .content .image {
+  width: 400px;
+  height: 250px;
+}
+
+main#edit .content .orange {
+  color: #FFF;
+  background-color: #fa6933;
+}
+
+main#edit .content .child {
+  flex: 1 0 20%;
+  display: flex;
+  justify-content: start;
+  margin-bottom: 20px;
+}
+
+main#edit .content .bold {
+  font-weight: bold;
+}
+
+main#edit .content .btn {
+  width: 200px;
+}
+
+main#edit .content input.form-control:focus {
+  border: 1px solid #CED4DA;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+main#edit .content select.form-control:focus {
+  border: 1px solid #CED4DA;
+  box-shadow: none;
+}
+
+main#edit .content input[type=file i]::-webkit-file-upload-button {
+  border: none;
+  background-color: #fa6933;
+  border-radius: 3px;
+  color: #FFF;
+  cursor: pointer;
+  padding: 10px, 5px;
+}
+
+@media screen and (max-width: 446px) {
+  main#edit .content .child {
+    flex: 1 0 100%;
+  }
+}
+
+@media screen and (min-width: 445px) and (max-width: 991px) {
+  main#edit .content .child {
+    flex: 1 0 50%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1399px) {
+  main#edit .content .child {
+    flex: 1 0 33%;
+  }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1599px) {
+  main#edit .content .child {
+    flex: 1 0 25%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  main#edit .content .child {
+    flex: 1 0 20%;
+  }
+}
+
 main#index-messages .my-card:hover {
   border: 2px solid #ededed;
 }

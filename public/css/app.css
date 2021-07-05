@@ -11692,7 +11692,6 @@ main#create .content .orange {
 main#create .content .child {
   flex: 1 0 20%;
   display: flex;
-  justify-content: start;
   margin-bottom: 20px;
 }
 
@@ -11723,6 +11722,16 @@ main#create .content input[type=file i]::-webkit-file-upload-button {
   color: #FFF;
   cursor: pointer;
   padding: 10px, 5px;
+}
+
+main#create .content button:focus {
+  box-shadow: none;
+}
+
+main#create .content textarea:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #CED4DA;
 }
 
 @media screen and (max-width: 446px) {
@@ -11917,8 +11926,9 @@ main#edit .content .icon {
 }
 
 main#edit .content .image {
-  width: 400px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 21/9;
 }
 
 main#edit .content .orange {
@@ -11929,7 +11939,6 @@ main#edit .content .orange {
 main#edit .content .child {
   flex: 1 0 20%;
   display: flex;
-  justify-content: start;
   margin-bottom: 20px;
 }
 
@@ -11939,6 +11948,16 @@ main#edit .content .bold {
 
 main#edit .content .btn {
   width: 200px;
+}
+
+main#edit .content button:focus {
+  box-shadow: none;
+}
+
+main#edit .content textarea:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #CED4DA;
 }
 
 main#edit .content input.form-control:focus {
@@ -12250,6 +12269,180 @@ main#welcome .title {
   .advanced-search-page.container-lg .overflowable,
   .advanced-search-page.container-xl .overflowable {
     height: auto;
+  }
+}
+
+main#show .container-fluid,
+main#show .container-sm,
+main#show .container-md,
+main#show .container-lg,
+main#show .container-xl {
+  background-color: #faf9f8;
+}
+
+main#show .thumb {
+  width: 100%;
+  height: 100%;
+}
+
+main#show .mr-10 {
+  margin-right: 10px;
+}
+
+main#show .ml-10 {
+  margin-left: 10px;
+}
+
+main#show .c-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+main#show .my-card:hover {
+  border: 2px solid #ededed;
+}
+
+main#show .bold {
+  font-weight: bold;
+}
+
+main#show .orange {
+  color: #FFF;
+  background-color: #fa6933;
+}
+
+main#show .cover {
+  height: 40.7rem;
+  background-size: cover;
+  background-position: center;
+}
+
+main#show .ar {
+  aspect-ratio: auto 22/9;
+}
+
+@media screen and (max-width: 446px) {
+  main#show .child {
+    flex: 0 0 100%;
+  }
+}
+
+@media screen and (min-width: 445px) and (max-width: 991px) {
+  main#show .child {
+    flex: 0 0 50%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1399px) {
+  main#show .child {
+    flex: 0 0 33%;
+  }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1599px) {
+  main#show .child {
+    flex: 0 0 25%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  main#show .child {
+    flex: 0 0 20%;
+  }
+}
+
+main#g_show .container-fluid,
+main#g_show .container-sm,
+main#g_show .container-md,
+main#g_show .container-lg,
+main#g_show .container-xl {
+  background-color: #faf9f8;
+}
+
+main#g_show .thumb {
+  width: 100%;
+  height: 100%;
+}
+
+main#g_show .mr-10 {
+  margin-right: 10px;
+}
+
+main#g_show .ml-10 {
+  margin-left: 10px;
+}
+
+main#g_show .c-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+main#g_show .my-card:hover {
+  border: 2px solid #ededed;
+}
+
+main#g_show .bold {
+  font-weight: bold;
+}
+
+main#g_show .orange {
+  color: #FFF;
+  background-color: #fa6933;
+}
+
+main#g_show .cover {
+  height: 40.7rem;
+  background-size: cover;
+  background-position: center;
+}
+
+main#g_show .ar {
+  aspect-ratio: auto 22/9;
+}
+
+main#g_show input:focus {
+  border: 1px solid #CED4DA;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+main#g_show textarea:focus {
+  border: 1px solid #CED4DA;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 446px) {
+  main#g_show .child {
+    flex: 0 0 100%;
+  }
+}
+
+@media screen and (min-width: 445px) and (max-width: 991px) {
+  main#g_show .child {
+    flex: 0 0 50%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1399px) {
+  main#g_show .child {
+    flex: 0 0 33%;
+  }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1599px) {
+  main#g_show .child {
+    flex: 0 0 25%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  main#g_show .child {
+    flex: 0 0 20%;
   }
 }
 

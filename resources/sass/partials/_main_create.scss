@@ -20,7 +20,6 @@ main#create .content {
   main#create .content .child {
     flex: 1 0 20%;
     display: flex;
-    justify-content: start;
     margin-bottom: 20px;
   }
   
@@ -51,6 +50,16 @@ main#create .content {
     color: #FFF;
     cursor: pointer;
     padding: 10px, 5px;
+  }
+  
+  main#create .content button:focus {
+    box-shadow: none;
+  }
+
+  main#create .content textarea:focus {
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #CED4DA;
   }
   
   @media screen and (max-width: 446px) {

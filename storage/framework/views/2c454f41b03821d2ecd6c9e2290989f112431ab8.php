@@ -3,22 +3,6 @@
 <main id="create">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  
-  <div class="search">
-    <div class="container">
-      <div class="row justify-content-right">
-        <div id="welcome" class="searchbar col-lg-3 offset-lg-9">
-          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
-          
-          <div class="">
-            <ul>
-              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  
   <div class="container title text-center mpt-20 mpb-20">
     <div class="row mpt-30">
       <div class="col-md-12">
@@ -30,7 +14,7 @@
   <div class="container-fluid content mpt-20 mpb-20">
       <div class="container">
         <form action="<?php echo e(route('admin.apartments.store')); ?>" method="post" enctype="multipart/form-data">
-        <div class="row d-flex justify-content-center mmb-20">
+          <div class="row d-flex justify-content-center mmb-20">
               <?php echo csrf_field(); ?>
               <?php echo method_field('POST'); ?>
             <div class="col-md-4">
@@ -95,16 +79,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
-                  <?php $__errorArgs = ['latitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger"> <?php echo e($message); ?></small>
-                  <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                  
                 </div>
   
                 <div class="form-group">
@@ -116,16 +91,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
-                  <?php $__errorArgs = ['longitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger"> <?php echo e($message); ?></small>
-                  <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                  
                 </div>
               </div>
             </div>
@@ -256,6 +222,32 @@ unset($__errorArgs, $__bag); ?>
               </div>
             </div>
           </div>
+          <div class="row d-flex justify-content-center mmb-10">
+            <div class="col-md-8 col-sm-12">
+              <div class="form-group">
+                <label for="description" class="bold">Descrizione</label>
+                <textarea class="form-control" <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> id="exampleFormControlTextarea3" name="description" rows="7"></textarea>
+                <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                  <small class="text-danger"> <?php echo e($message); ?></small>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+              </div>
+            </div>
+          </div>
+
           <div class="row d-flex justify-space-between last mmb-10">
             <div class="col-md-3 offset-md-2">
               <div class="form-group">
@@ -282,7 +274,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-md-2 offset-md-3">
               <div class="form-group">
-                <label for="visible" class="bold ">Visibile</label>
+                <label for="visible" class="bold">Visibile</label>
                 <select class="form-control w-half <?php $__errorArgs = ['visible'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

@@ -3,22 +3,6 @@
 <main id="create">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  {{-- {{-- <!-- searchbar --> --}}
-  <div class="search">
-    <div class="container">
-      <div class="row justify-content-right">
-        <div id="welcome" class="searchbar col-lg-3 offset-lg-9">
-          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
-          {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
-          <div class="">
-            <ul>
-              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  
   <div class="container title text-center mpt-20 mpb-20">
     <div class="row mpt-30">
       <div class="col-md-12">
@@ -60,16 +44,16 @@
   
                 <div class="form-group">
                   <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
-                  @error('latitude')
+                  {{-- @error('latitude')
                     <small class="text-danger"> {{ $message }}</small>
-                  @enderror
+                  @enderror --}}
                 </div>
   
                 <div class="form-group">
                   <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
-                  @error('longitude')
+                  {{-- @error('longitude')
                     <small class="text-danger"> {{ $message }}</small>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
             </div>
@@ -130,6 +114,18 @@
               </div>
             </div>
           </div>
+          <div class="row d-flex justify-content-center mmb-10">
+            <div class="col-md-8 col-sm-12">
+              <div class="form-group">
+                <label for="description" class="bold">Descrizione</label>
+                <textarea class="form-control" @error('description') is-invalid @enderror id="exampleFormControlTextarea3" name="description" rows="7"></textarea>
+                @error('description')
+                  <small class="text-danger"> {{ $message }}</small>
+                @enderror
+              </div>
+            </div>
+          </div>
+
           <div class="row d-flex justify-space-between last mmb-10">
             <div class="col-md-3 offset-md-2">
               <div class="form-group">

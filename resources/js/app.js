@@ -261,29 +261,22 @@ let search = new Vue({
             this.filteredServices;
         },
         rooms(newval, oldval) {
-            this.roomsChange;
+            this.roomsbedsChange;
         },
         beds(newval, oldval) {
-            this.bedsChange;
+            this.roomsbedsChange;
         }
     },
     computed: {
-        roomsChange() {
+        roomsbedsChange() {
             // this.filteredResults = [];
-            this.filteredResults = this.results.filter(apartment => apartment.n_rooms >= this.rooms);
+            this.filteredResults = this.results.filter(apartment => apartment.n_rooms >= this.rooms && apartment.n_beds >= this.beds);
             
             this.newMarkerFs();
 
             return
         },
-        bedsChange() {
-            // this.filteredResults = [];
-            this.filteredResults = this.results.filter(apartment => apartment.n_beds >= this.beds);
-            
-            this.newMarkerFs();
-            
-            return
-        },
+
         filteredServices() {            
             if (this.checkedItems.length == 0) {
 
@@ -298,6 +291,9 @@ let search = new Vue({
                         }
                     })
                     .then(response => {
+                        if(!response.data.data == []){
+                            this.removeMarker();
+                        }
                         this.filteredResults = [];
 
                         for (let i = 0; i < response.data.data.length; i++) {

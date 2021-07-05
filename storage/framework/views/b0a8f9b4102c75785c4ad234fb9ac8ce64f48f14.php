@@ -28,33 +28,56 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px;">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm justify-content-between" style="max-height: 180px;">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
                     <img src="/images/logo_boolbnb_4.png" alt="" style="max-width: 120px;">
                     <!-- <span style="font-size: 1.3rem; font-weight: 700; padding-left: 5px;">Boolbnb</span> -->
                     
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <?php if(Route::current()->getName() != 'welcome'): ?>
+                    <div v-cloak class="form-inline my-2 my-lg-0 ml-auto input-search-nav " id="welcome">
+                        <input class="form-control mr-sm-2 " id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
 
-                    </ul>
-                    <!-- <div class="form-inline my-2 my-lg-0" id="welcome">
-                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
-                        
-                        <div class="">
-                          <ul>
-                            <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
+
+                          <ul class="search-results">
+                            <a :href="(search != '' ? `/search/${search}` : '#')">
+                                <li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li>
+                            </a>
                           </ul>
-                        </div>
-                    </div> -->
+
+                    </div>
+                    <?php endif; ?>
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <div class="navbar-nav ml-auto" aria-labelledby="navbarSupportedContent1">
+                                <a class="nav-item text-right" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+
+                                <a class="nav-item text-right" href="<?php echo e(route('logout')); ?>"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    <?php echo e(__('Logout')); ?>
+
+                                </a>
+
+                                
+
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                    <?php echo csrf_field(); ?>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+  
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto desktop">
                         <!-- Authentication Links -->
                         <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item">
@@ -66,21 +89,17 @@
                                 </li>
                             <?php endif; ?>
                         <?php else: ?>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <?php echo e(Auth::user()->name); ?>
-
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                            <li class="nav-item">
+                                <div class="mr-auto nav-buttons">
+                                    <a class="mr-4" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                                    <a class="logout " href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <?php echo e(__('Logout')); ?>
 
                                     </a>
 
-                                    <a class="dropdown-item" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                                    
 
                                     <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
                                         <?php echo csrf_field(); ?>

@@ -11619,46 +11619,51 @@ input[type=checkbox]:checked:after {
   color: #000000;
 }
 
-nav .input-search-nav {
+nav #welcome.input-search-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 20px;
+  padding: 0px 15px;
   width: 40%;
   border: 1px solid #ededed;
   border-radius: 27px;
 }
 
-nav .input-search-nav .input {
+nav #welcome.input-search-nav .input {
   width: 90%;
 }
 
-nav .input-search-nav .input #searchInput {
+nav #welcome.input-search-nav .input #searchInput {
   width: 100%;
   border: none;
 }
 
-nav .input-search-nav .input #searchInput:focus {
+nav #welcome.input-search-nav .input #searchInput:focus {
   border-color: #ededed;
   box-shadow: none;
 }
 
-nav .input-search-nav .icon img {
-  width: 22px;
+nav #welcome.input-search-nav .icon img {
+  width: 18px;
 }
 
-nav #welcome .search-results {
+nav #welcome.input-search-nav .search-results {
   background-color: #fff;
   z-index: 10;
+  width: 25%;
   position: absolute;
-  top: 70px;
-  box-shadow: 2px 3px 17px -3px #000000;
+  top: 90px;
+  box-shadow: 3px 11px 27px 2px rgba(0, 0, 0, 0.25);
   border-radius: 9px;
 }
 
-nav #welcome .search-results a li {
+nav #welcome.input-search-nav .search-results a li {
   text-align: left;
   list-style: none;
+}
+
+nav #welcome.input-search-nav .search-results a li:hover {
+  color: #fa6933;
 }
 
 nav .mynavbutton {
@@ -11696,8 +11701,8 @@ nav .mynavbutton.register {
     width: 100%;
   }
 
-  nav .input-search-nav #searchInput {
-    width: 100%;
+  nav .icon {
+    display: none;
   }
 }
 

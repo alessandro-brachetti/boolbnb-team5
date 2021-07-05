@@ -42,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                     <!-- Left Side Of Navbar -->
                     @if(Route::current()->getName() != 'welcome')
-                    <div v-cloak class="form-inline my-2 my-lg-0 ml-auto input-search-nav " id="welcome">
+                    <div  class="form-inline my-2 my-lg-0 ml-auto input-search-nav " id="welcome">
                         <div class="input">
                           <input class="form-control mr-sm-2 " id="searchInput" type="search" placeholder="Dove vuoi andare" aria-label="Search" v-model="search" @input="responseApi">
                         </div>
@@ -50,11 +50,11 @@
                           <img src="/images/search.png" alt="">
                         </div>
 
-                          <ul class="search-results">
-                            <a :href="(search != '' ? `/search/${search}` : '#')">
-                                <li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li>
+                        <ul class="search-results pl-2 ">
+                            <a v-cloak :href="(search != '' ? `/search/${search}` : '#')">
+                                <li class="pt-2" v-for="result in results " @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li>
                             </a>
-                          </ul>
+                        </ul>
 
                     </div>
                     @endif

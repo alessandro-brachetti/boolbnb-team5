@@ -11576,6 +11576,32 @@ a:hover {
   background-color: #fa6933;
 }
 
+input[type=checkbox]:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+input[type=checkbox]:checked:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
 .white-btn {
   background-color: #fff;
   color: #000000;
@@ -11587,6 +11613,98 @@ a:hover {
 
 .white-btn:hover {
   border-color: #000000;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #000000;
+}
+
+nav .input-search-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  width: 40%;
+  border: 1px solid #ededed;
+  border-radius: 27px;
+}
+
+nav .input-search-nav .input {
+  width: 90%;
+}
+
+nav .input-search-nav .input #searchInput {
+  width: 100%;
+  border: none;
+}
+
+nav .input-search-nav .input #searchInput:focus {
+  border-color: #ededed;
+  box-shadow: none;
+}
+
+nav .input-search-nav .icon img {
+  width: 22px;
+}
+
+nav #welcome .search-results {
+  background-color: #fff;
+  z-index: 10;
+  position: absolute;
+  top: 70px;
+  box-shadow: 2px 3px 17px -3px #000000;
+  border-radius: 9px;
+}
+
+nav #welcome .search-results a li {
+  text-align: left;
+  list-style: none;
+}
+
+nav .mynavbutton {
+  border-radius: 9px;
+  padding: 4px 12px;
+  border: 2px solid #000000;
+  font-weight: 600;
+  color: #000000;
+}
+
+nav .mynavbutton.logout {
+  border: 2px solid #fa6933;
+  color: #fa6933;
+}
+
+nav .mynavbutton.logout:hover {
+  border: 2px solid #fa6933;
+}
+
+nav .mynavbutton.login {
+  margin-right: 24px;
+  background-color: none;
+}
+
+nav .mynavbutton.register {
+  border: 2px solid #fa6933;
+}
+
+@media screen and (max-width: 768px) {
+  nav ul.navbar-nav.ml-auto.desktop {
+    display: none;
+  }
+
+  nav .input-search-nav {
+    width: 100%;
+  }
+
+  nav .input-search-nav #searchInput {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  nav ul.navbar-nav.mr-auto {
+    display: none;
+  }
 }
 
 .my-container-fluid {
@@ -11764,6 +11882,10 @@ main#create .content textarea:focus {
   }
 }
 
+main#index-admin .grey-container {
+  background-color: #faf9f8;
+}
+
 main#index-admin .info {
   display: flex;
   align-items: center;
@@ -11771,6 +11893,8 @@ main#index-admin .info {
 }
 
 main#index-admin .apartments .my-card:hover {
+  transition: 0.4s ease;
+  transform: scale(1.05);
   border: 2px solid #fa6933;
 }
 
@@ -11782,7 +11906,8 @@ main#index-admin .apartments .my-card .actions {
 }
 
 main#index-admin .apartments .my-card .actions a:hover i {
-  transform: scale(1.2);
+  transition: 0.3s ease;
+  transform: scale(1.3);
   color: #fa6933;
 }
 
@@ -11810,6 +11935,8 @@ main#dashboard .info .user {
 
 main#dashboard .content .tools .my-card:hover {
   border: 2px solid #fa6933;
+  transition: 0.4s ease;
+  transform: scale(1.05);
 }
 
 main#dashboard .content .tools .my-card p {
@@ -11828,11 +11955,7 @@ main#dashboard .content .tools .my-card p {
 main#dashboard .content .tools .my-card i {
   padding-right: 10px;
   font-size: 1.4rem;
-}
-
-main#dashboard .content .tools .my-card i:hover {
-  transform: scale(1.2);
-  color: #fa6933;
+  color: #000000;
 }
 
 main#dashboard .content .totals .my-card:hover {
@@ -12011,6 +12134,11 @@ main#edit .content input[type=file i]::-webkit-file-upload-button {
   }
 }
 
+main#index-messages .greycontainer {
+  background-color: #faf9f8;
+  padding-bottom: 30px;
+}
+
 main#index-messages .my-card:hover {
   border: 2px solid #ededed;
 }
@@ -12040,11 +12168,27 @@ main#index-messages .my-card .my-card-body i {
   color: #fa6933;
 }
 
-main#index-sponsors {
-  background-color: red;
+main#index-sponsors .greycontainer {
+  background-color: #faf9f8;
+  padding-bottom: 30px;
 }
 
-main#index-sponsors button {
+main#index-sponsors .my-card:hover {
+  transition: 0.4s ease;
+  transform: scale(1.05);
+}
+
+main#index-sponsors .my-card .my-card-body label {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+main#index-sponsors .my-card .my-card-body .info {
+  font-weight: 600;
+  color: #838282;
+}
+
+main#index-sponsors .my-btn {
   text-transform: uppercase;
   font-size: 0.9em;
   padding: 4px 18px;
@@ -12053,6 +12197,38 @@ main#index-sponsors button {
   border-radius: 9px;
   color: #fff;
   border: 0;
+}
+
+main#index-sponsors .my-btn:focus {
+  box-shadow: none;
+}
+
+main#index-sponsors input[type=radio]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -3px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#index-sponsors input[type=radio]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -3px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
 }
 
 main#welcome .title {
@@ -12107,20 +12283,13 @@ main#welcome .title {
   overflow: hidden;
 }
 
-.container-fluid.advanced-search-page button.filter-services-btn,
-.advanced-search-page.container-sm button.filter-services-btn,
-.advanced-search-page.container-md button.filter-services-btn,
-.advanced-search-page.container-lg button.filter-services-btn,
-.advanced-search-page.container-xl button.filter-services-btn {
-  text-transform: uppercase;
-  font-size: 0.9em;
-  padding: 4px 18px;
-  background-color: none;
+.container-fluid.advanced-search-page .btn.services,
+.advanced-search-page.container-sm .btn.services,
+.advanced-search-page.container-md .btn.services,
+.advanced-search-page.container-lg .btn.services,
+.advanced-search-page.container-xl .btn.services {
   background-color: #fa6933;
-  border-radius: 9px;
-  padding: 0 12px;
   color: #fff;
-  border: 0;
 }
 
 .container-fluid.advanced-search-page .first-line-filters input,
@@ -12138,7 +12307,7 @@ main#welcome .title {
 .advanced-search-page.container-lg .overflowable,
 .advanced-search-page.container-xl .overflowable {
   overflow-y: auto;
-  height: calc(61vh - 75px);
+  height: calc(60vh - 75px);
 }
 
 .container-fluid.advanced-search-page .overflowable .my-search-card,
@@ -12160,6 +12329,14 @@ main#welcome .title {
 .advanced-search-page.container-lg .overflowable .my-search-card:hover,
 .advanced-search-page.container-xl .overflowable .my-search-card:hover {
   border: 2px solid #fa6933;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-sm .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-md .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-lg .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-xl .overflowable .my-search-card .col-sm-4.image {
+  padding-left: 0;
 }
 
 .container-fluid.advanced-search-page .overflowable .my-search-card .my-card-img,
@@ -12447,14 +12624,205 @@ main#g_show textarea:focus {
 }
 
 main#login {
-  margin-top: 30px;
+  padding-top: 50px;
+}
+
+main#login input:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #ced4da;
+}
+
+main#login input[type=checkbox]:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#login input[type=checkbox]:checked:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#login .my-btn {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+main#login .my-btn:focus {
+  box-shadow: none;
 }
 
 main#register {
-  padding: 30px;
+  padding-top: 50px;
+}
+
+main#register input:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #ced4da;
+}
+
+main#register input[type=checkbox]:after {
+  width: 15px;
+  height: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#register input[type=checkbox]:checked:after {
+  width: 15px;
+  height: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#register .my-btn {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+main#register .my-btn:focus {
+  box-shadow: none;
 }
 
 html {
   overflow-x: hidden;
+}
+
+footer {
+  padding-top: 300px;
+  background-color: #ededed;
+}
+
+footer .info h5 {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+footer .info .my-ul {
+  list-style: none;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+footer .info .my-ul li {
+  line-height: 40px;
+}
+
+footer .info .my-ul li a {
+  font-size: 0.9rem;
+  color: #838282;
+  font-weight: 500;
+}
+
+footer .info .my-ul li a:hover {
+  color: #fa6933;
+}
+
+footer .line {
+  background-color: #fff;
+  height: 3px;
+  border-radius: 2px;
+}
+
+footer .copyright .my-ul {
+  list-style: none;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .copyright .my-ul li a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fa6933;
+}
+
+footer .copyright .left {
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  footer .copyright .left {
+    display: none;
+  }
+}
+
+footer .copyright .right {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 992px) {
+  footer .copyright .right {
+    justify-content: space-between;
+    font-size: 0.6rem;
+  }
+}
+
+footer .copyright .right .lang li {
+  padding-right: 65px;
+}
+
+@media (max-width: 992px) {
+  footer .copyright .right .lang {
+    display: none;
+  }
+}
+
+footer .copyright .right .social i {
+  color: #fa6933;
+  font-size: 1.4rem;
+  padding-right: 20px;
+}
+
+@media (max-width: 768px) {
+  footer .copyright .right .social {
+    text-align: center;
+  }
 }
 

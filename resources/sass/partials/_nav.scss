@@ -1,0 +1,93 @@
+.navbar-light .navbar-nav .nav-link{
+  color: $myblack;}
+nav{
+    .input-search-nav{
+        @include flex-align-center;
+        justify-content: space-between;
+        padding: 8px 20px;
+        width: 40%;
+        border: 1px solid $mygrey;
+        border-radius: 27px;
+        .input{
+          width: 90%;
+          #searchInput{
+            width: 100%;
+            border: none;
+            &:focus{
+              border-color: $mygrey;
+              box-shadow: none;
+            }
+          }
+        }
+      .icon{
+        img{
+          width: 22px;
+        }
+      }
+    }
+
+    #welcome{
+        .search-results{
+          background-color: #fff;
+          z-index: 10;
+          position: absolute;
+          top: 70px;
+          box-shadow: 2px 3px 17px -3px #000000;
+          border-radius: 9px;
+            a{
+                li{
+                    text-align: left;
+                    list-style: none;
+                }
+            }
+        }
+      }
+
+    .mynavbutton{
+        border-radius: 9px;
+        padding: 4px 12px;
+        border: 2px solid $myblack;
+        font-weight: 600;
+        color: $myblack;
+
+        &.logout{
+            border: 2px solid $myorange;
+            color: $myorange;
+
+            &:hover{
+                border: 2px solid $myorange;
+            }
+        }
+
+        &.login{
+          margin-right: 24px;
+          background-color: none;
+
+        }
+
+        &.register{
+          border: 2px solid $myorange;
+        }
+      }
+
+
+    @media screen and (max-width: 768px) {
+        ul.navbar-nav.ml-auto.desktop{
+            display: none;
+        }
+
+        .input-search-nav{
+            width: 100%;
+            #searchInput{
+                width: 100%;
+            }
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        ul.navbar-nav.mr-auto{
+            display: none;
+        }
+    }
+
+}

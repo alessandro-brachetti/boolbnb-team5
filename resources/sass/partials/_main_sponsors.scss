@@ -1,10 +1,64 @@
 main#index-sponsors{
-  background-color: red;
-  button{
-    @include button-style;
-    background-color: $myorange;
-    border-radius: 9px;
-    color:#fff;
-    border: 0;
+  .greycontainer{
+    background-color: $mylightgrey;
+    padding-bottom: 30px;
   }
+  .my-card{
+    &:hover{
+      transition: 0.4s ease;
+      transform: scale(1.05);
+    }
+
+    .my-card-body{
+     label{
+       font-weight: 800;
+       font-size: 1.2rem;
+     }
+     .info{
+       font-weight: 600;
+       color: $greytext;
+     }
+    }
+  }
+
+  .my-btn{
+    @include button-style;
+     background-color: $myorange;
+     border-radius: 9px;
+     color:#fff;
+     border: 0;
+     &:focus{
+       box-shadow: none;
+     }
+  }
+
+  input[type='radio']:after {
+       width: 15px;
+       height: 15px;
+       border-radius: 15px;
+       top: -3px;
+       left: -1px;
+       position: relative;
+       background-color: #d1d3d1;
+       content: '';
+       display: inline-block;
+       visibility: visible;
+       border: 2px solid white;
+   }
+
+   input[type='radio']:checked:after {
+       width: 15px;
+       height: 15px;
+       border-radius: 15px;
+       top: -3px;
+       left: -1px;
+       position: relative;
+       background-color: $myorange;
+       content: '';
+       display: inline-block;
+       visibility: visible;
+       border: 2px solid white;
+   }
+
+
 }

@@ -11589,6 +11589,62 @@ a:hover {
   border-color: #000000;
 }
 
+nav .input-search-nav {
+  width: 50%;
+}
+
+nav .input-search-nav #searchInput {
+  width: 100%;
+}
+
+nav #welcome .search-results {
+  background-color: #fff;
+  z-index: 10;
+  position: absolute;
+  top: 70px;
+  box-shadow: 2px 3px 17px -3px #000000;
+  border-radius: 9px;
+}
+
+nav #welcome .search-results a li {
+  text-align: left;
+  list-style: none;
+}
+
+nav .nav-buttons a {
+  border: 1px solid #fa6933;
+  border-radius: 9px;
+  padding: 4px 12px;
+}
+
+nav .nav-buttons a.logout {
+  border: 1px solid #ededed;
+}
+
+nav .nav-buttons a.logout:hover {
+  border: 1px solid #fa6933;
+}
+
+@media screen and (max-width: 768px) {
+  nav ul.navbar-nav.ml-auto.desktop {
+    display: none;
+  }
+
+  nav .input-search-nav {
+    width: 100%;
+  }
+
+  nav .input-search-nav #searchInput {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  nav ul.navbar-nav.mr-auto {
+    display: none;
+  }
+}
+
 .my-container-fluid {
   padding-left: 0;
   padding-right: 0;
@@ -12002,20 +12058,13 @@ main#welcome .title {
   overflow: hidden;
 }
 
-.container-fluid.advanced-search-page button.filter-services-btn,
-.advanced-search-page.container-sm button.filter-services-btn,
-.advanced-search-page.container-md button.filter-services-btn,
-.advanced-search-page.container-lg button.filter-services-btn,
-.advanced-search-page.container-xl button.filter-services-btn {
-  text-transform: uppercase;
-  font-size: 0.9em;
-  padding: 4px 18px;
-  background-color: none;
+.container-fluid.advanced-search-page .btn.services,
+.advanced-search-page.container-sm .btn.services,
+.advanced-search-page.container-md .btn.services,
+.advanced-search-page.container-lg .btn.services,
+.advanced-search-page.container-xl .btn.services {
   background-color: #fa6933;
-  border-radius: 9px;
-  padding: 0 12px;
   color: #fff;
-  border: 0;
 }
 
 .container-fluid.advanced-search-page .first-line-filters input,
@@ -12033,7 +12082,7 @@ main#welcome .title {
 .advanced-search-page.container-lg .overflowable,
 .advanced-search-page.container-xl .overflowable {
   overflow-y: auto;
-  height: calc(61vh - 75px);
+  height: calc(60vh - 75px);
 }
 
 .container-fluid.advanced-search-page .overflowable .my-search-card,
@@ -12055,6 +12104,14 @@ main#welcome .title {
 .advanced-search-page.container-lg .overflowable .my-search-card:hover,
 .advanced-search-page.container-xl .overflowable .my-search-card:hover {
   border: 2px solid #fa6933;
+}
+
+.container-fluid.advanced-search-page .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-sm .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-md .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-lg .overflowable .my-search-card .col-sm-4.image,
+.advanced-search-page.container-xl .overflowable .my-search-card .col-sm-4.image {
+  padding-left: 0;
 }
 
 .container-fluid.advanced-search-page .overflowable .my-search-card .my-card-img,

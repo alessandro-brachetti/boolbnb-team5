@@ -11,22 +11,21 @@ main#dashboard{
       .my-card{
         &:hover{
           border: 2px solid $myorange;
+          transition: 0.4s ease;
+          transform: scale(1.05);
         }
         p{
           font-size: 1rem;
           font-weight: 700;
           @include flex-align-center;
           @media (max-width: 992px){
-            justify-content: center;
+          justify-content: center;
           }
         }
         i{
           padding-right: 10px;
           font-size: 1.4rem;
-          &:hover{
-            transform: scale(1.2);
-            color: $myorange;
-          }
+          color: $myblack;
         }
       }
     }

@@ -18,12 +18,12 @@ class SponsorSeeder extends Seeder
             'duration' => 24
             ],
             [
-            'name' => 'Pro',
+            'name' => 'Standard',
             'price' => 5.99,
             'duration' => 72
             ],
             [
-            'name' => 'Pro +',
+            'name' => 'Premium',
             'price' => 9.99,
             'duration' => 144
             ],

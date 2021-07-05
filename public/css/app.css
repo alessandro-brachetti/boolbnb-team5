@@ -11576,6 +11576,32 @@ a:hover {
   background-color: #fa6933;
 }
 
+input[type=checkbox]:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+input[type=checkbox]:checked:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
 .white-btn {
   background-color: #fff;
   color: #000000;
@@ -11755,6 +11781,10 @@ main#create .content input[type=file i]::-webkit-file-upload-button {
   }
 }
 
+main#index-admin .grey-container {
+  background-color: #faf9f8;
+}
+
 main#index-admin .info {
   display: flex;
   align-items: center;
@@ -11762,6 +11792,8 @@ main#index-admin .info {
 }
 
 main#index-admin .apartments .my-card:hover {
+  transition: 0.4s ease;
+  transform: scale(1.05);
   border: 2px solid #fa6933;
 }
 
@@ -11773,7 +11805,8 @@ main#index-admin .apartments .my-card .actions {
 }
 
 main#index-admin .apartments .my-card .actions a:hover i {
-  transform: scale(1.2);
+  transition: 0.3s ease;
+  transform: scale(1.3);
   color: #fa6933;
 }
 
@@ -11801,6 +11834,8 @@ main#dashboard .info .user {
 
 main#dashboard .content .tools .my-card:hover {
   border: 2px solid #fa6933;
+  transition: 0.4s ease;
+  transform: scale(1.05);
 }
 
 main#dashboard .content .tools .my-card p {
@@ -11819,11 +11854,7 @@ main#dashboard .content .tools .my-card p {
 main#dashboard .content .tools .my-card i {
   padding-right: 10px;
   font-size: 1.4rem;
-}
-
-main#dashboard .content .tools .my-card i:hover {
-  transform: scale(1.2);
-  color: #fa6933;
+  color: #000000;
 }
 
 main#dashboard .content .totals .my-card:hover {
@@ -11992,6 +12023,11 @@ main#edit .content input[type=file i]::-webkit-file-upload-button {
   }
 }
 
+main#index-messages .greycontainer {
+  background-color: #faf9f8;
+  padding-bottom: 30px;
+}
+
 main#index-messages .my-card:hover {
   border: 2px solid #ededed;
 }
@@ -12021,11 +12057,27 @@ main#index-messages .my-card .my-card-body i {
   color: #fa6933;
 }
 
-main#index-sponsors {
-  background-color: red;
+main#index-sponsors .greycontainer {
+  background-color: #faf9f8;
+  padding-bottom: 30px;
 }
 
-main#index-sponsors button {
+main#index-sponsors .my-card:hover {
+  transition: 0.4s ease;
+  transform: scale(1.05);
+}
+
+main#index-sponsors .my-card .my-card-body label {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+main#index-sponsors .my-card .my-card-body .info {
+  font-weight: 600;
+  color: #838282;
+}
+
+main#index-sponsors .my-btn {
   text-transform: uppercase;
   font-size: 0.9em;
   padding: 4px 18px;
@@ -12034,6 +12086,38 @@ main#index-sponsors button {
   border-radius: 9px;
   color: #fff;
   border: 0;
+}
+
+main#index-sponsors .my-btn:focus {
+  box-shadow: none;
+}
+
+main#index-sponsors input[type=radio]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -3px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#index-sponsors input[type=radio]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -3px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
 }
 
 main#welcome .title {
@@ -12254,11 +12338,105 @@ main#welcome .title {
 }
 
 main#login {
-  margin-top: 30px;
+  padding-top: 50px;
+}
+
+main#login input:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #ced4da;
+}
+
+main#login input[type=checkbox]:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#login input[type=checkbox]:checked:after {
+  width: 17px;
+  height: 17px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#login .my-btn {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+main#login .my-btn:focus {
+  box-shadow: none;
 }
 
 main#register {
-  padding: 30px;
+  padding-top: 50px;
+}
+
+main#register input:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #ced4da;
+}
+
+main#register input[type=checkbox]:after {
+  width: 15px;
+  height: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#register input[type=checkbox]:checked:after {
+  width: 15px;
+  height: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fa6933;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+main#register .my-btn {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+main#register .my-btn:focus {
+  box-shadow: none;
 }
 
 html {

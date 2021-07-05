@@ -3,25 +3,8 @@
 @section('content')
 <main id="dashboard">
 
-  <!-- searchbar -->
-  <div class="search">
-    <div class="container">
-      <div class="row justify-content-right">
-        <div class="searchbar col-lg-3 offset-lg-9" id="welcome">
-          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
-          {{-- <a class="btn btn-outline-success my-2 my-sm-0" :href="(search != '' ? `/search/${search}` : '#')">Search</a> --}}
-          <div class="">
-            <ul>
-              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
-    <div class="info row mpt-30">
+    <div class="info row mpt-50">
       <div class="col-lg-4 col-md-12 col-sm-12">
         <h5 class="title-admin user">
           Ciao, {{ Auth::user()->name }}
@@ -164,11 +147,12 @@
                 @foreach($apartments as $apartment)
                   @foreach($apartment->sponsors as $sponsor)
                 <tr>
-                  <td style="width: 70%;" class="apartment-title">{{$apartment->title}}</td>
                   @if ($loop->first)
+                  <td style="width: 70%;" class="apartment-title">{{$apartment->title}}</td>
+
                   <td> {!! date('d/m/Y h:m:s', strtotime($sponsor->pivot->expiration_date)) !!} </td>
-                    @endif
-                    @endforeach
+                  @endif
+                  @endforeach
                   @endforeach
                 </tr>
               </tbody>

@@ -1,12 +1,31 @@
 main#welcome{
+  background-color: $mylightgrey;
+  .apartments{
+    flex-wrap: nowrap;
+    &#scroll{
+      background-color: white;
+      border-radius: 15px 15px;
+      border: 2px solid $mygrey;
+      .scroll{
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        padding: 50px;
+      }
+    }
+  }
+  .bg-white{
+    background-color: white;
+  }
   .title{
     font-weight: 1400;
     color: #373a3d;
-    letter-spacing: 2.5px;
     margin-bottom: 50px;
     margin-top: 50px;
+    p{
+      padding-top: 20px;
+    }
   }
-}
 
 .partnership{
   position: absolute;
@@ -19,7 +38,6 @@ main#welcome{
   span{
     color: white;
     font-size: 12px;
-    letter-spacing: 1.5px;
   }
 }
 
@@ -40,3 +58,4 @@ main#welcome{
         }
       }
     }
+  }

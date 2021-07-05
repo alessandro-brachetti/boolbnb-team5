@@ -1,10 +1,29 @@
+.navbar-light .navbar-nav .nav-link{
+  color: $myblack;}
 nav{
-
     .input-search-nav{
-        width: 50%;
-        #searchInput{
+        @include flex-align-center;
+        justify-content: space-between;
+        padding: 8px 20px;
+        width: 40%;
+        border: 1px solid $mygrey;
+        border-radius: 27px;
+        .input{
+          width: 90%;
+          #searchInput{
             width: 100%;
+            border: none;
+            &:focus{
+              border-color: $mygrey;
+              box-shadow: none;
+            }
+          }
         }
+      .icon{
+        img{
+          width: 22px;
+        }
+      }
     }
 
     #welcome{
@@ -24,21 +43,33 @@ nav{
         }
       }
 
-    .nav-buttons a{
-        border: 1px solid $myorange;
+    .mynavbutton{
         border-radius: 9px;
         padding: 4px 12px;
+        border: 2px solid $myblack;
+        font-weight: 600;
+        color: $myblack;
 
         &.logout{
-            border: 1px solid $mygrey;
+            border: 2px solid $myorange;
+            color: $myorange;
 
             &:hover{
-                border: 1px solid $myorange;
+                border: 2px solid $myorange;
             }
         }
-    
+
+        &.login{
+          margin-right: 24px;
+          background-color: none;
+
+        }
+
+        &.register{
+          border: 2px solid $myorange;
+        }
       }
-    // }
+
 
     @media screen and (max-width: 768px) {
         ul.navbar-nav.ml-auto.desktop{

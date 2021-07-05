@@ -43,8 +43,12 @@
                     <!-- Left Side Of Navbar -->
                     @if(Route::current()->getName() != 'welcome')
                     <div v-cloak class="form-inline my-2 my-lg-0 ml-auto input-search-nav " id="welcome">
-                        <input class="form-control mr-sm-2 " id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
-
+                        <div class="input">
+                          <input class="form-control mr-sm-2 " id="searchInput" type="search" placeholder="Dove vuoi andare" aria-label="Search" v-model="search" @input="responseApi">
+                        </div>
+                        <div class="icon">
+                          <img src="/images/search.png" alt="">
+                        </div>
 
                           <ul class="search-results">
                             <a :href="(search != '' ? `/search/${search}` : '#')">
@@ -60,13 +64,13 @@
                             <div class="navbar-nav ml-auto" aria-labelledby="navbarSupportedContent1">
                                 <a class="nav-item text-right" href="{{route('dashboard')}}">Dashboard</a>
 
-                                <a class="nav-item text-right" href="{{ route('logout') }}"
+                                <a class="nav-item text-right logout" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                
+
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -74,30 +78,31 @@
                             </div>
                         </li>
                     </ul>
-  
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto desktop">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link mynavbutton login" href="{{ route('login') }}">{{ __('Login') }}</a>
+
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link mynavbutton register" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item">
                                 <div class="mr-auto nav-buttons">
-                                    <a class="mr-4" href="{{route('dashboard')}}">Dashboard</a>
-                                    <a class="logout " href="{{ route('logout') }}"
+                                    <a class="mr-4 mynavbutton" href="{{route('dashboard')}}">Dashboard</a>
+                                    <a class="logout mynavbutton" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -120,6 +125,82 @@
         return val;
         }
     </script> --}}
+
+    <footer class="mpt-100 mpb-20">
+      <div class="container">
+        <div class="info row">
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Chi siamo</h5>
+            <ul class="my-ul">
+              <li><a href="https://www.linkedin.com/in/alessandro-brachetti/">Alessandro Brachetti</a></li>
+              <li><a href="https://www.linkedin.com/in/giudittamarino/">Giuditta Marino</a></li>
+              <li><a href="https://www.linkedin.com/in/lorenzo-de-sossi-3343b7213/">Lorenzo De Sossi</a></li>
+              <li><a href="https://www.linkedin.com/in/michaelo-viktor-casubolo-91112420b/">Michaelo Viktor Casubolo</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Informazioni</h5>
+            <ul class="my-ul">
+              <li><a href="#">Come funziona Boolbnb</a></li>
+              <li><a href="#">Boolbnb Plus</a></li>
+              <li><a href="#">Boolbnb for Work</a></li>
+              <li><a href="#">Newsroom</a></li>
+              <li><a href="#">Investitori</a></li>
+              <li><a href="#">HotelTonight</a></li>
+              <li><a href="#">Opportunità di lavoro</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Community</h5>
+            <ul class="my-ul">
+              <li><a href="#"></a></li>
+              <li><a href="#">Diversità e appartenenza</a></li>
+              <li><a href="#">Alloggi per l'emergenza</a></li>
+              <li><a href="#">Accessibilità</a></li>
+              <li><a href="#">Invitare un ospite</a></li>
+              <li><a href="#">Boolbnb Associates</a></li>
+              <li><a href="#">Boolbnb.org</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Assistenza</h5>
+            <ul class="my-ul">
+              <li><a href="#">La nostra risposta all'emergenza COVID-19</a></li>
+              <li><a href="#">Servizio di supporto al vicinato</a></li>
+              <li><a href="#">Centro Assistenza</a></li>
+              <li><a href="#">Affidabilità e sicurezza</a></li>
+              <li><a href="#">Opzioni di cancellazione</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mmt-5 mmb-10 line row">
+        </div>
+        <div class="copyright row mpt-10">
+          <div class="left col-lg-6 col-md-12">
+            <ul class="my-ul">
+              <li><a href="#">&copy; 2021 Boolbnb, Inc.</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Termini</a></li>
+              <li><a href="#">Mappa del sito</a></li>
+              <li><a href="#">Dettagli dell'azienda</a></li>
+            </ul>
+          </div>
+          <div class="right col-lg-6 col-md-12 text-right">
+            <div class="lang">
+              <ul class="my-ul">
+                <li><a href="#"><i class="fas fa-globe-africa"></i> Italiano(IT)</a></li>
+                <li><a href="#"><i class="fas fa-euro-sign"></i> Eur</a></li>
+              </ul>
+            </div>
+            <div class="social">
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 </body>
 </html>
 

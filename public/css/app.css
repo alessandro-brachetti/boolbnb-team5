@@ -11617,6 +11617,28 @@ input[type=checkbox]:checked:after {
   border: 2px solid white;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .white-btn {
   background-color: #fff;
   color: #000000;
@@ -11949,6 +11971,19 @@ main#create .content textarea:focus {
   border: 1px solid #CED4DA;
 }
 
+ul.results {
+  background-color: #faf9f8;
+  z-index: 10;
+  position: absolute;
+  top: 70px;
+  border-radius: 9px;
+  padding: 5px 5px;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+  list-style: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 446px) {
   main#create .content .child {
     flex: 0 0 100%;
@@ -12207,6 +12242,17 @@ main#edit .content input[type=file i]::-webkit-file-upload-button {
   padding: 10px, 5px;
 }
 
+.results {
+  background-color: #faf9f8;
+  z-index: 10;
+  position: absolute;
+  top: 70px;
+  border-radius: 9px;
+  padding: 5px 5px;
+  list-style: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 446px) {
   main#edit .content .child {
     flex: 0 0 100%;
@@ -12240,6 +12286,7 @@ main#edit .content input[type=file i]::-webkit-file-upload-button {
 main#index-messages .greycontainer {
   background-color: #faf9f8;
   padding-bottom: 150px;
+  height: 100vh;
 }
 
 main#index-messages .my-card:hover {

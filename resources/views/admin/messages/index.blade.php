@@ -36,7 +36,7 @@
           @endforeach
         </div>
         @else
-        <h4 class="text-center mpt-30">Non hai ancora nessun messaggio</h4>
+        <h4 class="text-center mpt-30" style="padding-bottom: 200px">Non hai ancora nessun messaggio</h4>
         @endif
       </div>
     </div>

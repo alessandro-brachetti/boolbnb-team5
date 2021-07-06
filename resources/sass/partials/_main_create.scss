@@ -63,6 +63,19 @@ main#create .content {
     outline: none;
     border: 1px solid #CED4DA;
   }
+
+  ul.results {
+    background-color: $mylightgrey;
+    z-index: 10;
+    position: absolute;
+    top: 70px;
+    // box-shadow: 2px 3px 17px -3px #000000;
+    border-radius: 9px;
+    padding: 5px 5px; 
+    padding-inline-start: 0;   
+    list-style: none;
+    cursor: pointer;
+  }
   
   @media screen and (max-width: 446px) {
     main#create .content .child {

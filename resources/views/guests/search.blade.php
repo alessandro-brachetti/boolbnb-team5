@@ -3,8 +3,8 @@
 
 <div class="container-fluid advanced-search-page" id="search" >
     <div class="row">
-        <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 mobile d-flex flex-wrap flex-column justify-content-between">
-            <h4 class="mt-3">Soggiorni nell'area selezionata della mappa</h4>
+        <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 mobile d-flex flex-wrap flex-column">
+            <h4 class="title-admin mt-3 mpt-30 mpb-30">Soggiorni nell'area selezionata della mappa</h4>
             <div id="filters" class="d-flex flex-wrap flex-column mt-1">
                 
                 <div class="first-line-filters d-flex flex-wrap justify-content-start">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <div v-cloak class="range-changer mt-4">
+                <div v-cloak class="range-changer mmt-40">
                     <h5>Aumenta il raggio di ricerca:</h5>
                     <span>@{{range}} Km</span>
                     <input type="range" v-model='range' name="" id="" min="15" max="100" @input="onRangeChange">
@@ -48,7 +48,7 @@
 
             </div>
             
-            <div class="overflowable">               
+            <div class="overflowable mmt-50">               
                 <div v-cloak v-for="apartment in filteredResults" v-if="apartment.n_rooms >= rooms && apartment.n_beds >= beds">
                     <a :href="`/apartment/${apartment.id}`">
                         <div class="my-search-card row mb-2 ">

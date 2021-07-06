@@ -11871,6 +11871,7 @@ nav .mynavbutton.register {
 
 main#create .content {
   background-color: #faf9f8;
+  padding-bottom: 200px;
 }
 
 main#create .content .icon {
@@ -11965,6 +11966,7 @@ main#create .content textarea:focus {
 
 main#index-admin .grey-container {
   background-color: #faf9f8;
+  padding-bottom: 300px;
 }
 
 main#index-admin .info {
@@ -12007,6 +12009,10 @@ main#index-admin .apartments .my-card .beds-rooms .beds {
 
 main#index-admin .apartments .my-card .beds-rooms .circle {
   font-size: 1.1rem;
+}
+
+main#dashboard {
+  padding-bottom: 400px;
 }
 
 main#dashboard .info .user {
@@ -12121,6 +12127,7 @@ main#dashboard .sponsors .my-card .my-card-body .my-table tbody .apartment-title
 
 main#edit .content {
   background-color: #faf9f8;
+  padding-bottom: 200px;
 }
 
 main#edit .content .icon {
@@ -12217,7 +12224,7 @@ main#edit .content input[type=file i]::-webkit-file-upload-button {
 
 main#index-messages .greycontainer {
   background-color: #faf9f8;
-  padding-bottom: 30px;
+  padding-bottom: 150px;
 }
 
 main#index-messages .my-card:hover {
@@ -12251,7 +12258,7 @@ main#index-messages .my-card .my-card-body i {
 
 main#index-sponsors .greycontainer {
   background-color: #faf9f8;
-  padding-bottom: 30px;
+  padding-bottom: 150px;
 }
 
 main#index-sponsors .my-card:hover {
@@ -12408,6 +12415,14 @@ main#welcome .my-card .my-card-img-top {
 .advanced-search-page.container-xl .first-line-filters input {
   border-radius: 9px;
   padding: 0.35rem;
+}
+
+.container-fluid.advanced-search-page label,
+.advanced-search-page.container-sm label,
+.advanced-search-page.container-md label,
+.advanced-search-page.container-lg label,
+.advanced-search-page.container-xl label {
+  margin-bottom: 0;
 }
 
 .container-fluid.advanced-search-page .overflowable,
@@ -12645,6 +12660,7 @@ main#g_show .container-md,
 main#g_show .container-lg,
 main#g_show .container-xl {
   background-color: #faf9f8;
+  padding-bottom: 150px;
 }
 
 main#g_show .thumb {
@@ -12734,6 +12750,7 @@ main#g_show textarea:focus {
 
 main#login {
   padding-top: 50px;
+  padding-bottom: 200px;
 }
 
 main#login input:focus {
@@ -12795,6 +12812,7 @@ main#login .my-btn .prova:focus {
 
 main#register {
   padding-top: 50px;
+  padding-bottom: 200px;
 }
 
 main#register input:focus {

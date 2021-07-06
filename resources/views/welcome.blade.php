@@ -58,7 +58,7 @@
   <div class="container-fluid my-container-fluid bg-white">
     <div class="row mpt-30 mpb-5">
       <div class="col-md-6 offset-md-3 d-flex justify-content-center title text-center flex-column">
-        <h2>Appartamenti in evidenza</h2>
+        <h2 class="title-admin">Appartamenti in evidenza</h2>
         <p>Scopri i migliori appartamenti in circolazione dove trascorrere la tua vacanza da sogno.</p>
       </div>
     </div>
@@ -101,14 +101,14 @@
     <div class="container">
     <div class="row mpt-30 mpb-5">
       <div class="col-md-12 d-flex justify-content-center title text-center flex-column">
-        <h2>Aggiunti di recente</h2>
+        <h2 class="title-admin">Aggiunti di recente</h2>
           <p>Esplora migliaia di appartamenti, tutti a tua disposizione.</p>
       </div>
     </div>
   </div>
   </div>
-  <div class="container">
-    <div class="row apartments mmt-50 mmb-50" id="scroll">
+  <div class="container mpb-150">
+    <div class="row apartments mmt-50" id="scroll">
       <div class="scroll col-md-12">
       @foreach($apartmentsNewest as $apartmentNewest)
       <div class="col-lg-3 col-md-4 col-sm-6">

@@ -3,18 +3,16 @@
     .btn.services{
         background-color: $myorange;
         color:#fff;
-
     }
-
     .first-line-filters input{
         border-radius: 9px;
         padding: .35rem;
-
     }
 
-
-    .overflowable{
-        
+    label {
+      margin-bottom: 0;
+    }
+    .overflowable{    
         overflow-y: auto;
         height: calc(60vh - 75px);
         .my-search-card{

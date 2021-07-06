@@ -1,5 +1,8 @@
 main#welcome{
   background-color: $mylightgrey;
+  #searchInput{
+    font-size: 1.3rem;
+  }
   .apartments{
     width: 100%;
     flex-wrap: nowrap;

@@ -1,6 +1,7 @@
 main#show {
     .container-fluid {
         background-color: $mylightgrey;
+        padding-bottom: 100px;
     }
     .thumb {
         width: 100%;
@@ -15,7 +16,7 @@ main#show {
     .c-card {
         display: flex;
         flex-direction: column;
-        align-items: center;  
+        align-items: center;
         padding: 20px 0;
     }
     .my-card:hover {
@@ -42,25 +43,25 @@ main#show {
           flex: 0 0 100%;
         }
       }
-      
+
       @media screen and (min-width: 445px) and (max-width: 991px) {
         .child {
           flex: 0 0 50%;
         }
       }
-      
+
       @media screen and (min-width: 992px) and (max-width: 1399px) {
         .child {
           flex: 0 0 33%;
         }
       }
-      
+
       @media screen and (min-width: 1400px) and (max-width: 1599px) {
         .child {
           flex: 0 0 25%;
         }
       }
-      
+
       @media screen and (min-width: 1600px) {
         .child {
           flex: 0 0 20%;

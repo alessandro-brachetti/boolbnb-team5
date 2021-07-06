@@ -22,6 +22,18 @@ font-family: 'Nunito', sans-serif;
   }
 }
 
+// button arancione
+.my-btn{
+  @include button-style;
+   background-color: $myorange;
+   border-radius: 9px;
+   color:#fff;
+   border: 0;
+   &:focus{
+     box-shadow: none;
+   }
+}
+
 // stile link
 a{
   text-decoration: none;

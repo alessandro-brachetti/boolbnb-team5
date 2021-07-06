@@ -31,24 +31,24 @@
               <div v-cloak id="root">
                 <div class="form-group">
                   <label for="address" class="bold">Indirizzo</label>
-  
+
                     <input v-model="search" class="form-control @error('address') is-invalid @enderror" id="address" type="text" name="address" @input="responseApi">
                     <ul class="results">
                       <li v-for="result in results" @click="getCords(result.position.lat, result.position.lon), search=result.address.freeformAddress">@{{result.address.freeformAddress}}</li>
                     </ul>
-  
+
                   @error('address')
                     <small class="text-danger"> {{ $message }}</small>
                   @enderror
                 </div>
-  
+
                 <div class="form-group">
                   <input class="form-control @error('latitude') is-invalid @enderror" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
                 </div>
-  
+
                 <div class="form-group">
                   <input class="form-control @error('longitude') is-invalid @enderror" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
-                  
+
                 </div>
               </div>
             </div>
@@ -100,12 +100,12 @@
                 <div class="form-check child">
                   <input class="form-check-input" @error('services') is-invalid @enderror" id="{{$service->service_name}}" type="checkbox" name="service_ids[]" value="{{$service->id}}">
                 <label class="form-check-label" for="services"><span><img class="icon" src="../../icons/{{$service->service_name}}.svg" alt=""></span><span>{{$service->service_name}}</span></label>
-                </div> 
+                </div>
                 @endforeach
                 @error('services')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
-                </div>      
+                </div>
               </div>
             </div>
           </div>
@@ -143,10 +143,10 @@
                 @enderror
               </div>
             </div>
-          </div>       
+          </div>
           <div class="row text-center mpt-30">
             <div class="col-md-12">
-              <button class="btn orange" type="submit" name="button">Aggiungi</button>
+              <button class="btn my-btn" type="submit" name="button">Aggiungi</button>
             </div>
           </div>    
           </form>

@@ -10,8 +10,8 @@
         <div class="col-md-8">
           <h5 class="card-title"><span><img class="icon" src="/icons/Posizione.svg" alt="" width="25px" height="25px"></span> {{$apartment->address}}</h5>
           <input type="hidden" value="{{$apartment->longitude}}" id="long">
-          <input type="hidden" value="{{$apartment->latitude}}" id="lat">  
-        </div> 
+          <input type="hidden" value="{{$apartment->latitude}}" id="lat">
+        </div>
       </div>
       <div class="row d-flex align-items-center">
         <div class="col-md-12 ar">
@@ -33,17 +33,17 @@
         <div class="col-md-4 child mmb-10">
             <div class="c-card card my-card"><span><img class="icon" src="/icons/meter.svg" alt="" width="25px" height="25px"></span> Mq: {{$apartment->mq}}</div>
         </div>
-        <div class="col-md-4 child mmb-10">  
-          <div class="c-card card my-card"><span><img class="icon" src="/icons/views.svg" alt="" width="25px" height="25px"></span>Visualizzazioni totali: {{count($apartment->views)}}</div>                           
+        <div class="col-md-4 child mmb-10">
+          <div class="c-card card my-card"><span><img class="icon" src="/icons/views.svg" alt="" width="25px" height="25px"></span>Visualizzazioni totali: {{count($apartment->views)}}</div>
         </div>
     </div>
     <div class="row mmt-30 mmb-30">
       <div class="col-md-9">
           <div class="bold">Descrizione </div>
-          <p>{{$apartment->description}}</p>      
+          <p>{{$apartment->description}}</p>
       </div>
     </div>
-    <div class="bold">Servizi</div>    
+    <div class="bold">Servizi</div>
     <div class="row d-flex mmt-30">
         @foreach($apartment->services as $service)
         <div class="col-md-4 child mmb-15">
@@ -73,7 +73,7 @@
                       <small class="text-danger"> {{ $message }}</small>
                     @enderror
                   </div>
-      
+
                   <div class="form-group">
                     <label for="lastname">Cognome</label>
                     <input class="form-control @error('lastname') is-invalid @enderror" id="lastname" type="text" name="lastname" value="{{Auth::user() ? Auth::user()->lastname : ""}}">
@@ -81,7 +81,7 @@
                       <small class="text-danger"> {{ $message }}</small>
                     @enderror
                   </div>
-      
+
                   <div class="form-group">
                     <label for="email">Email</label>
                     <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" value="{{Auth::user() ? Auth::user()->email : ""}}">
@@ -89,7 +89,7 @@
                       <small class="text-danger"> {{ $message }}</small>
                     @enderror
                   </div>
-      
+
                   <div class="form-group">
                     <label for="message">Messaggio</label>
                     <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" value=""></textarea>
@@ -98,10 +98,10 @@
                     @enderror
                   </div>
                   <div class="message-button text-center">
-                    <button class="btn orange" type="button" name="button" data-toggle="modal" data-target="#exampleModal">Invia</button>
-    
+                    <button class="btn my-btn" type="button" name="button" data-toggle="modal" data-target="#exampleModal">Invia</button>
+
                   </div>
-    
+
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -115,20 +115,20 @@
                           Hai inviato il messaggio con successo!
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn orange" data-dismiss="modal" onclick="submit()">Ok</button>
+                          <button type="button" class="btn my-btn" data-dismiss="modal" onclick="submit()">Ok</button>
                         </div>
                       </div>
                     </div>
-                  </div> 
-              </form>      
+                  </div>
+              </form>
             @endif
-      </div> 
+      </div>
     </div>
   </div>
-              
+
   </div>
-      
-       
+
+
   </div>
   </div>
 </main>
@@ -149,7 +149,7 @@
   function submit() {
     form.submit();
   }
-  
+
   const API_KEY = 'DgxwlY48Gch9pmQ6Aw67y8KTVFViLafL';
   let long = document.getElementById('long').value;
   let lat = document.getElementById('lat').value;
@@ -166,4 +166,3 @@
   var marker = new tt.Marker({element: element}).setLngLat([long, lat]).addTo(map);
 </script>
 @endsection
-

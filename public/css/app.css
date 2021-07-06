@@ -11456,6 +11456,21 @@ body {
   }
 }
 
+.my-btn {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  padding: 4px 18px;
+  background-color: none;
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+.my-btn:focus {
+  box-shadow: none;
+}
+
 a {
   text-decoration: none;
   color: #000000;
@@ -12323,6 +12338,10 @@ main#welcome {
   background-color: #faf9f8;
 }
 
+main#welcome #searchInput {
+  font-size: 1.3rem;
+}
+
 main#welcome .apartments {
   width: 100%;
   flex-wrap: nowrap;
@@ -12423,6 +12442,135 @@ main#welcome .my-card .my-card-img-top {
 .advanced-search-page.container-lg label,
 .advanced-search-page.container-xl label {
   margin-bottom: 0;
+}
+
+.container-fluid.advanced-search-page .modal-footer button,
+.advanced-search-page.container-sm .modal-footer button,
+.advanced-search-page.container-md .modal-footer button,
+.advanced-search-page.container-lg .modal-footer button,
+.advanced-search-page.container-xl .modal-footer button {
+  background-color: #fa6933;
+  border-radius: 9px;
+  color: #fff;
+  border: 0;
+}
+
+.container-fluid.advanced-search-page .modal-footer button:focus,
+.advanced-search-page.container-sm .modal-footer button:focus,
+.advanced-search-page.container-md .modal-footer button:focus,
+.advanced-search-page.container-lg .modal-footer button:focus,
+.advanced-search-page.container-xl .modal-footer button:focus {
+  box-shadow: none;
+}
+
+.container-fluid.advanced-search-page button,
+.advanced-search-page.container-sm button,
+.advanced-search-page.container-md button,
+.advanced-search-page.container-lg button,
+.advanced-search-page.container-xl button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 14px;
+}
+
+.container-fluid.advanced-search-page button:focus,
+.advanced-search-page.container-sm button:focus,
+.advanced-search-page.container-md button:focus,
+.advanced-search-page.container-lg button:focus,
+.advanced-search-page.container-xl button:focus {
+  box-shadow: none;
+}
+
+.container-fluid.advanced-search-page input[type=number],
+.advanced-search-page.container-sm input[type=number],
+.advanced-search-page.container-md input[type=number],
+.advanced-search-page.container-lg input[type=number],
+.advanced-search-page.container-xl input[type=number] {
+  border: 1px solid #ededed;
+  outline: 0;
+}
+
+.container-fluid.advanced-search-page input[type=range],
+.advanced-search-page.container-sm input[type=range],
+.advanced-search-page.container-md input[type=range],
+.advanced-search-page.container-lg input[type=range],
+.advanced-search-page.container-xl input[type=range] {
+  overflow: hidden;
+  width: 100%;
+  -webkit-appearance: none;
+  background-color: #ededed;
+  border-radius: 8px;
+}
+
+.container-fluid.advanced-search-page input[type=range]:focus,
+.advanced-search-page.container-sm input[type=range]:focus,
+.advanced-search-page.container-md input[type=range]:focus,
+.advanced-search-page.container-lg input[type=range]:focus,
+.advanced-search-page.container-xl input[type=range]:focus {
+  outline: none;
+}
+
+.container-fluid.advanced-search-page input[type=range]::-webkit-slider-runnable-track,
+.advanced-search-page.container-sm input[type=range]::-webkit-slider-runnable-track,
+.advanced-search-page.container-md input[type=range]::-webkit-slider-runnable-track,
+.advanced-search-page.container-lg input[type=range]::-webkit-slider-runnable-track,
+.advanced-search-page.container-xl input[type=range]::-webkit-slider-runnable-track {
+  height: 10px;
+  -webkit-appearance: none;
+  color: #fa6933;
+  margin-top: -1px;
+  cursor: pointer;
+}
+
+.container-fluid.advanced-search-page input[type=range]::-webkit-slider-thumb,
+.advanced-search-page.container-sm input[type=range]::-webkit-slider-thumb,
+.advanced-search-page.container-md input[type=range]::-webkit-slider-thumb,
+.advanced-search-page.container-lg input[type=range]::-webkit-slider-thumb,
+.advanced-search-page.container-xl input[type=range]::-webkit-slider-thumb {
+  width: 10px;
+  -webkit-appearance: none;
+  height: 10px;
+  cursor: ew-resize;
+  background: #fa6933;
+  box-shadow: -700px 0 0 700px #fa6933;
+}
+
+.container-fluid.advanced-search-page input[type=range]::-webkit-slider-thumb:hover,
+.advanced-search-page.container-sm input[type=range]::-webkit-slider-thumb:hover,
+.advanced-search-page.container-md input[type=range]::-webkit-slider-thumb:hover,
+.advanced-search-page.container-lg input[type=range]::-webkit-slider-thumb:hover,
+.advanced-search-page.container-xl input[type=range]::-webkit-slider-thumb:hover,
+.container-fluid.advanced-search-page input[type=range]::-webkit-slider-thumb:active,
+.advanced-search-page.container-sm input[type=range]::-webkit-slider-thumb:active,
+.advanced-search-page.container-md input[type=range]::-webkit-slider-thumb:active,
+.advanced-search-page.container-lg input[type=range]::-webkit-slider-thumb:active,
+.advanced-search-page.container-xl input[type=range]::-webkit-slider-thumb:active {
+  background: #fa6933;
+  box-shadow: -700px 0 0 700px #fa6933;
+}
+
+.container-fluid.advanced-search-page input[type=range]::-moz-range-progress,
+.advanced-search-page.container-sm input[type=range]::-moz-range-progress,
+.advanced-search-page.container-md input[type=range]::-moz-range-progress,
+.advanced-search-page.container-lg input[type=range]::-moz-range-progress,
+.advanced-search-page.container-xl input[type=range]::-moz-range-progress {
+  background-color: #fa6933;
+}
+
+.container-fluid.advanced-search-page input[type=range]::-ms-fill-lower,
+.advanced-search-page.container-sm input[type=range]::-ms-fill-lower,
+.advanced-search-page.container-md input[type=range]::-ms-fill-lower,
+.advanced-search-page.container-lg input[type=range]::-ms-fill-lower,
+.advanced-search-page.container-xl input[type=range]::-ms-fill-lower {
+  background-color: #fa6933;
+}
+
+.container-fluid.advanced-search-page input[type=range]::-ms-fill-upper,
+.advanced-search-page.container-sm input[type=range]::-ms-fill-upper,
+.advanced-search-page.container-md input[type=range]::-ms-fill-upper,
+.advanced-search-page.container-lg input[type=range]::-ms-fill-upper,
+.advanced-search-page.container-xl input[type=range]::-ms-fill-upper {
+  background-color: #fa6933;
 }
 
 .container-fluid.advanced-search-page .overflowable,
@@ -12579,6 +12727,7 @@ main#show .container-md,
 main#show .container-lg,
 main#show .container-xl {
   background-color: #faf9f8;
+  padding-bottom: 100px;
 }
 
 main#show .thumb {
@@ -12749,8 +12898,8 @@ main#g_show textarea:focus {
 }
 
 main#login {
-  padding-top: 50px;
-  padding-bottom: 200px;
+  padding-top: 70px;
+  padding-bottom: 300px;
 }
 
 main#login input:focus {
@@ -12811,8 +12960,8 @@ main#login .my-btn .prova:focus {
 }
 
 main#register {
-  padding-top: 50px;
-  padding-bottom: 200px;
+  padding-top: 70px;
+  padding-bottom: 300px;
 }
 
 main#register input:focus {

@@ -6,17 +6,22 @@
   <div class="container-fluid my-container-fluid">
     <div class="carousel-inner my-carousel-inner">
         <div class="carousel-item my-carousel-item active">
-          <div class="bg-slider" style="background-image: url('/images/01.jpg')">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-4.jpg')">
 
           </div>
         </div>
         <div class="carousel-item my-carousel-item">
-          <div class="bg-slider" style="background-image: url('/images/02.jpg')">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-3.jpg')">
 
           </div>
         </div>
         <div class="carousel-item my-carousel-item">
-          <div class="bg-slider" style="background-image: url('/images/03.jpg')">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-2.jpg')">
+
+          </div>
+        </div>
+        <div class="carousel-item my-carousel-item">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-1.jpg')">
 
           </div>
         </div>
@@ -36,7 +41,7 @@
         </div>
         <div class="form-inline my-2 my-lg-0 my-welcome my-dropdown" id="welcome" v-cloak>
           <div class="d-flex flex-column my-search">
-            <input autocomplete="off" class="form-control my-form control mr-sm-2" id="searchInput" type="search" placeholder="Dove vuoi andare?" v-model="search" @input="responseApi">
+            <input class="text-center" autocomplete="off" class="form-control my-form control mr-sm-2" id="searchInput" type="search" placeholder="Dove vuoi andare?" v-model="search" @input="responseApi">
         <div class="my-dropdown-menu my-results" autocomplete="off">
           <ul>
             <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
@@ -53,7 +58,7 @@
   <div class="container-fluid my-container-fluid bg-white">
     <div class="row mpt-30 mpb-5">
       <div class="col-md-6 offset-md-3 d-flex justify-content-center title text-center flex-column">
-        <h2>Appartamenti in evidenza</h2>
+        <h2 class="title-admin">Appartamenti in evidenza</h2>
         <p>Scopri i migliori appartamenti in circolazione dove trascorrere la tua vacanza da sogno.</p>
       </div>
     </div>
@@ -96,14 +101,14 @@
     <div class="container">
     <div class="row mpt-30 mpb-5">
       <div class="col-md-12 d-flex justify-content-center title text-center flex-column">
-        <h2>Aggiunti di recente</h2>
+        <h2 class="title-admin">Aggiunti di recente</h2>
           <p>Esplora migliaia di appartamenti, tutti a tua disposizione.</p>
       </div>
     </div>
   </div>
   </div>
-  <div class="container">
-    <div class="row apartments mmt-50 mmb-50" id="scroll">
+  <div class="container mpb-150">
+    <div class="row apartments mmt-50" id="scroll">
       <div class="scroll col-md-12">
       <?php $__currentLoopData = $apartmentsNewest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartmentNewest): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <div class="col-lg-3 col-md-4 col-sm-6">

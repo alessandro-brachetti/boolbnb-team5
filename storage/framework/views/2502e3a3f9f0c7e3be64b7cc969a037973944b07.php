@@ -3,21 +3,21 @@
 
 <div class="container-fluid advanced-search-page" id="search" >
     <div class="row">
-        <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 mobile d-flex flex-wrap flex-column justify-content-between">
-            <h4 class="mt-3">Soggiorni nell'area selezionata della mappa</h4>
+        <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 mobile d-flex flex-wrap flex-column">
+            <h4 class="title-admin mt-3 mpt-30 mpb-30">Soggiorni nell'area selezionata della mappa</h4>
             <div id="filters" class="d-flex flex-wrap flex-column mt-1">
-                
+
                 <div class="first-line-filters d-flex flex-wrap justify-content-start">
                     <div class="mr-2">
                         <label for="points">Stanze:</label>
                         <input type="number" id="points" name="points" min="1" max="20" v-model="rooms">
                     </div>
-                    
+
                     <div v-cloak class="mr-2">
                         <label for="points">Letti:</label>
                         <input type="number" id="points" name="points" min="1" max="20" v-model="beds">
                     </div>
-        
+
                     <button class="btn services" type="button" data-toggle="modal" data-target="#myModal">Più filtri</button>
                 </div>
 
@@ -26,10 +26,10 @@
                     <div class="modal-content">
                         <div class="modal-body d-flex flex-wrap flex-column">
                             <h4>Più filtri</h4>
-                            <div class="form-check form-check-inline" v-for="service in services">  
+                            <div class="form-check form-check-inline" v-for="service in services">
                                 <input class="form-check-input" id="services" type="checkbox" v-model="checkedItems" :value="service">
                                 <label> {{service}} </label>
-                            </div>   
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-danger" @click="checkedItems = []" data-dismiss="modal"><i class="fas fa-redo-alt"></i></button>
@@ -39,16 +39,16 @@
                     </div>
                 </div>
 
-                <div v-cloak class="range-changer mt-4">
-                    <h5>Aumenta il raggio di ricerca:</h5>
+                <div v-cloak class="range-changer mmt-40">
+                    <h5 class="text-center">Aumenta il raggio di ricerca:</h5>
                     <span>{{range}} Km</span>
                     <input type="range" v-model='range' name="" id="" min="15" max="100" @input="onRangeChange">
                     <span>100 Km</span>
                 </div>
 
             </div>
-            
-            <div class="overflowable">               
+
+            <div class="overflowable mmt-50">
                 <div v-cloak v-for="apartment in filteredResults" v-if="apartment.n_rooms >= rooms && apartment.n_beds >= beds">
                     <a :href="`/apartment/${apartment.id}`">
                         <div class="my-search-card row mb-2 ">
@@ -63,7 +63,7 @@
                                     <div class="my-card-title">
                                         <p>{{apartment.title}}</p>
                                     </div>
-        
+
                                     <div class="my-card-text">
                                         <div class="address">
                                             <div class="via">{{apartment.address}}</div>
@@ -74,10 +74,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -85,7 +85,7 @@
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div id="map"></div>
-        </div>       
+        </div>
     </div>
 </div>
 
@@ -104,7 +104,7 @@
 
     input {
     margin: .4rem;
-    }   
+    }
 
     [v-cloak] {
         display: none;
@@ -114,9 +114,9 @@
 <script>
     console.log($(window.innerHeight)[0], $('.navbar')[0].offsetHeight, $('#filters')[0].offsetHeight)
 
-    
 
-    
+
+
 </script>
 <?php $__env->stopSection(); ?>
 

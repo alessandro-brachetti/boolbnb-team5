@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<main id="edit"> 
+<main id="edit">
   <div class="container title text-center mpt-20 mpb-20">
     <div class="row mpt-30">
       <div class="col-md-12">
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center mmb-20">
-          
+
 
           <div class="col-md-4">
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -109,7 +109,7 @@
                 @error('services')
                   <small class="text-danger"> {{ $message }}</small>
                 @enderror
-              </div>      
+              </div>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@
                 <small class="text-danger"> {{ $message }}</small>
               @enderror
             </div>
-          </div> 
+          </div>
           <div class="col-md-2 offset-md-3">
             <div class="form-group">
               <label for="visible" class="bold">Visibile</label>
@@ -149,12 +149,12 @@
         </div>
         <div class="row text-center mpt-30">
           <div class="col-md-12">
-            <button class="btn orange" type="submit" name="button">Salva</button>
+            <button class="btn my-btn" type="submit" name="button">Salva</button>
           </div>
         </div>
       </form>
       </div>
     </div>
-  </div>  
+  </div>
 </main>
 @endsection

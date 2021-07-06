@@ -12,7 +12,84 @@
     label {
       margin-bottom: 0;
     }
-    .overflowable{    
+
+    // modal
+    .modal-footer{
+      button{
+        background-color: $myorange;
+        border-radius: 9px;
+        color:#fff;
+        border: 0;
+        &:focus{
+          box-shadow: none;
+        }
+      }
+    }
+
+    // button più filtri
+    button{
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-radius: 14px;
+      &:focus{
+        box-shadow: none;
+      }
+    }
+    // input number
+    input[type="number"]{
+      border: 1px solid $mygrey;
+      outline: 0;
+    }
+
+    // input range
+    input[type="range"]{
+      overflow: hidden;
+      width: 100%;
+      -webkit-appearance: none;
+      background-color: $mygrey;
+      border-radius: 8px;
+    }
+
+    input[type=range]:focus {
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track{
+      height: 10px;
+      -webkit-appearance: none;
+      color: $myorange;
+      margin-top: -1px;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb{
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: $myorange;
+      box-shadow: -700px 0 0 700px $myorange;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover, input[type="range"]::-webkit-slider-thumb:active{
+      background: $myorange;
+      box-shadow: -700px 0 0 700px $myorange;
+    }
+
+    input[type="range"]::-moz-range-progress {
+      background-color: $myorange;
+    }
+
+    input[type="range"]::-ms-fill-lower {
+      background-color: $myorange;
+    }
+
+    input[type="range"]::-ms-fill-upper {
+      background-color: $myorange;
+    }
+    // input range
+
+    .overflowable{
         overflow-y: auto;
         height: calc(60vh - 75px);
         .my-search-card{
@@ -35,7 +112,7 @@
                 .cover{
                   background-position: center;
                   background-size: cover;
-                  
+
                   height: 130px;
                   border-radius: 9px;
                 }
@@ -55,7 +132,7 @@
                 }
                 .my-card-text{
                   font-size: 0.8rem;
-            
+
                   .address{
                     padding-top: 3px;
                     font-weight: 800;
@@ -63,12 +140,12 @@
                     .via{
                       font-weight: 600;
                     }
-                    
+
                   }
 
                   .services{
                     padding-top: 3px;
-                    
+
                     .service{
                         p.sr{
                             font-weight: 600;
@@ -83,7 +160,7 @@
 
 
 
-        
+
     }
 
     @media screen and (max-width: 991px) {

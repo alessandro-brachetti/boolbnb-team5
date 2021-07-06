@@ -47,6 +47,8 @@ main#welcome{
 
 .my-card{
       &:hover{
+        transition: 0.4s ease;
+        transform: scale(1.05);
         border: 2px solid $myorange;
       }
 

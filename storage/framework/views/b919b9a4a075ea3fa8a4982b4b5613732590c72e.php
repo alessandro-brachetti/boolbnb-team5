@@ -56,10 +56,12 @@
 </div>
 <main id="welcome">
   <div class="container-fluid my-container-fluid bg-white">
-    <div class="row mpt-30 mpb-5">
-      <div class="col-md-6 offset-md-3 d-flex justify-content-center title text-center flex-column">
-        <h2 class="title-admin">Appartamenti in evidenza</h2>
-        <p>Scopri i migliori appartamenti in circolazione dove trascorrere la tua vacanza da sogno.</p>
+    <div class="container">
+      <div class="row mpt-25">
+        <div class="col-md-12 d-flex justify-content-center flex-column">
+          <h2 class="title-admin">Appartamenti in evidenza</h2>
+          <p>Scopri i migliori appartamenti in circolazione dove trascorrere la tua vacanza da sogno.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -99,8 +101,8 @@
   </div>
   <div class="container-fluid my-container-fluid bg-white">
     <div class="container">
-    <div class="row mpt-30 mpb-5">
-      <div class="col-md-12 d-flex justify-content-center title text-center flex-column">
+    <div class="row mpt-55">
+      <div class="col-md-12 d-flex justify-content-center flex-column">
         <h2 class="title-admin">Aggiunti di recente</h2>
           <p>Esplora migliaia di appartamenti, tutti a tua disposizione.</p>
       </div>

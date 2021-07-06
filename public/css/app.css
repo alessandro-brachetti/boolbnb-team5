@@ -12391,6 +12391,8 @@ main#welcome .partnership span {
 }
 
 main#welcome .my-card:hover {
+  transition: 0.4s ease;
+  transform: scale(1.05);
   border: 2px solid #fa6933;
 }
 
@@ -12515,7 +12517,7 @@ main#welcome .my-card .my-card-img-top {
 .advanced-search-page.container-md input[type=range]::-webkit-slider-runnable-track,
 .advanced-search-page.container-lg input[type=range]::-webkit-slider-runnable-track,
 .advanced-search-page.container-xl input[type=range]::-webkit-slider-runnable-track {
-  height: 10px;
+  height: 17px;
   -webkit-appearance: none;
   color: #fa6933;
   margin-top: -1px;

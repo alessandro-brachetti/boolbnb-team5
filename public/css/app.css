@@ -11619,6 +11619,12 @@ input[type=checkbox]:checked:after {
   color: #000000;
 }
 
+@media screen and (max-width: 768px) {
+  nav {
+    max-height: 200px;
+  }
+}
+
 nav .input-search-nav {
   display: flex;
   align-items: center;
@@ -11627,6 +11633,18 @@ nav .input-search-nav {
   width: 40%;
   border: 1px solid #ededed;
   border-radius: 27px;
+}
+
+@media screen and (max-width: 768px) {
+  nav .input-search-nav {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  nav .input-search-nav {
+    width: 50%;
+  }
 }
 
 nav .input-search-nav .input {
@@ -11654,11 +11672,29 @@ nav #welcome .search-results {
   top: 70px;
   box-shadow: 2px 3px 17px -3px #000000;
   border-radius: 9px;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  nav #welcome .search-results {
+    top: 75%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  nav #welcome .search-results {
+    width: 380px;
+  }
 }
 
 nav #welcome .search-results a li {
   text-align: left;
   list-style: none;
+  padding-left: 10px;
+}
+
+nav #welcome .search-results a li:hover {
+  background-color: #fa6933;
 }
 
 nav .mynavbutton {

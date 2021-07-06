@@ -2316,6 +2316,42 @@ esources\\views/admin/sponsors/index.blade.php(44): Illuminate\\Foundation\\Boot
 #42 C:\\Users\\giudi\\Desktop\\BOOLEAN\\ESERCIZI\\ESERCIZI-SVOLGIMENTO\\boolbnb-team5\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #43 C:\\Users\\giudi\\Desktop\\BOOLEAN\\ESERCIZI\\ESERCIZI-SVOLGIMENTO\\boolbnb-team5\\server.php(21): require_once('C:\\\\Users\\\\giudi\\\\...')
 #44 {main}
+<<<<<<< HEAD
+"} 
+<<<<<<< HEAD
+[2021-07-05 20:03:07] local.ERROR: Unable to prepare route [api/user] for serialization. Uses Closure. {"exception":"[object] (LogicException(code: 0): Unable to prepare route [api/user] for serialization. Uses Closure. at C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php:1150)
+[stacktrace]
+#0 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteCacheCommand.php(62): Illuminate\\Routing\\Route->prepareForSerialization()
+#1 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Foundation\\Console\\RouteCacheCommand->handle()
+#2 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(37): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#4 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#5 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(596): Illuminate\\Container\\BoundMethod::call()
+#6 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(134): Illuminate\\Container\\Container->call()
+#7 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\symfony\\console\\Command\\Command.php(299): Illuminate\\Console\\Command->execute()
+#8 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(121): Symfony\\Component\\Console\\Command\\Command->run()
+#9 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Concerns\\CallsCommands.php(56): Illuminate\\Console\\Command->run()
+#10 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Concerns\\CallsCommands.php(28): Illuminate\\Console\\Command->runCommand()
+#11 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\OptimizeCommand.php(31): Illuminate\\Console\\Command->call()
+#12 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Foundation\\Console\\OptimizeCommand->handle()
+#13 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(37): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#14 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#15 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#16 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(596): Illuminate\\Container\\BoundMethod::call()
+#17 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(134): Illuminate\\Container\\Container->call()
+#18 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\symfony\\console\\Command\\Command.php(299): Illuminate\\Console\\Command->execute()
+#19 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(121): Symfony\\Component\\Console\\Command\\Command->run()
+#20 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\symfony\\console\\Application.php(978): Illuminate\\Console\\Command->run()
+#21 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\symfony\\console\\Application.php(295): Symfony\\Component\\Console\\Application->doRunCommand()
+#22 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\symfony\\console\\Application.php(167): Symfony\\Component\\Console\\Application->doRun()
+#23 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run()
+#24 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run()
+#25 C:\\Users\\misha\\Desktop\\Boolean\\Final_project\\boolbnb-team5\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#26 {main}
+"} 
+=======
+>>>>>>> 51223476001f526a908895e9782c70c63ae060bc
+=======
 "}
 <<<<<<< HEAD
 [2021-07-04 23:49:21] local.ERROR: Undefined variable: apartmentsNewest (View: C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\views\welcome.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: apartmentsNewest (View: C:\\Users\\lollo\\Desktop\\Esercizi_Boolean\\boolbnb-team5\esources\\views\\welcome.blade.php) at C:\\Users\\lollo\\Desktop\\Esercizi_Boolean\\boolbnb-team5\esources\\views/welcome.blade.php:92)
@@ -2665,6 +2701,7 @@ esources\\views/admin/sponsors/index.blade.php(44): Illuminate\\Foundation\\Boot
 #60 {main}
 "}
 =======
+>>>>>>> f7015c8190de333cdb1d03158f2d025d7be1bcde
 >>>>>>> e4520a9574cbc7f57ddffa59a5ce5d37aa1f4602
 [2021-07-05 23:04:28] local.ERROR: SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'n_bathrooms' at row 1 (SQL: insert into `apartments` (`user_id`, `title`, `address`, `latitude`, `longitude`, `n_rooms`, `n_beds`, `n_bathrooms`, `mq`, `description`, `visible`, `img`, `updated_at`, `created_at`) values (1, elglglgl, Peak, SC, 34.23526, -81.3268, 44, 34, 333, 423, aeerrrrr, 1, storage/uploads/LJ1v6xqcRtHK9kkZ8Rk3N4x8EsBZzYfZHURQ9Mwj.png, 2021-07-05 23:04:28, 2021-07-05 23:04:28)) {"userId":1,"exception":"[object] (Illuminate\\Database\\QueryException(code: 22003): SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'n_bathrooms' at row 1 (SQL: insert into `apartments` (`user_id`, `title`, `address`, `latitude`, `longitude`, `n_rooms`, `n_beds`, `n_bathrooms`, `mq`, `description`, `visible`, `img`, `updated_at`, `created_at`) values (1, elglglgl, Peak, SC, 34.23526, -81.3268, 44, 34, 333, 423, aeerrrrr, 1, storage/uploads/LJ1v6xqcRtHK9kkZ8Rk3N4x8EsBZzYfZHURQ9Mwj.png, 2021-07-05 23:04:28, 2021-07-05 23:04:28)) at C:\\Users\\lollo\\Desktop\\Esercizi_Boolean\\boolbnb-team5\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:671)
 [stacktrace]

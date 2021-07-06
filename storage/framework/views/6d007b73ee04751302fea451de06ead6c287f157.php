@@ -197,7 +197,7 @@ unset($__errorArgs, $__bag); ?>
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <p class="bold">Servizi</p>
-              <div class="d-flex justify-content-center flex-wrap">
+              <div class="d-flex flex-wrap">
                 <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="form-check child">
                   <input class="form-check-input" <?php $__errorArgs = ['services'];

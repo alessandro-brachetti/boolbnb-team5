@@ -43,5 +43,14 @@ main#login{
       &:focus{
         box-shadow: none;
       }
+
+    .prova {
+      box-shadow: none;
+      outline: none;
+      border: 1px solid #ced4da;
+        &:focus{
+          box-shadow: none;
+        }
+      }
    }
 }

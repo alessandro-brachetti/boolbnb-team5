@@ -28,59 +28,83 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="max-height: 70px;">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm justify-content-between" style="max-height: 180px;">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
                     <img src="/images/logo_boolbnb_4.png" alt="" style="max-width: 120px;">
                     <!-- <span style="font-size: 1.3rem; font-weight: 700; padding-left: 5px;">Boolbnb</span> -->
                     
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-                    <!-- <div class="form-inline my-2 my-lg-0" id="welcome">
-                        <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" aria-label="Search" v-model="search" @input="responseApi">
-                        
-                        <div class="">
-                          <ul>
-                            <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
-                          </ul>
+                    <?php if(Route::current()->getName() != 'welcome'): ?>
+                    <div v-cloak class="form-inline my-2 my-lg-0 ml-auto input-search-nav " id="welcome">
+                        <div class="input">
+                          <input class="form-control mr-sm-2 " id="searchInput" type="search" placeholder="Dove vuoi andare" aria-label="Search" v-model="search" @input="responseApi">
                         </div>
-                    </div> -->
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        <?php if(auth()->guard()->guest()): ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
-                            </li>
-                            <?php if(Route::has('register')): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-                                </li>
-                            <?php endif; ?>
-                        <?php else: ?>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <?php echo e(Auth::user()->name); ?>
+                        <div class="icon">
+                          <img src="/images/search.png" alt="">
+                        </div>
+
+                          <ul class="search-results">
+                            <a :href="(search != '' ? `/search/${search}` : '#')">
+                                <li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li>
+                            </a>
+                          </ul>
+
+                    </div>
+                    <?php endif; ?>
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <div class="navbar-nav ml-auto" aria-labelledby="navbarSupportedContent1">
+                                <a class="nav-item text-right" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+
+                                <a class="nav-item text-right logout" href="<?php echo e(route('logout')); ?>"
+                                   onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <?php echo e(__('Logout')); ?>
 
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+
+
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                    <?php echo csrf_field(); ?>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto desktop">
+                        <!-- Authentication Links -->
+                        <?php if(auth()->guard()->guest()): ?>
+                            <li class="nav-item">
+                                <a class="nav-link mynavbutton login" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
+
+                            </li>
+                            <?php if(Route::has('register')): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link mynavbutton register" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
+                                </li>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <div class="mr-auto nav-buttons">
+                                    <a class="mr-4 mynavbutton" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                                    <a class="logout mynavbutton" href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <?php echo e(__('Logout')); ?>
 
                                     </a>
 
-                                    <a class="dropdown-item" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+
 
                                     <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
                                         <?php echo csrf_field(); ?>
@@ -97,6 +121,82 @@
 
     </div>
     
+
+    <footer class="mpt-100 mpb-20">
+      <div class="container">
+        <div class="info row">
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Chi siamo</h5>
+            <ul class="my-ul">
+              <li><a href="https://www.linkedin.com/in/alessandro-brachetti/">Alessandro Brachetti</a></li>
+              <li><a href="https://www.linkedin.com/in/giudittamarino/">Giuditta Marino</a></li>
+              <li><a href="https://www.linkedin.com/in/lorenzo-de-sossi-3343b7213/">Lorenzo De Sossi</a></li>
+              <li><a href="https://www.linkedin.com/in/michaelo-viktor-casubolo-91112420b/">Michaelo Viktor Casubolo</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Informazioni</h5>
+            <ul class="my-ul">
+              <li><a href="#">Come funziona Boolbnb</a></li>
+              <li><a href="#">Boolbnb Plus</a></li>
+              <li><a href="#">Boolbnb for Work</a></li>
+              <li><a href="#">Newsroom</a></li>
+              <li><a href="#">Investitori</a></li>
+              <li><a href="#">HotelTonight</a></li>
+              <li><a href="#">Opportunità di lavoro</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Community</h5>
+            <ul class="my-ul">
+              <li><a href="#"></a></li>
+              <li><a href="#">Diversità e appartenenza</a></li>
+              <li><a href="#">Alloggi per l'emergenza</a></li>
+              <li><a href="#">Accessibilità</a></li>
+              <li><a href="#">Invitare un ospite</a></li>
+              <li><a href="#">Boolbnb Associates</a></li>
+              <li><a href="#">Boolbnb.org</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h5>Assistenza</h5>
+            <ul class="my-ul">
+              <li><a href="#">La nostra risposta all'emergenza COVID-19</a></li>
+              <li><a href="#">Servizio di supporto al vicinato</a></li>
+              <li><a href="#">Centro Assistenza</a></li>
+              <li><a href="#">Affidabilità e sicurezza</a></li>
+              <li><a href="#">Opzioni di cancellazione</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mmt-5 mmb-10 line row">
+        </div>
+        <div class="copyright row mpt-10">
+          <div class="left col-lg-6 col-md-12">
+            <ul class="my-ul">
+              <li><a href="#">&copy; 2021 Boolbnb, Inc.</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Termini</a></li>
+              <li><a href="#">Mappa del sito</a></li>
+              <li><a href="#">Dettagli dell'azienda</a></li>
+            </ul>
+          </div>
+          <div class="right col-lg-6 col-md-12 text-right">
+            <div class="lang">
+              <ul class="my-ul">
+                <li><a href="#"><i class="fas fa-globe-africa"></i> Italiano(IT)</a></li>
+                <li><a href="#"><i class="fas fa-euro-sign"></i> Eur</a></li>
+              </ul>
+            </div>
+            <div class="social">
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 </body>
 </html>
 

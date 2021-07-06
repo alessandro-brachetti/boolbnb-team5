@@ -99,7 +99,7 @@
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <p class="bold">Servizi</p>
-              <div class="d-flex justify-content-center flex-wrap">
+              <div class="d-flex flex-wrap">
                 @foreach ($services as $key => $service)
                 <div class="form-check child">
                   <input class="form-check-input" @error('services') is-invalid @enderror" id="{{$service->service_name}}" type="checkbox" name="service_ids[]" value=" {{$service->id}}" {{ $apartment->services->contains($service) ?  'checked' : '' }}>

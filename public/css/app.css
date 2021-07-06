@@ -11854,31 +11854,31 @@ main#create .content textarea:focus {
 
 @media screen and (max-width: 446px) {
   main#create .content .child {
-    flex: 1 0 100%;
+    flex: 0 0 100%;
   }
 }
 
 @media screen and (min-width: 445px) and (max-width: 991px) {
   main#create .content .child {
-    flex: 1 0 50%;
+    flex: 0 0 50%;
   }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1399px) {
   main#create .content .child {
-    flex: 1 0 33%;
+    flex: 0 0 33%;
   }
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1599px) {
   main#create .content .child {
-    flex: 1 0 25%;
+    flex: 0 0 25%;
   }
 }
 
 @media screen and (min-width: 1600px) {
   main#create .content .child {
-    flex: 1 0 20%;
+    flex: 0 0 20%;
   }
 }
 
@@ -12106,31 +12106,31 @@ main#edit .content input[type=file i]::-webkit-file-upload-button {
 
 @media screen and (max-width: 446px) {
   main#edit .content .child {
-    flex: 1 0 100%;
+    flex: 0 0 100%;
   }
 }
 
 @media screen and (min-width: 445px) and (max-width: 991px) {
   main#edit .content .child {
-    flex: 1 0 50%;
+    flex: 0 0 50%;
   }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1399px) {
   main#edit .content .child {
-    flex: 1 0 33%;
+    flex: 0 0 33%;
   }
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1599px) {
   main#edit .content .child {
-    flex: 1 0 25%;
+    flex: 0 0 25%;
   }
 }
 
 @media screen and (min-width: 1600px) {
   main#edit .content .child {
-    flex: 1 0 20%;
+    flex: 0 0 20%;
   }
 }
 
@@ -12671,6 +12671,16 @@ main#login .my-btn {
 }
 
 main#login .my-btn:focus {
+  box-shadow: none;
+}
+
+main#login .my-btn .prova {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #ced4da;
+}
+
+main#login .my-btn .prova:focus {
   box-shadow: none;
 }
 

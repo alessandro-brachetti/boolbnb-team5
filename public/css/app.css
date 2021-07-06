@@ -11619,51 +11619,82 @@ input[type=checkbox]:checked:after {
   color: #000000;
 }
 
-nav #welcome.input-search-nav {
+@media screen and (max-width: 768px) {
+  nav {
+    max-height: 200px;
+  }
+}
+
+nav .input-search-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 15px;
+  padding: 8px 20px;
   width: 40%;
   border: 1px solid #ededed;
   border-radius: 27px;
 }
 
-nav #welcome.input-search-nav .input {
+@media screen and (max-width: 768px) {
+  nav .input-search-nav {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  nav .input-search-nav {
+    width: 50%;
+  }
+}
+
+nav .input-search-nav .input {
   width: 90%;
 }
 
-nav #welcome.input-search-nav .input #searchInput {
+nav .input-search-nav .input #searchInput {
   width: 100%;
   border: none;
 }
 
-nav #welcome.input-search-nav .input #searchInput:focus {
+nav .input-search-nav .input #searchInput:focus {
   border-color: #ededed;
   box-shadow: none;
 }
 
-nav #welcome.input-search-nav .icon img {
-  width: 18px;
+nav .input-search-nav .icon img {
+  width: 22px;
 }
 
-nav #welcome.input-search-nav .search-results {
+nav #welcome .search-results {
   background-color: #fff;
   z-index: 10;
-  width: 25%;
   position: absolute;
-  top: 90px;
-  box-shadow: 3px 11px 27px 2px rgba(0, 0, 0, 0.25);
+  top: 70px;
+  box-shadow: 2px 3px 17px -3px #000000;
   border-radius: 9px;
+  padding: 0;
 }
 
-nav #welcome.input-search-nav .search-results a li {
+@media screen and (max-width: 768px) {
+  nav #welcome .search-results {
+    top: 75%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  nav #welcome .search-results {
+    width: 380px;
+  }
+}
+
+nav #welcome .search-results a li {
   text-align: left;
   list-style: none;
+  padding-left: 10px;
 }
 
-nav #welcome.input-search-nav .search-results a li:hover {
-  color: #fa6933;
+nav #welcome .search-results a li:hover {
+  background-color: #fa6933;
 }
 
 nav .mynavbutton {
@@ -11701,8 +11732,8 @@ nav .mynavbutton.register {
     width: 100%;
   }
 
-  nav .icon {
-    display: none;
+  nav .input-search-nav #searchInput {
+    width: 100%;
   }
 }
 

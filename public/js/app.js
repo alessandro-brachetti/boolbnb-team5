@@ -37764,13 +37764,8 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> f7015c8190de333cdb1d03158f2d025d7be1bcde
+__webpack_require__(/*! C:\Users\giudi\Desktop\BOOLEAN\ESERCIZI\ESERCIZI-SVOLGIMENTO\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\giudi\Desktop\BOOLEAN\ESERCIZI\ESERCIZI-SVOLGIMENTO\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

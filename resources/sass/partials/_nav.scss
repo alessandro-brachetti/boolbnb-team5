@@ -1,13 +1,22 @@
 .navbar-light .navbar-nav .nav-link{
   color: $myblack;}
 nav{
-  #welcome.input-search-nav{
+    @media screen and (max-width: 768px) {
+    max-height: 200px;
+    }
+    .input-search-nav{
         @include flex-align-center;
         justify-content: space-between;
-        padding: 0px 15px;
+        padding: 8px 20px;
         width: 40%;
         border: 1px solid $mygrey;
         border-radius: 27px;
+        @media screen and (max-width: 768px) {
+        width: 100%;
+        }
+        @media screen and (max-width: 992px) {
+          width: 50%;
+        }
         .input{
           width: 90%;
           #searchInput{
@@ -21,32 +30,38 @@ nav{
         }
       .icon{
         img{
-          width: 18px;
+          width: 22px;
         }
-      }
-
-      .search-results{
-        background-color: #fff;
-        z-index: 10;
-        width: 25%;
-        position: absolute;
-        top: 90px;
-        box-shadow: 3px 11px 27px 2px rgba(0,0,0,0.25);
-        border-radius: 9px;
-          a{
-              li{
-                  text-align: left;
-                  list-style: none;
-                  &:hover{
-                    color: $myorange;
-                  }
-              }
-              
-          }
       }
     }
 
-
+    #welcome{
+        .search-results{
+          background-color: #fff;
+          z-index: 10;
+          position: absolute;
+          top: 70px;
+          box-shadow: 2px 3px 17px -3px #000000;
+          border-radius: 9px;
+          padding: 0;
+          @media screen and (max-width: 768px) {
+            top: 75%;
+          }
+          @media screen and (min-width: 1400px) {
+            width: 380px;
+          }
+            a{
+                li{
+                    text-align: left;
+                    list-style: none;
+                    padding-left: 10px;
+                    &:hover{
+                      background-color: $myorange;
+                    }
+                }
+            }
+        }
+      }
 
     .mynavbutton{
         border-radius: 9px;
@@ -83,10 +98,9 @@ nav{
 
         .input-search-nav{
             width: 100%;
-        }
-
-        .icon{
-          display: none;
+            #searchInput{
+                width: 100%;
+            }
         }
     }
 

@@ -89,8 +89,13 @@ unset($__errorArgs, $__bag); ?>
                                   </button>
 
                                   <?php if(Route::has('password.request')): ?>
+<<<<<<< HEAD:storage/framework/views/ed42de38863b87a49359cc9c6cc90ec415ca0007.php
                                       <a class="btn prova" href="<?php echo e(route('password.request')); ?>">
                                           <?php echo e(__('Dimenticato la Password?')); ?>
+=======
+                                      <a class="btn" href="<?php echo e(route('password.request')); ?>">
+                                          <?php echo e(__('Forgot Your Password?')); ?>
+>>>>>>> bf326f64aa9cd228c8a608c22608bf84c47907b6:storage/framework/views/c29692cb745ca359d6643a631e668b835995fc22.php
 
                                       </a>
                                   <?php endif; ?>
@@ -105,4 +110,4 @@ unset($__errorArgs, $__bag); ?>
 </main>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Alessandro\Desktop\Esercizi\boolbnb-team5\resources\views/auth/login.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\lollo\Desktop\Esercizi_Boolean\boolbnb-team5\resources\views/auth/login.blade.php ENDPATH**/ ?>

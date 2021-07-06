@@ -11619,6 +11619,12 @@ input[type=checkbox]:checked:after {
   color: #000000;
 }
 
+@media screen and (max-width: 768px) {
+  nav {
+    max-height: 200px;
+  }
+}
+
 nav .input-search-nav {
   display: flex;
   align-items: center;
@@ -11627,6 +11633,18 @@ nav .input-search-nav {
   width: 40%;
   border: 1px solid #ededed;
   border-radius: 27px;
+}
+
+@media screen and (max-width: 768px) {
+  nav .input-search-nav {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  nav .input-search-nav {
+    width: 50%;
+  }
 }
 
 nav .input-search-nav .input {
@@ -11654,11 +11672,29 @@ nav #welcome .search-results {
   top: 70px;
   box-shadow: 2px 3px 17px -3px #000000;
   border-radius: 9px;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  nav #welcome .search-results {
+    top: 75%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  nav #welcome .search-results {
+    width: 380px;
+  }
 }
 
 nav #welcome .search-results a li {
   text-align: left;
   list-style: none;
+  padding-left: 10px;
+}
+
+nav #welcome .search-results a li:hover {
+  background-color: #fa6933;
 }
 
 nav .mynavbutton {
@@ -11719,6 +11755,7 @@ nav .mynavbutton.register {
 }
 
 #my-carousel .my-carousel-inner .my-carousel-item .bg-slider {
+  filter: brightness(90%);
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -11727,7 +11764,7 @@ nav .mynavbutton.register {
 }
 
 #my-carousel .my-search {
-  width: 40%;
+  width: 50%;
   z-index: 1;
   position: absolute;
   top: 15%;
@@ -11738,7 +11775,27 @@ nav .mynavbutton.register {
 
 @media (max-width: 600px) {
   #my-carousel .my-search {
-    width: 70%;
+    width: 50%;
+  }
+}
+
+#my-carousel .slogan {
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#my-carousel .slogan p {
+  text-shadow: 1px 1px grey;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  #my-carousel .slogan {
+    display: none;
   }
 }
 
@@ -11747,44 +11804,68 @@ nav .mynavbutton.register {
 }
 
 #my-carousel .my-input-group #welcome input {
+  padding: 0 20px;
   margin-right: 0 !important;
-  height: 50px;
-  border-radius: 15px;
+  height: 60px;
+  border-radius: 27px;
   box-shadow: none;
   outline: none;
+  border: 1px solid #ededed;
 }
 
-#my-carousel .my-input-group #welcome input:focus {
-  border: 1px solid lightgrey;
+#my-carousel .my-input-group #welcome.my-dropdown {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 1;
+}
+
+#my-carousel .my-input-group #welcome .my-dropdown-menu {
+  text-align: left;
+  position: absolute;
+  top: 120%;
+  width: 100%;
+  z-index: 10;
 }
 
 #my-carousel .my-input-group #welcome .my-results {
-  width: 100%;
-  z-index: 1;
-  position: absolute;
-  top: 430%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 15px;
 }
 
 #my-carousel .my-input-group #welcome .my-results ul {
+  border-radius: 15px;
+  box-shadow: 2px 2px grey;
   -webkit-padding-start: 0;
           padding-inline-start: 0;
-  border-radius: 15px;
   list-style: none;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: white;
 }
 
 #my-carousel .my-input-group #welcome .my-results ul li {
-  color: white;
+  color: black;
   line-height: 2;
-  text-align: center;
+  text-align: left;
+  padding-left: 10px;
+}
+
+#my-carousel .my-input-group #welcome .my-results ul li:first-child {
+  border-radius: 15px 15px 0 0;
+}
+
+#my-carousel .my-input-group #welcome .my-results ul li:last-child {
+  border-radius: 0 0 15px 15px;
+}
+
+#my-carousel .my-input-group #welcome .my-results ul li:hover {
+  background-color: #FA6934;
+  color: white;
 }
 
 @media (max-width: 600px) {
-  #my-carousel .my-input-group #welcome .my-results {
-    height: 300px;
+  #my-carousel .my-input-group #welcome .my-results ul {
+    font-size: 12px;
   }
 }
 
@@ -12231,15 +12312,44 @@ main#index-sponsors input[type=radio]:checked:after {
   border: 2px solid white;
 }
 
+main#welcome {
+  background-color: #faf9f8;
+}
+
+main#welcome .apartments {
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+main#welcome .apartments#scroll {
+  background-color: white;
+  border-radius: 15px 15px;
+  border: 2px solid #ededed;
+}
+
+main#welcome .apartments#scroll .scroll {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  padding: 50px;
+}
+
+main#welcome .bg-white {
+  background-color: white;
+}
+
 main#welcome .title {
   font-weight: 1400;
   color: #373a3d;
-  letter-spacing: 2.5px;
   margin-bottom: 50px;
   margin-top: 50px;
 }
 
-.partnership {
+main#welcome .title p {
+  padding-top: 20px;
+}
+
+main#welcome .partnership {
   position: absolute;
   width: 100px;
   height: 1.4rem;
@@ -12249,28 +12359,27 @@ main#welcome .title {
   left: 20px;
 }
 
-.partnership span {
+main#welcome .partnership span {
   color: white;
   font-size: 12px;
-  letter-spacing: 1.5px;
 }
 
-.my-card:hover {
+main#welcome .my-card:hover {
   border: 2px solid #fa6933;
 }
 
-.my-card .my-card-img-top {
+main#welcome .my-card .my-card-img-top {
   padding: 14px;
 }
 
 @media (min-width: 600px) {
-  .my-card .my-card-img-top .cover {
+  main#welcome .my-card .my-card-img-top .cover {
     height: 160px;
   }
 }
 
 @media (min-width: 1550px) {
-  .my-card .my-card-img-top .cover {
+  main#welcome .my-card .my-card-img-top .cover {
     height: 210px;
   }
 }

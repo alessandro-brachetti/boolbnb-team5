@@ -1,21 +1,6 @@
 
 <?php $__env->startSection('content'); ?>
-<main id="edit">
-  <div class="search">
-    <div class="container">
-      <div class="row justify-content-right">
-        <div id="welcome" class="searchbar col-lg-3 offset-lg-9">
-          <input id="searchInput" type="search" placeholder="Dove vuoi andare?" aria-label="Search" v-model="search" @input="responseApi">
-          
-          <div class="">
-            <ul>
-              <a v-cloak :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">{{result.address.freeformAddress}}</li></a>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> 
+<main id="edit"> 
   <div class="container title text-center mpt-20 mpb-20">
     <div class="row mpt-30">
       <div class="col-md-12">
@@ -27,14 +12,15 @@
   <div class="container-fluid content mpt-20 mpb-20">
     <div class="container">
       <form action="<?php echo e(route('admin.apartments.update', ['apartment'=>$apartment->id])); ?>" method="post" enctype="multipart/form-data">
+        <?php echo csrf_field(); ?>
+        <?php echo method_field('PUT'); ?>
         <div class="row mpb-20">
           <div class="col-md-12 d-flex justify-content-center image">
             <img src="<?php echo e(asset($apartment->img)); ?>" class="img-fluid img-thumbnail" alt="<?php echo e($apartment->title); ?>">
           </div>
         </div>
         <div class="row d-flex justify-content-center mmb-20">
-          <?php echo csrf_field(); ?>
-          <?php echo method_field('PUT'); ?>
+          
 
           <div class="col-md-4">
             <input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
@@ -98,16 +84,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="latitude" type="hidden" step="any" name="latitude" :value="lat">
-                <?php $__errorArgs = ['latitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                  <small class="text-danger"> <?php echo e($message); ?></small>
-                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
               </div>
 
               <div class="form-group">
@@ -119,16 +95,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="longitude" type="hidden" step="any" name="longitude" :value="lon">
-                <?php $__errorArgs = ['longitude'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                  <small class="text-danger"> <?php echo e($message); ?></small>
-                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
               </div>
             </div>
           </div>
@@ -204,8 +170,8 @@ unset($__errorArgs, $__bag); ?>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group" class="bold">
-              <label for="mq">Metri Quadri</label>
+            <div class="form-group">
+              <label for="mq" class="bold">Metri Quadri</label>
               <input class="form-control <?php $__errorArgs = ['mq'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -256,6 +222,31 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
               </div>      
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center mmb-10">
+          <div class="col-md-8 col-sm-12">
+            <div class="form-group">
+              <label for="description" class="bold">Descrizione</label>
+              <textarea class="form-control" <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> id="exampleFormControlTextarea3" name="description" rows="7"><?php echo e($apartment->description); ?></textarea>
+              <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <small class="text-danger"> <?php echo e($message); ?></small>
+              <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
           </div>
         </div>
@@ -322,4 +313,4 @@ unset($__errorArgs, $__bag); ?>
 </main>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\giudi\Desktop\BOOLEAN\ESERCIZI\ESERCIZI-SVOLGIMENTO\boolbnb-team5\resources\views/admin/apartments/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\views/admin/apartments/edit.blade.php ENDPATH**/ ?>

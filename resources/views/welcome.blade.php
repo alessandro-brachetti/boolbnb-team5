@@ -6,17 +6,22 @@
   <div class="container-fluid my-container-fluid">
     <div class="carousel-inner my-carousel-inner">
         <div class="carousel-item my-carousel-item active">
-          <div class="bg-slider" style="background-image: url('/images/01.jpg')">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-4.jpg')">
 
           </div>
         </div>
         <div class="carousel-item my-carousel-item">
-          <div class="bg-slider" style="background-image: url('/images/02.jpg')">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-3.jpg')">
 
           </div>
         </div>
         <div class="carousel-item my-carousel-item">
-          <div class="bg-slider" style="background-image: url('/images/03.jpg')">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-2.jpg')">
+
+          </div>
+        </div>
+        <div class="carousel-item my-carousel-item">
+          <div class="bg-slider" style="background-image: url('/images/sfondo-1.jpg')">
 
           </div>
         </div>
@@ -34,9 +39,9 @@
           <p style="color: white; font-size: 30px; font-weight: 800;">La tua vacanza ideale, dove e quando vuoi.</p>
 
         </div>
-        <div class="form-inline my-2 my-lg-0 my-welcome my-dropdown" id="welcome">
+        <div class="form-inline my-2 my-lg-0 my-welcome my-dropdown" id="welcome" v-cloak>
           <div class="d-flex flex-column my-search">
-            <input autocomplete="off" class="form-control my-form control mr-sm-2" id="searchInput" type="search" placeholder="Es. Via roma 12, Palermo" v-model="search" @input="responseApi">
+            <input class="text-center" autocomplete="off" class="form-control my-form control mr-sm-2" id="searchInput" type="search" placeholder="Dove vuoi andare?" v-model="search" @input="responseApi">
         <div class="my-dropdown-menu my-results" autocomplete="off">
           <ul>
             <a :href="(search != '' ? `/search/${search}` : '#')"><li v-for="result in results" @click="search=result.address.freeformAddress, results=[]">@{{result.address.freeformAddress}}</li></a>

@@ -50,14 +50,13 @@
     #welcome{
       flex-direction: column!important;
       input{
+        padding: 0 20px;
         margin-right: 0!important;
-        height: 50px;
-        border-radius: 15px;
+        height: 60px;
+        border-radius: 27px;
         box-shadow: none;
         outline: none;
-        &:focus{
-          border: 2px solid $mygrey;
-        }
+        border: 1px solid $mygrey;
       }
       &.my-dropdown{
         position: absolute;

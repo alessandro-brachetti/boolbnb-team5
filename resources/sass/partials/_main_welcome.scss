@@ -1,6 +1,7 @@
 main#welcome{
   background-color: $mylightgrey;
   .apartments{
+    width: 100%;
     flex-wrap: nowrap;
     &#scroll{
       background-color: white;

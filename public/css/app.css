@@ -11768,15 +11768,13 @@ nav .mynavbutton.register {
 }
 
 #my-carousel .my-input-group #welcome input {
+  padding: 0 20px;
   margin-right: 0 !important;
-  height: 50px;
-  border-radius: 15px;
+  height: 60px;
+  border-radius: 27px;
   box-shadow: none;
   outline: none;
-}
-
-#my-carousel .my-input-group #welcome input:focus {
-  border: 2px solid #ededed;
+  border: 1px solid #ededed;
 }
 
 #my-carousel .my-input-group #welcome.my-dropdown {
@@ -12283,6 +12281,7 @@ main#welcome {
 }
 
 main#welcome .apartments {
+  width: 100%;
   flex-wrap: nowrap;
 }
 

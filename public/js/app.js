@@ -37811,8 +37811,8 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alessandro\Desktop\Esercizi\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alessandro\Desktop\Esercizi\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\misha\Desktop\Boolean\Final_project\boolbnb-team5\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

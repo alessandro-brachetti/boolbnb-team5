@@ -27,7 +27,7 @@ class ApartmentSeeder extends Seeder
         $apartment->description = 'Ubicato nel centro di Palermo , il nuovissimo Central Loft dista 700 metri dalla Stazione Centrale , e’ a ridosso della Citta’ Vecchia , Castello Svevo, Palazzo Fizzarotti , Lungomare , Via Sparano e Corso Vittorio Emanuele , e’ vicino quindi a tutti i principali luoghi di interesse della citta’ .
         Dispone di una cucina a scomparsa con tutto il necessario , inoltre e’ prevista una macchina da caffe’ Nespresso, bollitore elettrico, frigorifero , tostapane e cassaforte.
         Un apparecchio per l’aromaterapia insieme alla doccia cromoterapica vi accompagnera’ in un piacevole relax .';
-        $apartment->img = '/images/appartamenti/app-1.jpeg';
+        $apartment->img = 'images/appartamenti/app-1.jpeg';
         $apartment->visible = 1;
         $apartment->user_id = 1;
         $apartment->save();
@@ -42,7 +42,7 @@ class ApartmentSeeder extends Seeder
         $apartment->latitude = 38.11971;
         $apartment->longitude = 13.36918;
         $apartment->description = "La casa si trova al piano superiore di una villa bifamiliare con un suo accesso privato ed una magnifica terrazza a piè di mare. Dispone di 4 camere da letto matrimoniali, un grande soggiorno TV, INTERNET WIFI ed una zona pranzo.Le camere sono disposte in due ali separate della casa CON AC dove vi sono anche i rispettivi bagni con doccia. Vi è inoltre una cucina attrezzata con lavastoviglie che apre anch'essa sulla terrazza vista mare. RIDUZIONI PER LOCAZIONI MENSILI (min 28 notti)";
-        $apartment->img = 'images/appartamenti/app-2.jpeg';
+        $apartment->img = 'images/appartamenti/app-2.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 1;
         $apartment->save();
@@ -61,7 +61,7 @@ class ApartmentSeeder extends Seeder
                                   Oltre al divano sono presenti poltrone confort per potersi rilassare. Al primo piano una grande terrazza dove è possibile prendere il sole in totale privacy. Completa il quadro una grande piscina condominiale a poche decine di metri dalla villa.
                                   Accesso per gli ospiti
                                   Gli ospiti della villa, rispettando il regolamento condominiale, hanno il pieno accesso alla piscina durante gli orari di apertura.";
-        $apartment->img = 'images/appartamenti/app-3.jpeg';
+        $apartment->img = 'images/appartamenti/app-3.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 2;
         $apartment->save();
@@ -76,7 +76,7 @@ class ApartmentSeeder extends Seeder
         $apartment->latitude = 38.11554;
         $apartment->longitude = 13.36154;
         $apartment->description = "Tra arte e natura: una casa con l'animaIl B&B La Porta Accanto è realizzato all’interno di un edificio antico, risalente al 1700.E’ una casa molto amata e curata nei minimi dettagli. E’ stata ristrutturata con materiali naturali, l’energia viene fornita tramite l’impianto fotovoltaico e per l’acqua calda ci si serve di una pompa di calore. Il B&B è composto di due camere matrimoniali ognuna delle quali ha uno stile proprio e un bagno privato. La zona giorno è arredata in stile rustico e allietata dal calore di una stube.";
-        $apartment->img = 'images/appartamenti/app-4.jpeg';
+        $apartment->img = 'images/appartamenti/app-4.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 2;
         $apartment->save();
@@ -96,7 +96,7 @@ class ApartmentSeeder extends Seeder
                                   In dotazione: biancheria, lavatrice, lavastoviglie, tv, asciugacapelli, ferro da stiro
                                   Impianto di riscaldamento autonomo.
                                   Non è dotato di Wi-Fi. Lo si può avere recandosi in portineria.';
-        $apartment->img = 'images/appartamenti/app-5.jpeg';
+        $apartment->img = 'images/appartamenti/app-5.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 1;
         $apartment->save();
@@ -115,7 +115,7 @@ class ApartmentSeeder extends Seeder
         L'appartamento si trova all'interno della zona pedonale di cui fa parte il percorso arabo normanno del Cassaro, oggi patrimonio mondiale dell'umanità UNESCO. A piedi è possibile raggiungere i luoghi di maggior interesse storico della città. La struttura è stata recentemente ristrutturata con gusto e dotata di tutti i confort.
         Accesso per gli ospiti
         Gli ospiti avranno a disposizione un servizio di lavanderia con lavatrice e asciugatrice, wi fi gratuito, ferro da stiro, lavastoviglie. L'accesso all'immobile è automatizzato e dotato di servizio di sicurezza.";
-        $apartment->img = 'images/appartamenti/app-8.jpeg';
+        $apartment->img = 'images/appartamenti/app-8.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 2;
         $apartment->save();
@@ -137,7 +137,7 @@ class ApartmentSeeder extends Seeder
         Altre cose da tenere a mente
         Si consiglia di affittare l'automobile.
         Non disponibile per il mese di Agosto.";
-        $apartment->img = 'images/appartamenti/app-7.jpeg';
+        $apartment->img = 'images/appartamenti/app-7.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 2;
         $apartment->save();
@@ -158,7 +158,7 @@ class ApartmentSeeder extends Seeder
                                   impressi.
                                   Accesso per gli ospiti
                                   avete tutta la villa indipendente per voi";
-        $apartment->img = 'images/appartamenti/app-10.jpeg';
+        $apartment->img = 'images/appartamenti/app-10.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 1;
         $apartment->save();
@@ -177,7 +177,7 @@ class ApartmentSeeder extends Seeder
                                   Lo spazio
                                   Grazie per avere visitato il mio annuncio. L'appartamento si trova all'interno di un'antica tenuta Siciliana in una splendida campagna ricca di alberi di ulivo, limoni, aranci, carrubi e fichidindia, con vista sul mare. Lo spazio è così suddiviso: ampio living room e cucina in muratura, una zona notte con letto matrimoniale, letto singolo e culla, bagno con doccia. Se siete 2 coppie possiamo ospitare una delle due in un' altra camera aggiuntiva, con ingresso indipendente, con due posti letto e una piccola toilette con wc e lavabo. Specifichiamo che la doccia è una sola ed è nell' appartamento principale.
                                   Il posto è ideale per famiglie e coppie.";
-        $apartment->img = 'images/appartamenti/app-12.jpeg';
+        $apartment->img = 'images/appartamenti/app-12.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 2;
         $apartment->save();
@@ -192,7 +192,7 @@ class ApartmentSeeder extends Seeder
         $apartment->latitude = 38.12275;
         $apartment->longitude = 13.35683;
         $apartment->description = "L'appartamento si trova all’interno di un antico palazzo nobiliare del ‘700, nel cuore del centro storico di Palermo, a pochissimi passi dalle maggiori attrazioni culturali (teatro Massimo, chiesa della Martorana).L’appartamento, totalmente ristrutturato ha due livelli in cui vi sono tre camere da letto climatizzate;due bagni, uno con vasca idromassaggio e uno con doccia; una cucina e una zona living con balconi. L’appartamento è inoltre dotato di WI-FI e riscaldamento autonomo.";
-        $apartment->img = 'images/appartamenti/app-13.jpeg';
+        $apartment->img = 'images/appartamenti/app-13.jpg';
         $apartment->visible = 1;
         $apartment->user_id = 2;
         $apartment->save();
